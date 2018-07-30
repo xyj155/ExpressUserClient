@@ -12,20 +12,21 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 
 public class RetrofitUtil {
-    private static final String BASE_URL = "http://111.230.18.100/";
+    public static final String BASE_URL = "http://111.230.18.100/";
+    public static final String KUAIDINIAO = "http://api.kdniao.cc/";
     private Retrofit retrofit;
     private static RetrofitUtil sInstance;
-    public RetrofitUtil() {
+    public RetrofitUtil(String url) {
         retrofit = new Retrofit.Builder()
-                .baseUrl(BASE_URL)
+                .baseUrl(url)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build();
     }
-    public static RetrofitUtil getInstance() {
+    public static RetrofitUtil getInstance(String url) {
         synchronized (RetrofitUtil.class) {
             if (sInstance == null) {
-                sInstance = new RetrofitUtil();
+                sInstance = new RetrofitUtil(url);
             }
         }
         return sInstance;

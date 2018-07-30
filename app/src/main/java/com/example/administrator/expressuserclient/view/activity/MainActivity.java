@@ -42,7 +42,7 @@ public class MainActivity extends BaseActivity {
     }
 
     @Override
-    public void initView() {
+    public void initView(Bundle savedInstanceState) {
         bottom = (BottomBarLayout) findViewById(R.id.bottom);
     }
 

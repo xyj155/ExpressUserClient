@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+
+    <ImageView
+        android:id="@+id/img_marker"
+        android:layout_width="50dp"
+        android:layout_height="70dp"
+        android:src="@mipmap/ic_map_marker" />
+
+    <com.example.administrator.expressuserclient.weight.CircleImageView
+        android:id="@+id/img_user_head"
+        android:padding="@dimen/dp_7"
+        android:layout_width="40dp"
+        android:src="@mipmap/ic_sitelist_head"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="3dp" />
+</FrameLayout>

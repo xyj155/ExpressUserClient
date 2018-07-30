@@ -34,7 +34,7 @@ public class LoginActivity extends BaseActivity implements LoginActivityContract
     }
 
     @Override
-    public void initView() {
+    public void initView(Bundle savedInstanceState) {
 
     }
 

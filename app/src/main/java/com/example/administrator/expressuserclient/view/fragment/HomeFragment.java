@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.example.administrator.expressuserclient.R;
 import com.example.administrator.expressuserclient.base.BaseFragment;
+import com.example.administrator.expressuserclient.view.activity.SiteListActivity;
 import com.youth.banner.Banner;
 
 import butterknife.ButterKnife;
@@ -88,6 +89,7 @@ public class HomeFragment extends BaseFragment {
             case R.id.btn_packet_deliver:
                 break;
             case R.id.btn_deliver_points:
+                startActivity(new Intent(getContext(), SiteListActivity.class));
                 break;
         }
     }

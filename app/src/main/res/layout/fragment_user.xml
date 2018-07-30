@@ -51,6 +51,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_50"
+        android:drawableLeft="@mipmap/ic_user_proble"
         android:drawablePadding="@dimen/dp_10"
         android:drawableRight="@mipmap/ic_go"
         android:gravity="center|left"
@@ -68,6 +69,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_50"
+        android:drawableLeft="@mipmap/ic_user_location_list"
         android:drawablePadding="@dimen/dp_10"
         android:drawableRight="@mipmap/ic_go"
         android:gravity="center|left"
@@ -88,6 +90,7 @@
         android:drawablePadding="@dimen/dp_10"
         android:drawableRight="@mipmap/ic_go"
         android:gravity="center|left"
+        android:drawableLeft="@mipmap/ic_user_colletion"
         android:paddingLeft="@dimen/dp_10"
         android:paddingRight="8dp"
         android:text="我的收藏"
@@ -105,6 +108,7 @@
         android:drawableRight="@mipmap/ic_go"
         android:gravity="center|left"
         android:paddingLeft="@dimen/dp_10"
+        android:drawableLeft="@mipmap/ic_user_service"
         android:paddingRight="8dp"
         android:text="服务中心"
         android:textColor="#000" />
@@ -116,6 +120,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_50"
+        android:drawableLeft="@mipmap/ic_user_setting"
         android:drawablePadding="@dimen/dp_10"
         android:drawableRight="@mipmap/ic_go"
         android:gravity="center|left"

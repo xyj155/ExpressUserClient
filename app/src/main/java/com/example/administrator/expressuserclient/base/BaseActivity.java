@@ -34,13 +34,14 @@ public abstract class BaseActivity extends AppCompatActivity {
 
         setContentView(intiLayout());
         //初始化控件
-        initView();
+        initView(savedInstanceState);
         //设置数据
         initData();
     }
 
     public void showmDialog(String msg) {
         dialog = AppleDialog.createLoadingDialog(BaseActivity.this, msg);
+      dialog.show();
     }
 
 
@@ -88,7 +89,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     /**
      * 初始化布局
      */
-    public abstract void initView();
+    public abstract void initView(Bundle savedInstanceState);
 
     /**
      * 设置数据
