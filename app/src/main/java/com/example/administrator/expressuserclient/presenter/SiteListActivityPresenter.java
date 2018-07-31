@@ -1,19 +1,13 @@
 package com.example.administrator.expressuserclient.presenter;
 
 import android.content.Context;
-import android.os.Handler;
 import android.util.Log;
 
 import com.example.administrator.expressuserclient.commonUtil.DataLoader;
-import com.example.administrator.expressuserclient.commonUtil.GsonUtil;
 import com.example.administrator.expressuserclient.contract.SiteListActivityContract;
 import com.example.administrator.expressuserclient.gson.POIGson;
 import com.example.administrator.expressuserclient.model.SiteListActivityModel;
 import com.google.gson.Gson;
-
-
-import java.util.ArrayList;
-import java.util.List;
 
 
 /**
@@ -41,7 +35,9 @@ public class SiteListActivityPresenter implements SiteListActivityContract.Prese
                 String replace = data.replace("[]", "null");
                 Gson gson = new Gson();
                 POIGson poiGson = gson.fromJson(replace, POIGson.class);
-                view.loadSitelist(poiGson.getPois());
+                if(poiGson.getPois().size()>0){
+                    view.loadSitelist(poiGson.getPois());
+                }
             }
         });
     }

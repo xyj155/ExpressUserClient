@@ -31,4 +31,31 @@
         <attr name="circle_border_overlay" format="boolean" />
         <attr name="circle_fill_color" format="color" />
     </declare-styleable>
+    <declare-styleable name="BubbleView">
+        <attr name="arrowWidth" format="dimension" />
+        <attr name="angle" format="dimension" />
+        <attr name="arrowHeight" format="dimension" />
+        <attr name="arrowPosition" format="dimension" />
+        <attr name="bubbleColor" format="color" />
+        <attr name="arrowCenter" format="boolean" />
+        <attr name="arrowLocation" format="enum">
+            <enum name="left" value="0x00" />
+            <enum name="right" value="0x01" />
+            <enum name="top" value="0x02" />
+            <enum name="bottom" value="0x03" />
+        </attr>
+    </declare-styleable>
+    <declare-styleable name="BubbleLayout">
+        <attr name="background_color" format="color" />
+        <attr name="shadow_color" format="color" />
+        <attr name="shadow_size" format="dimension" />
+        <attr name="radius" format="dimension" />
+        <attr name="direction" format="enum">
+            <enum name="left" value="1" />
+            <enum name="top" value="2" />
+            <enum name="right" value="3" />
+            <enum name="bottom" value="4" />
+        </attr>
+        <attr name="offset" format="dimension" />
+    </declare-styleable>
 </resources>

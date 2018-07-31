@@ -1,13 +1,11 @@
 package com.example.administrator.expressuserclient.view.activity;
 
 import android.Manifest;
-import android.app.Dialog;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.BottomSheetDialog;
 import android.support.v4.app.ActivityCompat;
@@ -17,6 +15,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.TextView;
 
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
@@ -29,6 +28,7 @@ import com.amap.api.maps.MapView;
 import com.amap.api.maps.model.BitmapDescriptor;
 import com.amap.api.maps.model.BitmapDescriptorFactory;
 import com.amap.api.maps.model.LatLng;
+import com.amap.api.maps.model.Marker;
 import com.amap.api.maps.model.MarkerOptions;
 import com.amap.api.maps.model.MyLocationStyle;
 import com.bumptech.glide.Glide;
@@ -45,10 +45,11 @@ import com.example.administrator.expressuserclient.gson.POIGson;
 import com.example.administrator.expressuserclient.presenter.SiteListActivityPresenter;
 import com.example.administrator.expressuserclient.weight.CircleImageView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
-public class SiteListActivity extends BaseActivity implements SiteListActivityContract.View {
+public class SiteListActivity extends BaseActivity implements SiteListActivityContract.View, AMap.OnMarkerClickListener, AMap.OnMapClickListener {
 
     private RecyclerView ry_map;
     private MapView mMapView = null;
@@ -61,6 +62,8 @@ public class SiteListActivity extends BaseActivity implements SiteListActivityCo
 
     private BitmapDescriptor bitmapDescriptor;
     private SiteListActivityPresenter siteListActivityPresenter;
+    private Marker currentMarker;
+
 
     @Override
     public int intiLayout() {
@@ -133,8 +136,23 @@ public class SiteListActivity extends BaseActivity implements SiteListActivityCo
         mlocationClient.startLocation();//启动定位
         CameraUpdate cameraUpdate = CameraUpdateFactory.zoomTo(19);
         mMapView.getMap().moveCamera(cameraUpdate);
-    }
+        aMap.setOnMarkerClickListener(this);
+        aMap.setOnMapClickListener(this);
+        aMap.setInfoWindowAdapter(new AMap.InfoWindowAdapter() {
+            @Override
+            public View getInfoWindow(Marker marker) {
+                return null;
+            }
 
+            @Override
+            public View getInfoContents(Marker marker) {
+                View infoContent = getLayoutInflater().inflate(
+                        R.layout.sitelist_mapoverlay_bg, null);
+                render(marker, infoContent);
+                return infoContent;
+            }
+        });
+    }
 
     @Override
     public void onResume() {
@@ -195,7 +213,13 @@ public class SiteListActivity extends BaseActivity implements SiteListActivityCo
                 });
     }
 
+    private List<POIGson.PoisBean> poiList = new ArrayList<>();
 
+    /**
+     * 数据加载presentor
+     *
+     * @param poiGson
+     */
     @Override
     public void loadSitelist(List<POIGson.PoisBean> poiGson) {
         ry_map.setLayoutManager(new LinearLayoutManager(SiteListActivity.this));
@@ -203,10 +227,87 @@ public class SiteListActivity extends BaseActivity implements SiteListActivityCo
         SiteListAdapter adapter = new SiteListAdapter(poiGson);
         ry_map.setAdapter(adapter);
         for (int i = 0; i < poiGson.size(); i++) {
+            poiList.add(poiGson.get(i));
             addMarker(poiGson.get(i));
         }
     }
 
+    /**
+     * 解析数据添加到地图上面
+     * <p>
+     * //
+     */
+
+    private void addMarker(POIGson.PoisBean poisBean) {
+        String location = poisBean.getLocation();
+        String[] split = location.split(",");
+        double lat = Double.valueOf(split[1]);
+        double lot = Double.valueOf(split[0]);
+        Log.i(TAG, "addMarker: " + lat + "--" + lot);
+        LatLng latLng = new LatLng(lat, lot);
+
+        final MarkerOptions markerOptions = new MarkerOptions();
+        markerOptions.position(latLng);
+        customizeMarkerIcon(R.mipmap.ic_sitelist_station, new OnMarkerIconLoadListener() {
+            @Override
+            public void markerIconLoadingFinished(View view) {
+                markerOptions.icon(bitmapDescriptor);
+                aMap.addMarker(markerOptions);
+            }
+        });
+    }
+
+    /**
+     * maker点击事件
+     *
+     * @param marker
+     * @return
+     */
+    @Override
+    public boolean onMarkerClick(Marker marker) {
+        currentMarker = marker;
+        for (int i = 0; i < poiList.size(); i++) {
+            String location = poiList.get(i).getLocation();
+            String[] split = location.split(",");
+            double lat = Double.valueOf(split[1]);
+            double lot = Double.valueOf(split[0]);
+            if (marker.getPosition().longitude == lot && marker.getPosition().latitude == lat) {
+                marker.setTitle(poiList.get(i).getName());
+                marker.setSnippet(poiList.get(i).getAddress());
+            }
+        }
+
+        marker.showInfoWindow();
+        return true;
+    }
+
+    /**
+     * 自定义infowinfow窗口
+     */
+    public void render(Marker marker, View view) {
+        String title = marker.getTitle();
+        String snippet = marker.getSnippet();
+        TextView titleUi = ((TextView) view.findViewById(R.id.tv_name));
+        TextView address = ((TextView) view.findViewById(R.id.tv_address));
+        titleUi.setText(title);
+        address.setText(snippet);
+    }
+
+    /**
+     * 地图点击事件
+     *
+     * @param latLng
+     */
+    @Override
+    public void onMapClick(LatLng latLng) {
+        if (currentMarker.isInfoWindowShown()) {
+            currentMarker.hideInfoWindow();//这个是隐藏infowindow窗口的方法
+        }
+    }
+
+    /**
+     * 列表适配器
+     */
     private class SiteListAdapter extends BaseQuickAdapter<POIGson.PoisBean, BaseViewHolder> {
 
         public SiteListAdapter(List<POIGson.PoisBean> data) {
@@ -224,6 +325,13 @@ public class SiteListActivity extends BaseActivity implements SiteListActivityCo
         }
     }
 
+    /**
+     * 、
+     * <p>
+     * 加载框
+     *
+     * @param str
+     */
     @Override
     public void showLoading(String str) {
         showmDialog(str);
@@ -239,27 +347,4 @@ public class SiteListActivity extends BaseActivity implements SiteListActivityCo
     }
 
 
-    /**
-     * 解析数据添加到地图上面
-     * <p>
-     * //
-     */
-    private void addMarker(POIGson.PoisBean poisBean) {
-        String location = poisBean.getLocation();
-        String[] split = location.split(",");
-        double lat = Double.valueOf(split[1]);
-        double lot = Double.valueOf(split[0]);
-        Log.i(TAG, "addMarker: "+lat+"--"+lot);
-        LatLng latLng = new LatLng(lat, lot);
-
-        final MarkerOptions markerOptions = new MarkerOptions();
-        markerOptions.position(latLng);
-        customizeMarkerIcon(R.mipmap.ic_package, new OnMarkerIconLoadListener() {
-            @Override
-            public void markerIconLoadingFinished(View view) {
-                markerOptions.icon(bitmapDescriptor);
-                aMap.addMarker(markerOptions);
-            }
-        });
-    }
 }
