@@ -31,4 +31,9 @@
         <attr name="circle_border_overlay" format="boolean" />
         <attr name="circle_fill_color" format="color" />
     </declare-styleable>
+    <declare-styleable name="VerticalScrollLayout">
+        <attr name="vsl_animDuration" format="integer" />
+        <attr name="vsl_sleepTime" format="integer" />
+        <attr name="vsl_isCusDuration" format="boolean" />
+    </declare-styleable>
 </resources>
