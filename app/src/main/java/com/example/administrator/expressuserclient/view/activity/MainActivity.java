@@ -1,6 +1,7 @@
 package com.example.administrator.expressuserclient.view.activity;
 
 
+import android.app.Notification;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -20,6 +21,10 @@ import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import cn.jpush.android.api.BasicPushNotificationBuilder;
+import cn.jpush.android.api.CustomPushNotificationBuilder;
+import cn.jpush.android.api.JPushInterface;
+import cn.jpush.android.api.MultiActionsNotificationBuilder;
 
 public class MainActivity extends BaseActivity {
 
@@ -36,6 +41,7 @@ public class MainActivity extends BaseActivity {
     private MessageFragment fragmentMessage;
     private TicketFragment fragmentTicket;
     private UserFragment fragmentUser;
+
     @Override
     public int intiLayout() {
         return R.layout.activity_main;
@@ -62,7 +68,7 @@ public class MainActivity extends BaseActivity {
             item.setNormalIconId(normalIcon[i]);
             item.setSelectIconId(selectIcon[i]);
             tabEntityList.add(item);
-            if(i==2 ){
+            if (i == 2) {
                 item.setNewsCount(8);
             }
         }

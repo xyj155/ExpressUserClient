@@ -6,14 +6,18 @@ android {
     defaultConfig {
         applicationId "com.example.administrator.expressuserclient"
         minSdkVersion 18
-        targetSdkVersion 27
+        targetSdkVersion 25
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         ndk {
-            //设置支持的SO库架构（开发者可以根据需要，选择一个或多个平台的so）
-            abiFilters "armeabi", "armeabi-v7a", "arm64-v8a", "x86", "arm64-v8a", "x86_64"
+            abiFilters 'armeabi', 'armeabi-v7a', 'armeabi-v8a'
         }
+        manifestPlaceholders = [
+                JPUSH_PKGNAME: applicationId,
+                JPUSH_APPKEY : "ce96018f1ca252300f934c39", //JPush上注册的包名对应的appkey.
+                JPUSH_CHANNEL: "developer-default", //暂时填写默认值即可.
+        ]
     }
     buildTypes {
         release {
@@ -33,23 +37,38 @@ dependencies {
     }
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.android.support:design:25.0.0'
+    // SmartRefreshLayout
     compile 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-alpha-11'
     compile 'com.scwang.smartrefresh:SmartRefreshHeader:1.1.0-alpha-11'
+    //高德地图
     compile 'com.amap.api:3dmap:5.0.0'
     compile 'com.amap.api:location:3.3.0'
     compile 'com.amap.api:search:5.0.0'
     compile 'com.github.bumptech.glide:glide:3.7.0'
     compile 'com.squareup.retrofit2:retrofit:2.3.0'
     compile 'com.google.code.gson:gson:2.8.0'
+    //  rxjava
     compile 'io.reactivex:rxjava:1.3.0'
     compile 'io.reactivex:rxandroid:1.1.0'
     compile 'com.squareup.retrofit2:converter-gson:2.3.0'
     compile 'com.squareup.retrofit2:adapter-rxjava:2.3.0'
+    //adapter
     compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.4'
     compile 'com.jakewharton:butterknife:5.1.1'
+    //轮播图
     compile 'com.youth.banner:banner:1.4.10'
+    //二维码扫描
     compile 'com.github.XuDaojie:QRCode-Android:v0.4.2'
+    //极光
+    compile 'cn.jiguang.sdk:jpush:3.0.0'
+    compile 'cn.jiguang.sdk:jcore:1.0.0'
+    //volley请求框架
     compile 'com.mcxiaoke.volley:library:1.0.19'
     compile 'com.android.support:cardview-v7:25.0.0'
+    //bugly更新
+    compile 'com.tencent.bugly:crashreport_upgrade:1.2.0'
+    //其中latest.release指代最新版本号，也可以指定明确的版本号，例如1.2.0
+    compile 'com.tencent.bugly:nativecrashreport:2.2.0'
+    //其中latest.release指代最新版本号，也可以指定明确的版本号，例如2.2.0
     testCompile 'junit:junit:4.12'
 }

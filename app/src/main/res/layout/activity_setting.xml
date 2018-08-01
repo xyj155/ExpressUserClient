@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.administrator.expressuserclient.view.activity.SettingActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:background="#fff"
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar"
+        android:layout_alignParentStart="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/dp_1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_clean_cache"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_50"
+                android:layout_marginTop="@dimen/dp_1"
+                android:background="#fff"
+                android:drawableRight="@mipmap/ic_go"
+                android:gravity="left|center"
+                android:paddingLeft="@dimen/dp_19"
+                android:paddingRight="@dimen/dp_10"
+                android:text="缓存清理"
+                android:textColor="#000" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_50"
+                android:layout_marginTop="@dimen/dp_1"
+                android:background="#fff"
+                android:paddingLeft="@dimen/dp_19"
+                android:paddingRight="@dimen/dp_10">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="免打扰模式"
+                    android:textColor="#000" />
+
+                <Switch
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentTop="true"
+                    app:theme="@style/MySwitch" />
+            </RelativeLayout>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_50"
+                android:layout_marginTop="@dimen/dp_8"
+                android:background="#fff"
+                android:id="@+id/tv_about_us"
+                android:drawableRight="@mipmap/ic_go"
+                android:gravity="left|center"
+                android:paddingLeft="@dimen/dp_19"
+                android:paddingRight="@dimen/dp_10"
+                android:text="关于快递小哥"
+                android:textColor="#000" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_50"
+                android:layout_marginTop="@dimen/dp_1"
+                android:background="#fff"
+                android:id="@+id/tv_our_service"
+                android:drawableRight="@mipmap/ic_go"
+                android:gravity="left|center"
+                android:paddingLeft="@dimen/dp_19"
+                android:paddingRight="@dimen/dp_10"
+                android:text="快递小哥服务条款"
+                android:textColor="#000" />
+
+            <TextView
+                android:id="@+id/tv_update"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_50"
+                android:layout_marginTop="@dimen/dp_1"
+                android:background="#fff"
+                android:drawableRight="@mipmap/ic_go"
+                android:gravity="left|center"
+                android:paddingLeft="@dimen/dp_19"
+                android:paddingRight="@dimen/dp_10"
+                android:text="检查更新"
+                android:textColor="#000" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_50"
+                android:layout_marginTop="@dimen/dp_5"
+                android:background="#fff"
+                android:gravity="center"
+                android:id="@+id/tv_login_out"
+                android:text="退出登陆"
+                android:textColor="#000" />
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+</RelativeLayout>

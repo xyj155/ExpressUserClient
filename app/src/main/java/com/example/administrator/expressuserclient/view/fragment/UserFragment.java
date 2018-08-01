@@ -19,6 +19,7 @@ import com.example.administrator.expressuserclient.R;
 import com.example.administrator.expressuserclient.base.BaseFragment;
 import com.example.administrator.expressuserclient.contract.UserFragmentContract;
 import com.example.administrator.expressuserclient.presenter.UserFragmentPresenter;
+import com.example.administrator.expressuserclient.view.activity.SettingActivity;
 import com.example.administrator.expressuserclient.weight.CircleImageView;
 
 import java.io.File;
@@ -139,6 +140,7 @@ public class UserFragment extends BaseFragment implements UserFragmentContract.V
             case R.id.tv_service:
                 break;
             case R.id.tv_settting:
+                startActivity(new Intent(getContext(), SettingActivity.class));
                 break;
         }
     }
