@@ -1,26 +1,17 @@
 package com.example.administrator.expressuserclient.JPush;
 
-import android.app.ActivityManager;
 import android.app.NotificationManager;
 import android.content.BroadcastReceiver;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.Volley;
-import com.example.administrator.expressuserclient.http.volley.VolleyRequestCllBack;
-import com.example.administrator.expressuserclient.http.volley.VolleyRequestUtil;
-import com.google.gson.Gson;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Iterator;
-import java.util.List;
 
 import cn.jpush.android.api.JPushInterface;
 
@@ -34,6 +25,7 @@ public class JPushReciver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
+
         if (null == nm) {
             nm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         }

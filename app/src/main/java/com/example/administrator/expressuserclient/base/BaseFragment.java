@@ -1,5 +1,6 @@
 package com.example.administrator.expressuserclient.base;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -7,6 +8,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.example.administrator.expressuserclient.weight.AppleDialog;
 
 import butterknife.ButterKnife;
 
@@ -18,7 +21,7 @@ public abstract class BaseFragment extends Fragment {
 
     private View mContentView;
     private Context mContext;
-
+    private Dialog dialog;
 
     @Nullable
     @Override
@@ -29,14 +32,21 @@ public abstract class BaseFragment extends Fragment {
         mContext = getContext();
         init();
 
-            setUpView(mContentView, savedInstanceState);
-            setUpData();
+        setUpView(mContentView, savedInstanceState);
+        setUpData();
 
 
         return mContentView;
     }
 
+    public void showFragmentDialog(String msg) {
+        dialog = AppleDialog.createLoadingDialog(getActivity(), msg);
+        dialog.hide();
+    }
 
+    public void hideFragmentDialog() {
+        dialog.dismiss();
+    }
 
     /**
      * 此方法用于返回Fragment设置ContentView的布局文件资源ID

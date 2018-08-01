@@ -44,7 +44,8 @@ public class UserFragmentPresenter implements UserFragmentContract.Presenter {
         File file = new File(files);
         RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
         MultipartBody.Part part = MultipartBody.Part.createFormData("image", file.getName(), requestFile);
-        model.uploadAvatar( part)
+        RequestBody body = toRequestBody(id);
+        model.uploadAvatar(body, part)
                 .enqueue(new Callback<ResponseBody>() {
                     @Override
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

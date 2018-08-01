@@ -1,14 +1,18 @@
 package com.example.administrator.expressuserclient.view.activity;
 
 
-import android.app.Notification;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.widget.FrameLayout;
 
 import com.example.administrator.expressuserclient.R;
 import com.example.administrator.expressuserclient.base.BaseActivity;
+import com.example.administrator.expressuserclient.base.BaseGson;
+import com.example.administrator.expressuserclient.contract.MessageFragmentContract;
+import com.example.administrator.expressuserclient.gson.PushGson;
+import com.example.administrator.expressuserclient.presenter.MessageFragmentPresenter;
 import com.example.administrator.expressuserclient.view.fragment.HomeFragment;
 import com.example.administrator.expressuserclient.view.fragment.MessageFragment;
 import com.example.administrator.expressuserclient.view.fragment.TicketFragment;
@@ -21,12 +25,8 @@ import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
-import cn.jpush.android.api.BasicPushNotificationBuilder;
-import cn.jpush.android.api.CustomPushNotificationBuilder;
-import cn.jpush.android.api.JPushInterface;
-import cn.jpush.android.api.MultiActionsNotificationBuilder;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity implements MessageFragmentContract.View {
 
     @InjectView(R.id.framlayout)
     FrameLayout framlayout;
@@ -41,6 +41,9 @@ public class MainActivity extends BaseActivity {
     private MessageFragment fragmentMessage;
     private TicketFragment fragmentTicket;
     private UserFragment fragmentUser;
+    private final static int MESSAGE_SIZE = 8;
+    private MessageFragmentPresenter presenter = new MessageFragmentPresenter(this);
+    private int size;
 
     @Override
     public int intiLayout() {
@@ -52,29 +55,18 @@ public class MainActivity extends BaseActivity {
         bottom = (BottomBarLayout) findViewById(R.id.bottom);
     }
 
+
     @Override
     public void initData() {
         //fragment切换
+        presenter.getPushList();
         fragmentManager = getSupportFragmentManager();
         final FragmentTransaction transaction = fragmentManager.beginTransaction();
         fragmentHome = new HomeFragment();
         transaction.add(R.id.framlayout, fragmentHome);
         transaction.commit();
         //底部导航栏
-        tabEntityList = new ArrayList<>();
-        for (int i = 0; i < tabText.length; i++) {
-            TabEntity item = new TabEntity();
-            item.setText(tabText[i]);
-            item.setNormalIconId(normalIcon[i]);
-            item.setSelectIconId(selectIcon[i]);
-            tabEntityList.add(item);
-            if (i == 2) {
-                item.setNewsCount(8);
-            }
-        }
-        bottom.setNormalTextColor(0xff8a8a8a);
-        bottom.setSelectTextColor(0xff000000);
-        bottom.setTabList(tabEntityList);
+//        setBottomBar();
         bottom.setOnItemClickListener(new BottomBarLayout.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
@@ -118,6 +110,38 @@ public class MainActivity extends BaseActivity {
                 transaction.commit();
             }
         });
+
+    }
+
+    private void setBottomBar(int size) {
+        tabEntityList = new ArrayList<>();
+        TabEntity item = new TabEntity();
+        item.setText(tabText[0]);
+        item.setNormalIconId(normalIcon[0]);
+        item.setSelectIconId(selectIcon[0]);
+        tabEntityList.add(item);
+        TabEntity item1 = new TabEntity();
+        item1.setText(tabText[1]);
+        item1.setNormalIconId(normalIcon[1]);
+        item1.setSelectIconId(selectIcon[1]);
+        tabEntityList.add(item1);
+        final TabEntity item3 = new TabEntity();
+        item3.setText(tabText[2]);
+        item3.setNormalIconId(normalIcon[2]);
+        item3.setSelectIconId(selectIcon[2]);
+
+        item3.setNewsCount(size);
+        tabEntityList.add(item3);
+        Log.i(TAG, "initData: " + size);
+
+        TabEntity item4 = new TabEntity();
+        item4.setText(tabText[3]);
+        item4.setNormalIconId(normalIcon[3]);
+        item4.setSelectIconId(selectIcon[3]);
+        tabEntityList.add(item4);
+        bottom.setNormalTextColor(0xff8a8a8a);
+        bottom.setSelectTextColor(0xff000000);
+        bottom.setTabList(tabEntityList);
     }
 
     @Override
@@ -125,6 +149,7 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         // TODO: add setContentView(...) invocation
         ButterKnife.inject(this);
+
     }
     //隐藏所有Fragment
 
@@ -142,4 +167,22 @@ public class MainActivity extends BaseActivity {
             transaction.hide(fragmentUser);
         }
     }
+
+    @Override
+    public void showDialog(String msg) {
+
+    }
+
+    @Override
+    public void hideDialog() {
+
+    }
+
+
+    @Override
+    public void setPushList(BaseGson<PushGson> pushList) {
+        final int size = pushList.getData().size();
+        setBottomBar(size);
+    }
+
 }

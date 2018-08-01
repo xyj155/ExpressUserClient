@@ -1,6 +1,7 @@
 package com.example.administrator.expressuserclient.contract;
 
 import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 
@@ -10,7 +11,7 @@ import retrofit2.Call;
 
 public interface UserFragmentContract {
     interface Model {
-        Call<ResponseBody> uploadAvatar(MultipartBody.Part file);
+        Call<ResponseBody> uploadAvatar(RequestBody id, MultipartBody.Part file);
 //        @Override
 //        public Observable<BaseData<EmptyData>> addData(RequestBody content, RequestBody contact, List<MultipartBody.Part> files) {
 //            return RetrofitUtils

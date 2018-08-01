@@ -2,13 +2,16 @@ package com.example.administrator.expressuserclient.http;
 
 import com.example.administrator.expressuserclient.base.BaseGson;
 import com.example.administrator.expressuserclient.gson.ExpressGson;
+import com.example.administrator.expressuserclient.gson.PushGson;
 import com.example.administrator.expressuserclient.gson.UserGson;
 
 import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
@@ -41,5 +44,9 @@ public interface API {
     @Streaming
     @Multipart
     @POST("/CurrierBrother/public/index.php/Index/User/loadHead")
-    Call<ResponseBody> uploadAvatar(@Part MultipartBody.Part part);
+    Call<ResponseBody> uploadAvatar(@Part("id") RequestBody id, @Part MultipartBody.Part part);
+
+    @GET("/CurrierBrother/public/index.php/Index/Push/newsPush")
+    Observable<BaseGson<PushGson>> getPushList();
+
 }
