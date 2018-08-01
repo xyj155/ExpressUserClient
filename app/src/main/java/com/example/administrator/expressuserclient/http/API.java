@@ -4,11 +4,16 @@ import com.example.administrator.expressuserclient.base.BaseGson;
 import com.example.administrator.expressuserclient.gson.ExpressGson;
 import com.example.administrator.expressuserclient.gson.UserGson;
 
+import okhttp3.MultipartBody;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.Headers;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
-import retrofit2.http.Query;
+import retrofit2.http.Part;
+import retrofit2.http.Streaming;
 import rx.Observable;
 
 /**
@@ -20,6 +25,7 @@ public interface API {
     @POST("/CurrierBrother/public/index.php/Index/User/login")
     Observable<BaseGson<UserGson>> loginWithUserName(@Field("username") String username,
                                                      @Field("password") String password);
+
     @Headers({
             "accept:*/*",
             "connection:Keep-Alive",
@@ -31,4 +37,9 @@ public interface API {
                                              @Field("RequestType") String RequestType,
                                              @Field("DataSign") String DataSign,
                                              @Field("DataType") String DataType);
+
+    @Streaming
+    @Multipart
+    @POST("/CurrierBrother/public/index.php/Index/User/loadHead")
+    Call<ResponseBody> uploadAvatar(@Part MultipartBody.Part part);
 }

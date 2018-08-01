@@ -18,6 +18,7 @@
 
         <com.example.administrator.expressuserclient.weight.CircleImageView
             android:layout_width="@dimen/dp_70"
+            android:id="@+id/img_user_head"
             android:layout_height="@dimen/dp_70"
             android:layout_margin="@dimen/dp_15"
             android:src="@mipmap/w3" />
