@@ -10,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
@@ -41,6 +42,16 @@ public class UserFragment extends BaseFragment implements UserFragmentContract.V
     Toolbar toolbar;
     @InjectView(R.id.img_user_head)
     CircleImageView imgUserHead;
+    @InjectView(R.id.tv_problem_order)
+    TextView tvProblemOrder;
+    @InjectView(R.id.tv_address_list)
+    TextView tvAddressList;
+    @InjectView(R.id.tv_my_collection)
+    TextView tvMyCollection;
+    @InjectView(R.id.tv_service)
+    TextView tvService;
+    @InjectView(R.id.tv_settting)
+    TextView tvSettting;
     private RequestQueue queen;
     private UserFragmentPresenter presenter = new UserFragmentPresenter(this, getActivity());
 
@@ -75,12 +86,6 @@ public class UserFragment extends BaseFragment implements UserFragmentContract.V
         ButterKnife.reset(this);
     }
 
-    @OnClick(R.id.img_user_head)
-    public void onViewClicked() {
-        Intent intent = new Intent(Intent.ACTION_PICK,
-                android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        startActivityForResult(intent, IMAGE);
-    }
 
     public List<MultipartBody.Part> c(List<File> files) {
         List<MultipartBody.Part> parts = new ArrayList<>(files.size());
@@ -116,4 +121,25 @@ public class UserFragment extends BaseFragment implements UserFragmentContract.V
     }
 
     private static final String TAG = "UserFragment";
+
+    @OnClick({R.id.img_user_head, R.id.tv_problem_order, R.id.tv_address_list, R.id.tv_my_collection, R.id.tv_service, R.id.tv_settting})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.img_user_head:
+                Intent intent = new Intent(Intent.ACTION_PICK,
+                        MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(intent, IMAGE);
+                break;
+            case R.id.tv_problem_order:
+                break;
+            case R.id.tv_address_list:
+                break;
+            case R.id.tv_my_collection:
+                break;
+            case R.id.tv_service:
+                break;
+            case R.id.tv_settting:
+                break;
+        }
+    }
 }

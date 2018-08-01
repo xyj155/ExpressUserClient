@@ -51,6 +51,7 @@
 
     <TextView
         android:layout_width="match_parent"
+        android:id="@+id/tv_problem_order"
         android:layout_height="@dimen/dp_50"
         android:drawableLeft="@mipmap/ic_user_proble"
         android:drawablePadding="@dimen/dp_10"
@@ -70,6 +71,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_50"
+        android:id="@+id/tv_address_list"
         android:drawableLeft="@mipmap/ic_user_location_list"
         android:drawablePadding="@dimen/dp_10"
         android:drawableRight="@mipmap/ic_go"
@@ -90,6 +92,7 @@
         android:layout_height="@dimen/dp_50"
         android:drawablePadding="@dimen/dp_10"
         android:drawableRight="@mipmap/ic_go"
+        android:id="@+id/tv_my_collection"
         android:gravity="center|left"
         android:drawableLeft="@mipmap/ic_user_colletion"
         android:paddingLeft="@dimen/dp_10"
@@ -108,6 +111,7 @@
         android:drawablePadding="@dimen/dp_10"
         android:drawableRight="@mipmap/ic_go"
         android:gravity="center|left"
+        android:id="@+id/tv_service"
         android:paddingLeft="@dimen/dp_10"
         android:drawableLeft="@mipmap/ic_user_service"
         android:paddingRight="8dp"
@@ -125,6 +129,7 @@
         android:drawablePadding="@dimen/dp_10"
         android:drawableRight="@mipmap/ic_go"
         android:gravity="center|left"
+        android:id="@+id/tv_settting"
         android:paddingLeft="@dimen/dp_10"
         android:paddingRight="8dp"
         android:text="设置"
