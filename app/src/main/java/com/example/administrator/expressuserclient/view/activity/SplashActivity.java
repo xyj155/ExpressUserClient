@@ -17,15 +17,12 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.administrator.expressuserclient.R;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
-
-import static android.icu.lang.UCharacter.GraphemeClusterBreak.T;
 
 /**
  * Created by Administrator on 2018/8/1/001.
@@ -52,7 +49,6 @@ public class SplashActivity extends AppCompatActivity {
         boolean isAllGranted = checkPermissionAllGranted(
                 permissions
         );
-        // 如果这3个权限全都拥有, 则直接执行备份代码
         if (isAllGranted) {
             new Handler().postDelayed(new Runnable() {
                 @Override
