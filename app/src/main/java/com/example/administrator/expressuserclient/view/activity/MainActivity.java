@@ -41,9 +41,7 @@ public class MainActivity extends BaseActivity implements MessageFragmentContrac
     private MessageFragment fragmentMessage;
     private TicketFragment fragmentTicket;
     private UserFragment fragmentUser;
-    private final static int MESSAGE_SIZE = 8;
     private MessageFragmentPresenter presenter = new MessageFragmentPresenter(this);
-    private int size;
 
     @Override
     public int intiLayout() {
@@ -65,8 +63,6 @@ public class MainActivity extends BaseActivity implements MessageFragmentContrac
         fragmentHome = new HomeFragment();
         transaction.add(R.id.framlayout, fragmentHome);
         transaction.commit();
-        //底部导航栏
-//        setBottomBar();
         bottom.setOnItemClickListener(new BottomBarLayout.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
@@ -167,7 +163,7 @@ public class MainActivity extends BaseActivity implements MessageFragmentContrac
             transaction.hide(fragmentUser);
         }
     }
-    
+
     @Override
     public void showDialog(String msg) {
 

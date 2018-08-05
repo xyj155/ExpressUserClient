@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,6 +32,7 @@ import com.example.administrator.expressuserclient.http.volley.VolleyRequestCllB
 import com.example.administrator.expressuserclient.http.volley.VolleyRequestUtil;
 import com.example.administrator.expressuserclient.view.activity.ExpressSearchActivity;
 import com.example.administrator.expressuserclient.view.activity.ExpressSiteListActivity;
+import com.example.administrator.expressuserclient.view.activity.NewTaskActivity;
 import com.example.administrator.expressuserclient.view.activity.PackagePointListActivity;
 import com.example.administrator.expressuserclient.weight.VerticalScrollLayout;
 import com.google.gson.Gson;
@@ -97,6 +99,8 @@ public class HomeFragment extends BaseFragment implements AMapLocationListener {
     TextView tvSearch;
     @InjectView(R.id.scrollView)
     NestedScrollView scrollView;
+    @InjectView(R.id.new_task)
+    LinearLayout newTask;
     private RequestQueue queue;
     //声明mlocationClient对象
     public AMapLocationClient mlocationClient;
@@ -148,9 +152,12 @@ public class HomeFragment extends BaseFragment implements AMapLocationListener {
         ButterKnife.reset(this);
     }
 
-    @OnClick({R.id.tv_search,R.id.btn_scan, R.id.btn_packet_search, R.id.btn_packet_history, R.id.btn_packet_deliver, R.id.btn_deliver_points})
+    @OnClick({R.id.new_task, R.id.tv_search, R.id.btn_scan, R.id.btn_packet_search, R.id.btn_packet_history, R.id.btn_packet_deliver, R.id.btn_deliver_points})
     public void onViewClicked(View view) {
         switch (view.getId()) {
+            case R.id.new_task:
+                startActivity(new Intent(getContext(), NewTaskActivity.class));
+                break;
             case R.id.tv_search:
                 startActivity(new Intent(getContext(), ExpressSearchActivity.class));
                 break;

@@ -1,5 +1,6 @@
 package com.example.administrator.expressuserclient.view.activity;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -81,7 +82,7 @@ public class ExpressSearchActivity extends BaseActivity implements ExpressSearch
     @Override
     public void expressSearch(BaseGson<OrderGson> packageSiteListBaseGson) {
         rySearch.setLayoutManager(new LinearLayoutManager(ExpressSearchActivity.this));
-        rySearch.setAdapter(new ExpressSearchAdapter(packageSiteListBaseGson.getData()));
+        rySearch.setAdapter(new ExpressSearchAdapter(ExpressSearchActivity.this,packageSiteListBaseGson.getData()));
     }
 
     @OnClick(R.id.btn_scan)
@@ -89,10 +90,12 @@ public class ExpressSearchActivity extends BaseActivity implements ExpressSearch
         finish();
     }
 
-    private class ExpressSearchAdapter extends BaseQuickAdapter<OrderGson, BaseViewHolder> {
+    public static class ExpressSearchAdapter extends BaseQuickAdapter<OrderGson, BaseViewHolder> {
+        private Context context;
 
-        public ExpressSearchAdapter(List<OrderGson> data) {
+        public ExpressSearchAdapter(Context context, List<OrderGson> data) {
             super(R.layout.ry_item_express_search, data);
+            this.context = context;
         }
 
         @Override

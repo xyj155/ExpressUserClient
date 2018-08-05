@@ -9,7 +9,6 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.BottomSheetBehavior;
-import android.support.design.widget.BottomSheetDialog;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.LinearLayoutManager;
@@ -60,7 +59,7 @@ public class ExpressSiteListActivity extends BaseActivity implements SiteListAct
     AMapLocationClient mlocationClient;
     AMapLocationClientOption mLocationOption;
     private NestedScrollView scrollview;
-    private BottomSheetDialog bottomSheetDialog;
+
 
     private BitmapDescriptor bitmapDescriptor;
     private SiteListActivityPresenter siteListActivityPresenter;
@@ -75,7 +74,6 @@ public class ExpressSiteListActivity extends BaseActivity implements SiteListAct
     @Override
     public void initView(Bundle savedInstanceState) {
         mMapView = (MapView) findViewById(R.id.map);
-        bottomSheetDialog = new BottomSheetDialog(ExpressSiteListActivity.this);
         mMapView.onCreate(savedInstanceState);
         scrollview = (NestedScrollView) findViewById(R.id.scrollView);
         ry_map = (RecyclerView) findViewById(R.id.ry_map);

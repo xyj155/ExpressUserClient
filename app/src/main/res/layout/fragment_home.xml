@@ -222,13 +222,13 @@
                         android:layout_gravity="right|center"
                         android:layout_marginRight="@dimen/dp_30"
                         android:src="@mipmap/ic_box" />
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="90dp"
-                    android:orientation="vertical"
-                    android:paddingLeft="@dimen/dp_30">
 
-
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="90dp"
+                        android:id="@+id/new_task"
+                        android:orientation="vertical"
+                        android:paddingLeft="@dimen/dp_30">
 
                         <FrameLayout
                             android:layout_width="wrap_content"
@@ -261,8 +261,8 @@
                             android:paddingLeft="20dp"
                             android:text="配送单数量：105件" />
 
-                </LinearLayout>
-            </FrameLayout>
+                    </LinearLayout>
+                </FrameLayout>
 
                 <View
                     android:layout_width="match_parent"

@@ -193,8 +193,9 @@
         </provider>
 
         <activity android:name=".view.activity.PackagePointListActivity" />
-        <activity android:name=".view.activity.OrderSearchActivity"></activity>
+        <activity android:name=".view.activity.OrderSearchActivity" />
         <activity android:name=".view.activity.ExpressStationDetailActivity" />
+        <activity android:name=".view.activity.NewTaskActivity"></activity>
     </application>
 
 </manifest>
