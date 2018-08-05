@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.example.administrator.expressuserclient.weight.bubble.BubbleLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="15dp"
+    android:textColor="#fff"
+    app:angle="8dp"
+    app:arrowCenter="true"
+    app:arrowHeight="10dp"
+    app:arrowLocation="bottom"
+    app:bubbleColor="#87CEFF">
+
+    <TextView
+        android:id="@+id/tv_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:paddingBottom="@dimen/dp_20"
+        android:paddingLeft="@dimen/dp_10"
+        android:paddingRight="@dimen/dp_10"
+        android:paddingTop="@dimen/dp_8"
+        android:text="地址：湖南省湖南省株洲市攸县城关镇系统组株洲市攸县城关镇系统组"
+        android:textColor="#fff" />
+</com.example.administrator.expressuserclient.weight.bubble.BubbleLinearLayout>
