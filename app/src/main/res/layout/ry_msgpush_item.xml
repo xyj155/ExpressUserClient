@@ -53,8 +53,8 @@
                 android:layout_height="match_parent"
                 android:ellipsize="end"
                 android:maxLines="3"
-                android:paddingLeft="@dimen/dp_5"
-                android:paddingRight="@dimen/dp_5"
+                android:paddingLeft="@dimen/dp_10"
+                android:paddingRight="@dimen/dp_10"
                 android:paddingTop="@dimen/dp_5"
                 android:text="我的他我的我的他我的天订单收到我的他我的我的他我的天订单收到我的他我的天订单收到我的他我的天订单收到我的他我的天订单收到天订单收到我的他我的天订单收到我的他我的天订单收到我的他我的天订单收到天订单收到"
                 android:textSize="14sp" />

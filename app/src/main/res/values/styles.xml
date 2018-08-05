@@ -6,6 +6,10 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+
+    <declare-styleable name="CouponDisplayView">
+        <attr name="CircleColor" format="color"/>
+    </declare-styleable>
     <!-- popup window 显示消失动画-->
     <style name="PopWindowAnimStyle">
         <item name="android:windowShowAnimation">@anim/dialog_enter</item>

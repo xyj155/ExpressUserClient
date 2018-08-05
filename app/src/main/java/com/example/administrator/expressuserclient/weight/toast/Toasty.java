@@ -50,7 +50,7 @@ public class Toasty {
     @ColorInt
     private static int WARNING_COLOR = Color.parseColor("#FFA900");
     @ColorInt
-    private static int NORMAL_COLOR = Color.parseColor("#353A3E");
+    private static int NORMAL_COLOR = Color.parseColor("#FFC125");
 
     private static final Typeface LOADED_TOAST_TYPEFACE = Typeface.create("sans-serif-condensed", Typeface.NORMAL);
     private static Typeface currentTypeface = LOADED_TOAST_TYPEFACE;

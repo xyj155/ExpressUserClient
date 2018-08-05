@@ -17,8 +17,9 @@ import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.example.administrator.expressuserclient.R;
 import com.example.administrator.expressuserclient.base.BaseFragment;
-import com.example.administrator.expressuserclient.contract.UserFragmentContract;
-import com.example.administrator.expressuserclient.presenter.UserFragmentPresenter;
+import com.example.administrator.expressuserclient.contract.user.UserFragmentContract;
+import com.example.administrator.expressuserclient.presenter.user.UserFragmentPresenter;
+import com.example.administrator.expressuserclient.view.activity.ServiceActivity;
 import com.example.administrator.expressuserclient.view.activity.SettingActivity;
 import com.example.administrator.expressuserclient.weight.CircleImageView;
 
@@ -138,6 +139,7 @@ public class UserFragment extends BaseFragment implements UserFragmentContract.V
             case R.id.tv_my_collection:
                 break;
             case R.id.tv_service:
+                startActivity(new Intent(getContext(), ServiceActivity.class));
                 break;
             case R.id.tv_settting:
                 startActivity(new Intent(getContext(), SettingActivity.class));

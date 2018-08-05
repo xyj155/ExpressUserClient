@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.administrator.expressuserclient">
+
     <!-- Required -->
     <permission
         android:name="com.example.administrator.expressuserclient.permission.JPUSH_MESSAGE"
@@ -20,6 +21,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <!-- Optional. Required for location feature -->
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" /> <!-- 用于开启 debug 版本的应用在6.0 系统上 层叠窗口权限 -->
@@ -29,7 +31,6 @@
     <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
     <uses-permission android:name="android.permission.GET_TASKS" />
-
 
     <application
         android:name=".App"
@@ -49,16 +50,19 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.activity.MainActivity">
-
-        </activity>
+        <activity
+            android:name=".view.activity.ServiceActivity"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity
+            android:name=".view.activity.MainActivity"
+            android:hardwareAccelerated="false" />
         <activity android:name=".view.activity.LoginActivity" />
         <activity android:name="io.github.xudaojie.qrcodelib.CaptureActivity" />
-        <activity android:name=".view.activity.SiteListActivity" />
+        <activity android:name=".view.activity.ExpressSiteListActivity" />
         <activity android:name=".view.activity.ExpressSearchActivity" />
-        <activity android:name=".view.activity.SettingActivity"></activity>
-
-        <!-- Required SDK 核心功能-->
+        <activity android:name=".view.activity.SettingActivity" />
+        <activity android:name=".view.activity.ChatUrlWebActivity" />
+        <!-- Required SDK 核心功能 -->
         <!-- 可配置android:process参数将PushService放在其他进程中 -->
         <service
             android:name="cn.jpush.android.service.PushService"
@@ -72,7 +76,6 @@
             </intent-filter>
         </service>
 
-
         <!-- since 1.8.0 option 可选项。用于同一设备中不同应用的JPush服务相互拉起的功能。 -->
         <!-- 若不启用该功能可删除该组件，将不拉起其他应用也不能被其他应用拉起 -->
         <service
@@ -81,16 +84,18 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="cn.jpush.android.intent.DaemonService" />
+
                 <category android:name="com.example.administrator.expressuserclient" />
             </intent-filter>
         </service>
 
-        <!-- Required SDK核心功能-->
+        <!-- Required SDK核心功能 -->
         <receiver
             android:name="cn.jpush.android.service.PushReceiver"
             android:enabled="true">
             <intent-filter android:priority="1000">
                 <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED_PROXY" />
+
                 <category android:name="com.example.administrator.expressuserclient" />
             </intent-filter>
             <intent-filter>
@@ -106,12 +111,12 @@
             </intent-filter>
         </receiver>
 
-        <!-- Required SDK核心功能-->
+        <!-- Required SDK核心功能 -->
         <activity
             android:name="cn.jpush.android.ui.PushActivity"
             android:configChanges="orientation|keyboardHidden"
-            android:theme="@android:style/Theme.NoTitleBar"
-            android:exported="false">
+            android:exported="false"
+            android:theme="@android:style/Theme.NoTitleBar">
             <intent-filter>
                 <action android:name="cn.jpush.android.ui.PushActivity" />
 
@@ -119,7 +124,7 @@
                 <category android:name="com.example.administrator.expressuserclient" />
             </intent-filter>
         </activity>
-        <!-- SDK核心功能-->
+        <!-- SDK核心功能 -->
         <activity
             android:name="cn.jpush.android.ui.PopWinActivity"
             android:configChanges="orientation|keyboardHidden"
@@ -131,31 +136,32 @@
             </intent-filter>
         </activity>
 
-        <!-- Required SDK核心功能-->
+        <!-- Required SDK核心功能 -->
         <service
             android:name="cn.jpush.android.service.DownloadService"
             android:enabled="true"
-            android:exported="false"></service>
+            android:exported="false" />
 
-        <!-- Required SDK核心功能-->
+        <!-- Required SDK核心功能 -->
         <receiver android:name="cn.jpush.android.service.AlarmReceiver" />
 
-
-        <!-- User defined. 用户自定义的广播接收器-->
+        <!-- User defined. 用户自定义的广播接收器 -->
         <receiver
             android:name=".JPush.JPushReciver"
             android:enabled="true">
             <intent-filter>
-                <!--Required 用户注册SDK的intent-->
+
+                <!-- Required 用户注册SDK的intent -->
                 <action android:name="cn.jpush.android.intent.REGISTRATION" />
-                <!--Required 用户接收SDK消息的intent-->
+                <!-- Required 用户接收SDK消息的intent -->
                 <action android:name="cn.jpush.android.intent.MESSAGE_RECEIVED" />
-                <!--Required 用户接收SDK通知栏信息的intent-->
+                <!-- Required 用户接收SDK通知栏信息的intent -->
                 <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED" />
-                <!--Required 用户打开自定义通知栏的intent-->
+                <!-- Required 用户打开自定义通知栏的intent -->
                 <action android:name="cn.jpush.android.intent.NOTIFICATION_OPENED" />
                 <!-- 接收网络变化 连接/断开 since 1.6.3 -->
                 <action android:name="cn.jpush.android.intent.CONNECTION" />
+
                 <category android:name="com.example.administrator.expressuserclient" />
             </intent-filter>
         </receiver>
@@ -163,19 +169,17 @@
         <meta-data
             android:name="JPUSH_CHANNEL"
             android:value="developer-default" />
-
         <meta-data
             android:name="JPUSH_APPKEY"
             android:value="ce96018f1ca252300f934c39" />
 
-
-        <!--腾讯bugly更新-->
+        <!-- 腾讯bugly更新 -->
         <activity
             android:name="com.tencent.bugly.beta.ui.BetaActivity"
             android:configChanges="keyboardHidden|orientation|screenSize|locale"
             android:theme="@android:style/Theme.Translucent" />
 
-        <!--dataProvider-->
+        <!-- dataProvider -->
         <provider
             android:name=".commonUtil.FileProviderUtil"
             android:authorities="${applicationId}.fileProvider"
@@ -187,6 +191,10 @@
                 android:resource="@xml/provider_paths"
                 tools:replace="name,resource" />
         </provider>
+
+        <activity android:name=".view.activity.PackagePointListActivity" />
+        <activity android:name=".view.activity.OrderSearchActivity"></activity>
+        <activity android:name=".view.activity.ExpressStationDetailActivity" />
     </application>
 
 </manifest>

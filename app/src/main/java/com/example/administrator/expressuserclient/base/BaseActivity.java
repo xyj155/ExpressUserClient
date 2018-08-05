@@ -43,7 +43,9 @@ public abstract class BaseActivity extends AppCompatActivity {
         dialog = AppleDialog.createLoadingDialog(BaseActivity.this, msg);
       dialog.show();
     }
-
+public void hidemDialog(){
+    dialog.dismiss();
+}
 
     public BaseActivity initToolBar() {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -114,38 +116,5 @@ public abstract class BaseActivity extends AppCompatActivity {
         isshowstate = ishow;
     }
 
-    /**
-     * 显示长toast
-     *
-     * @param msg
-     */
-    public void toastLong(String msg) {
-        if (null == toast) {
-            toast = new Toast(this);
-            toast.setDuration(Toast.LENGTH_LONG);
-            toast.setText(msg);
-            toast.show();
-        } else {
-            toast.setText(msg);
-            toast.show();
-        }
-    }
-
-    /**
-     * 显示短toast
-     *
-     * @param msg
-     */
-    public void toastShort(String msg) {
-        if (null == toast) {
-            toast = new Toast(this);
-            toast.setDuration(Toast.LENGTH_SHORT);
-            toast.setText(msg);
-            toast.show();
-        } else {
-            toast.setText(msg);
-            toast.show();
-        }
-    }
 
 }

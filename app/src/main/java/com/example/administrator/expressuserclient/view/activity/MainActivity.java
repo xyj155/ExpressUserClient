@@ -10,9 +10,9 @@ import android.widget.FrameLayout;
 import com.example.administrator.expressuserclient.R;
 import com.example.administrator.expressuserclient.base.BaseActivity;
 import com.example.administrator.expressuserclient.base.BaseGson;
-import com.example.administrator.expressuserclient.contract.MessageFragmentContract;
+import com.example.administrator.expressuserclient.contract.push.MessageFragmentContract;
 import com.example.administrator.expressuserclient.gson.PushGson;
-import com.example.administrator.expressuserclient.presenter.MessageFragmentPresenter;
+import com.example.administrator.expressuserclient.presenter.push.MessageFragmentPresenter;
 import com.example.administrator.expressuserclient.view.fragment.HomeFragment;
 import com.example.administrator.expressuserclient.view.fragment.MessageFragment;
 import com.example.administrator.expressuserclient.view.fragment.TicketFragment;
@@ -167,7 +167,7 @@ public class MainActivity extends BaseActivity implements MessageFragmentContrac
             transaction.hide(fragmentUser);
         }
     }
-
+    
     @Override
     public void showDialog(String msg) {
 

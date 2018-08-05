@@ -2,7 +2,10 @@ package com.example.administrator.expressuserclient.http;
 
 import com.example.administrator.expressuserclient.base.BaseGson;
 import com.example.administrator.expressuserclient.gson.ExpressGson;
+import com.example.administrator.expressuserclient.gson.OrderGson;
+import com.example.administrator.expressuserclient.gson.PackageSiteList;
 import com.example.administrator.expressuserclient.gson.PushGson;
+import com.example.administrator.expressuserclient.gson.TurLingGson;
 import com.example.administrator.expressuserclient.gson.UserGson;
 
 import okhttp3.MultipartBody;
@@ -24,6 +27,8 @@ import rx.Observable;
  */
 
 public interface API {
+
+    //登陆
     @FormUrlEncoded
     @POST("/CurrierBrother/public/index.php/Index/User/login")
     Observable<BaseGson<UserGson>> loginWithUserName(@Field("username") String username,
@@ -41,12 +46,34 @@ public interface API {
                                              @Field("DataSign") String DataSign,
                                              @Field("DataType") String DataType);
 
+    //上传头像
     @Streaming
     @Multipart
     @POST("/CurrierBrother/public/index.php/Index/User/loadHead")
     Call<ResponseBody> uploadAvatar(@Part("id") RequestBody id, @Part MultipartBody.Part part);
 
+    //消息推送
     @GET("/CurrierBrother/public/index.php/Index/Push/newsPush")
     Observable<BaseGson<PushGson>> getPushList();
 
+    //订单列表
+    @FormUrlEncoded
+    @POST("/CurrierBrother/public/index.php/Index/Order/getOrderList")
+    Observable<BaseGson<OrderGson>> getOrderList(@Field("userid") String userid);
+
+    //图灵机器人
+    @FormUrlEncoded
+    @POST("http://www.tuling123.com/openapi/api")
+    Call<TurLingGson> chatWithTurling(@Field("key") String key,
+                                      @Field("info") String info);
+
+    //配送列表
+    @FormUrlEncoded
+    @POST("/CurrierBrother/public/index.php/Index/Order/getPackageStation")
+    Observable<BaseGson<PackageSiteList>> getPackageStation(@Field("userid") String userid);
+
+    //查询订单
+    @FormUrlEncoded
+    @POST("/CurrierBrother/public/index.php/Index/Order/searchOrder")
+    Observable<BaseGson<OrderGson>> searchOrder(@Field("input") String input);
 }

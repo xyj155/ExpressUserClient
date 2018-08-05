@@ -16,9 +16,9 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.administrator.expressuserclient.R;
 import com.example.administrator.expressuserclient.base.BaseFragment;
 import com.example.administrator.expressuserclient.base.BaseGson;
-import com.example.administrator.expressuserclient.contract.MessageFragmentContract;
+import com.example.administrator.expressuserclient.contract.push.MessageFragmentContract;
 import com.example.administrator.expressuserclient.gson.PushGson;
-import com.example.administrator.expressuserclient.presenter.MessageFragmentPresenter;
+import com.example.administrator.expressuserclient.presenter.push.MessageFragmentPresenter;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
@@ -58,7 +58,7 @@ public class MessageFragment extends BaseFragment implements MessageFragmentCont
     protected void setUpData() {
         toolbar.setSubtitle("消息");
         toolbar.setSubtitleTextColor(0xff000000);
-        smart.autoRefresh(500);
+        smart.autoRefresh();
         smart.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(@NonNull RefreshLayout refreshLayout) {
@@ -111,7 +111,7 @@ public class MessageFragment extends BaseFragment implements MessageFragmentCont
         @Override
         protected void convert(BaseViewHolder helper, PushGson item) {
             helper.setText(R.id.tv_title, item.getTitle())
-                    .setText(R.id.tv_content, item.getContent())
+                    .setText(R.id.tv_content, "\t\t" + item.getContent())
                     .setText(R.id.tv_time, item.getDate())
                     .setOnClickListener(R.id.item, new View.OnClickListener() {
                         @Override

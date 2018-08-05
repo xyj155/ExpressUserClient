@@ -9,8 +9,8 @@ import android.widget.TextView;
 
 import com.example.administrator.expressuserclient.R;
 import com.example.administrator.expressuserclient.base.BaseActivity;
-import com.example.administrator.expressuserclient.contract.LoginActivityContract;
-import com.example.administrator.expressuserclient.presenter.LoginActivityPresenter;
+import com.example.administrator.expressuserclient.contract.login.LoginActivityContract;
+import com.example.administrator.expressuserclient.presenter.login.LoginActivityPresenter;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;

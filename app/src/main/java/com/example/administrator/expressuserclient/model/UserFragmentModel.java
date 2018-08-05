@@ -15,10 +15,10 @@ import retrofit2.Call;
 public class UserFragmentModel implements UserFragmentContract.Model {
 
     @Override
-    public Call<ResponseBody> uploadAvatar(RequestBody id, MultipartBody.Part file) {
+    public Call<ResponseBody> uploadAvatar(RequestBody requestBody,MultipartBody.Part file) {
         return RetrofitUtil
                 .getInstance(RetrofitUtil.BASE_URL)
                 .getServerices()
-                .uploadAvatar(id, file);
+                .uploadAvatar(requestBody,file);
     }
 }

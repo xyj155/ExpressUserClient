@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">#fff</color>
     <color name="colorPrimaryDark">#fff</color>
-    <color name="colorAccent">#fff</color>
+    <color name="colorAccent">#000</color>
     <color name="blue">#1296db</color>
     <color name="dark">#707070</color>
     <color name="green">#3CB371</color>
@@ -11,7 +11,7 @@
     <color name="android_layout_bg">#fafafa</color>
     <color name="black">#000000</color>
     <color name="colorblack">#000000</color>
-
+<color name="coupon">#F2F2F2</color>
     <color name="player_black">#000000</color>
     <color name="player_white">#FFFFFF</color>
     <color name="player_panel">#696969</color>

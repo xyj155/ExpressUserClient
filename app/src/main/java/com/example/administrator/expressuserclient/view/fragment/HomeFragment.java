@@ -3,6 +3,8 @@ package com.example.administrator.expressuserclient.view.fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.widget.NestedScrollView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,9 +29,14 @@ import com.example.administrator.expressuserclient.gson.NewsGson;
 import com.example.administrator.expressuserclient.gson.WeatherGson;
 import com.example.administrator.expressuserclient.http.volley.VolleyRequestCllBack;
 import com.example.administrator.expressuserclient.http.volley.VolleyRequestUtil;
-import com.example.administrator.expressuserclient.view.activity.SiteListActivity;
+import com.example.administrator.expressuserclient.view.activity.ExpressSearchActivity;
+import com.example.administrator.expressuserclient.view.activity.ExpressSiteListActivity;
+import com.example.administrator.expressuserclient.view.activity.PackagePointListActivity;
 import com.example.administrator.expressuserclient.weight.VerticalScrollLayout;
 import com.google.gson.Gson;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.loader.ImageLoader;
@@ -45,8 +52,6 @@ import butterknife.OnClick;
 import io.github.xudaojie.qrcodelib.CaptureActivity;
 
 import static android.app.Activity.RESULT_OK;
-import static com.bumptech.glide.gifdecoder.GifHeaderParser.TAG;
-import static com.example.administrator.expressuserclient.R.id.map;
 import static com.example.administrator.expressuserclient.config.SysConfig.REQUEST_QR_CODE;
 
 /**
@@ -84,6 +89,14 @@ public class HomeFragment extends BaseFragment implements AMapLocationListener {
     TextView tvCity;
     @InjectView(R.id.tv_distance)
     TextView tvDistance;
+    @InjectView(R.id.smart)
+    SmartRefreshLayout smart;
+    @InjectView(R.id.red_point)
+    View redPoint;
+    @InjectView(R.id.tv_search)
+    TextView tvSearch;
+    @InjectView(R.id.scrollView)
+    NestedScrollView scrollView;
     private RequestQueue queue;
     //声明mlocationClient对象
     public AMapLocationClient mlocationClient;
@@ -119,6 +132,13 @@ public class HomeFragment extends BaseFragment implements AMapLocationListener {
         mLocationOption.setOnceLocation(true);
         mlocationClient.setLocationOption(mLocationOption);
         mlocationClient.startLocation();
+        smart.autoRefresh();
+        smart.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(@NonNull RefreshLayout refreshLayout) {
+                smart.finishRefresh();
+            }
+        });
         return rootView;
     }
 
@@ -128,9 +148,12 @@ public class HomeFragment extends BaseFragment implements AMapLocationListener {
         ButterKnife.reset(this);
     }
 
-    @OnClick({R.id.btn_scan, R.id.btn_packet_search, R.id.btn_packet_history, R.id.btn_packet_deliver, R.id.btn_deliver_points})
+    @OnClick({R.id.tv_search,R.id.btn_scan, R.id.btn_packet_search, R.id.btn_packet_history, R.id.btn_packet_deliver, R.id.btn_deliver_points})
     public void onViewClicked(View view) {
         switch (view.getId()) {
+            case R.id.tv_search:
+                startActivity(new Intent(getContext(), ExpressSearchActivity.class));
+                break;
             case R.id.btn_scan:
                 Intent intent = new Intent(getContext(), CaptureActivity.class);
                 startActivityForResult(intent, REQUEST_QR_CODE);
@@ -140,9 +163,10 @@ public class HomeFragment extends BaseFragment implements AMapLocationListener {
             case R.id.btn_packet_history:
                 break;
             case R.id.btn_packet_deliver:
+                startActivity(new Intent(getContext(), PackagePointListActivity.class));
                 break;
             case R.id.btn_deliver_points:
-                startActivity(new Intent(getContext(), SiteListActivity.class));
+                startActivity(new Intent(getContext(), ExpressSiteListActivity.class));
                 break;
         }
     }
@@ -212,11 +236,11 @@ public class HomeFragment extends BaseFragment implements AMapLocationListener {
                             Glide.with(getActivity()).load(R.mipmap.ic_sun1).asBitmap().into(imgWeather);
                         } else if (weatherGson.getResult().get(0).getWeather().contains("雨")) {
                             Glide.with(getActivity()).load(R.mipmap.ic_ruin_1).asBitmap().into(imgWeather);
-                        }else if (weatherGson.getResult().get(0).getWeather().contains("云")) {
+                        } else if (weatherGson.getResult().get(0).getWeather().contains("云")) {
                             Glide.with(getActivity()).load(R.mipmap.ic_cloud).asBitmap().into(imgWeather);
-                        }else if (weatherGson.getResult().get(0).getWeather().contains("霾")) {
+                        } else if (weatherGson.getResult().get(0).getWeather().contains("霾")) {
                             Glide.with(getActivity()).load(R.mipmap.ic_mai).asBitmap().into(imgWeather);
-                        }else if (weatherGson.getResult().get(0).getWeather().contains("雪")) {
+                        } else if (weatherGson.getResult().get(0).getWeather().contains("雪")) {
                             Glide.with(getActivity()).load(R.mipmap.ic_snow).asBitmap().into(imgWeather);
                         }
                     }

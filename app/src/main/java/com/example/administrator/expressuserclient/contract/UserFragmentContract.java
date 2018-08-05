@@ -11,7 +11,7 @@ import retrofit2.Call;
 
 public interface UserFragmentContract {
     interface Model {
-        Call<ResponseBody> uploadAvatar(RequestBody id, MultipartBody.Part file);
+        Call<ResponseBody> uploadAvatar(RequestBody requestBody,MultipartBody.Part file);
 //        @Override
 //        public Observable<BaseData<EmptyData>> addData(RequestBody content, RequestBody contact, List<MultipartBody.Part> files) {
 //            return RetrofitUtils

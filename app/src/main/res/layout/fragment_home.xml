@@ -5,7 +5,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-
     <FrameLayout
         android:id="@+id/frameLayout"
         android:layout_width="match_parent"
@@ -28,6 +27,7 @@
             android:layout_gravity="center|left"
             android:layout_marginBottom="2dp"
             android:layout_marginLeft="@dimen/dp_40"
+            android:id="@+id/tv_search"
             android:layout_marginRight="@dimen/dp_10"
             android:background="@drawable/tv_home_search_bg"
             android:gravity="center"
@@ -38,17 +38,26 @@
 
     </FrameLayout>
 
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:layout_width="match_parent"
+        android:id="@+id/smart"
+        android:layout_marginTop="@dimen/dp_50"
+        android:layout_height="match_parent">
+
+    <com.scwang.smartrefresh.header.DeliveryHeader
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:id="@+id/scrollView"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/frameLayout"
         android:background="#fff">
 
         <LinearLayout
             android:layout_width="match_parent"
-
             android:layout_height="match_parent"
             android:orientation="vertical">
 
@@ -311,4 +320,5 @@
 
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 </RelativeLayout>
