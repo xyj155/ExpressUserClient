@@ -3,6 +3,8 @@ package com.example.administrator.expressuserclient.commonUtil;
 import android.content.SharedPreferences;
 import android.util.Log;
 
+import com.example.administrator.expressuserclient.App;
+
 import java.util.Map;
 
 import static android.content.Context.MODE_PRIVATE;
@@ -59,6 +61,9 @@ public class SPUtil {
 
         return sInstance;
     }
+
+
+
 
     public void save() {
         editor.apply();

@@ -30,6 +30,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/tv_username"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/dp_10"
@@ -38,6 +39,7 @@
                 android:textSize="18sp" />
 
             <TextView
+                android:id="@+id/tv_tel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="手机号码" />

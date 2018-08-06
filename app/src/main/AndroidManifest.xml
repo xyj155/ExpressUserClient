@@ -44,24 +44,9 @@
             android:value="4b6669548c1645c17d5d7a5695ebb551" />
 
         <activity android:name=".view.activity.SplashActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
-        <activity
-            android:name=".view.activity.ServiceActivity"
-            android:windowSoftInputMode="stateHidden|adjustResize" />
-        <activity
-            android:name=".view.activity.MainActivity"
-            android:hardwareAccelerated="false" />
-        <activity android:name=".view.activity.LoginActivity" />
-        <activity android:name="io.github.xudaojie.qrcodelib.CaptureActivity" />
-        <activity android:name=".view.activity.ExpressSiteListActivity" />
-        <activity android:name=".view.activity.ExpressSearchActivity" />
-        <activity android:name=".view.activity.SettingActivity" />
-        <activity android:name=".view.activity.ChatUrlWebActivity" />
+
         <!-- Required SDK 核心功能 -->
         <!-- 可配置android:process参数将PushService放在其他进程中 -->
         <service
@@ -192,10 +177,34 @@
                 tools:replace="name,resource" />
         </provider>
 
+
+
+        <activity
+            android:name=".view.activity.ServiceActivity"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity
+            android:name=".view.activity.MainActivity"
+            android:hardwareAccelerated="false" >
+        </activity>
+        <activity android:name=".view.activity.LoginActivity" />
+        <activity android:name="io.github.xudaojie.qrcodelib.CaptureActivity" />
+        <activity android:name=".view.activity.ExpressSiteListActivity" />
+        <activity android:name=".view.activity.ExpressSearchActivity" />
+        <activity android:name=".view.activity.SettingActivity" />
+        <activity android:name=".view.activity.ChatUrlWebActivity" />
         <activity android:name=".view.activity.PackagePointListActivity" />
-        <activity android:name=".view.activity.OrderSearchActivity" />
         <activity android:name=".view.activity.ExpressStationDetailActivity" />
-        <activity android:name=".view.activity.NewTaskActivity"></activity>
+        <activity android:name=".view.activity.NewTaskActivity" />
+        <activity android:name=".view.activity.IntroduceActivity">
+
+        </activity>
+        <activity android:name=".view.activity.JudeMentActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

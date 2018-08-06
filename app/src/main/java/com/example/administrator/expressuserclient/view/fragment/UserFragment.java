@@ -2,6 +2,7 @@ package com.example.administrator.expressuserclient.view.fragment;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -12,8 +13,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.example.administrator.expressuserclient.R;
 import com.example.administrator.expressuserclient.base.BaseFragment;
@@ -33,6 +32,8 @@ import butterknife.OnClick;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
+
+import static android.content.Context.MODE_PRIVATE;
 
 /**
  * Created by Administrator on 2018/7/29.
@@ -54,7 +55,10 @@ public class UserFragment extends BaseFragment implements UserFragmentContract.V
     TextView tvService;
     @InjectView(R.id.tv_settting)
     TextView tvSettting;
-    private RequestQueue queen;
+    @InjectView(R.id.tv_username)
+    TextView tvUsername;
+    @InjectView(R.id.tv_tel)
+    TextView tvTel;
     private UserFragmentPresenter presenter = new UserFragmentPresenter(this, getActivity());
 
     @Override
@@ -71,7 +75,15 @@ public class UserFragment extends BaseFragment implements UserFragmentContract.V
     protected void setUpData() {
         toolbar.setSubtitle("用户");
         toolbar.setSubtitleTextColor(0xff000000);
-        queen = Volley.newRequestQueue(getActivity());
+        SharedPreferences sp = getActivity().getSharedPreferences("user", MODE_PRIVATE);
+        String username = sp.getString("username", "");
+        String tel = sp.getString("tel", "");
+        if (username.isEmpty()){
+            tvTel.setText("你还没有绑定手机号码哦！");
+        }else {
+            tvTel.setText(tel);
+        }
+        tvUsername.setText(username);
     }
 
     @Override
