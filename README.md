@@ -1,4 +1,4 @@
-====快递小哥快递员版
+#快递小哥快递员版
 
 1.APP采用MVP架构的设计模式
 
@@ -16,10 +16,15 @@
 
 8.接入极光IM，实现即时通讯
 
-##项目截图
-![主界面](http://111.230.18.100/pc1.png)
-![界面1](http://111.230.18.100/pc2.png)
-![界面2](http://111.230.18.100/pc3.png)
-![界面3](http://111.230.18.100/pc4.png)
+9.接入图灵机器人，进行在线客户
 
+##项目截图
+![主界面](https://github.com/xyj155/ExpressUserClient/tree/master/image/Screenshot_2018-08-06-11-01-45-511_com.example.ad.png)
+![界面1](https://github.com/xyj155/ExpressUserClient/tree/master/image/Screenshot_2018-08-06-11-01-53-047_com.example.ad.png)
+![界面2](https://github.com/xyj155/ExpressUserClient/tree/master/image/Screenshot_2018-08-06-11-01-57-250_com.example.ad.png)
+![界面3](https://github.com/xyj155/ExpressUserClient/tree/master/image/Screenshot_2018-08-06-11-01-59-745_com.example.ad.png)
+![界面4](https://github.com/xyj155/ExpressUserClient/tree/master/image/Screenshot_2018-08-06-11-02-06-410_com.example.ad.png)
+![界面5](https://github.com/xyj155/ExpressUserClient/tree/master/image/Screenshot_2018-08-06-11-02-09-998_com.example.ad.png)
+![界面6](https://github.com/xyj155/ExpressUserClient/tree/master/image/Screenshot_2018-08-06-11-02-13-280_com.example.ad.png)
+![界面7](https://github.com/xyj155/ExpressUserClient/tree/master/image/Screenshot_2018-08-06-11-02-16-075_com.example.ad.png)
 
