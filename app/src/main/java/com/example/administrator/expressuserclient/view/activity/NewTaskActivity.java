@@ -232,11 +232,24 @@ public class NewTaskActivity extends BaseActivity implements ExpressSearchActivi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // TODO: add setContentView(...) invocation
-
-
         dlLayout = (DrawerLayout) findViewById(R.id.dl_layout);
-        setDrawerLeftEdgeSize(NewTaskActivity.this, dlLayout, 0.6f);
+        setDrawerLeftEdgeSize(NewTaskActivity.this, dlLayout, 1);
+    }
 
+    public static void setDrawerLeftEdgeSize(Activity activity, DrawerLayout drawerLayout, float displayWidthPercentage) {
+        if (activity == null || drawerLayout == null) return;
+        try {
+            Field leftDraggerField = drawerLayout.getClass().getDeclaredField("mLeftDragger");
+            leftDraggerField.setAccessible(true);
+            ViewDragHelper leftDragger = (ViewDragHelper) leftDraggerField.get(drawerLayout);
+            Field edgeSizeField = leftDragger.getClass().getDeclaredField("mEdgeSize");
+            edgeSizeField.setAccessible(true);
+            int edgeSize = edgeSizeField.getInt(leftDragger);
+            DisplayMetrics dm = new DisplayMetrics();
+            activity.getWindowManager().getDefaultDisplay().getMetrics(dm);
+            edgeSizeField.setInt(leftDragger, Math.max(edgeSize, (int) (dm.widthPixels * displayWidthPercentage)));
+        } catch (Exception e) {
+        }
     }
 
     @OnClick({R.id.tv_see, R.id.dl_layout})
@@ -254,31 +267,6 @@ public class NewTaskActivity extends BaseActivity implements ExpressSearchActivi
         }
     }
 
-    private void setDrawerLeftEdgeSize(Activity activity, DrawerLayout drawerLayout, float displayWidthPercentage) {
-        if (activity == null || drawerLayout == null)
-            return;
-        try {
-            // find ViewDragHelper and set it accessible
-            Field leftDraggerField = drawerLayout.getClass().getDeclaredField("mLeftDragger");
-            leftDraggerField.setAccessible(true);
-            ViewDragHelper leftDragger = (ViewDragHelper) leftDraggerField.get(drawerLayout);
-            // find edgesize and set is accessible
-            Field edgeSizeField = leftDragger.getClass().getDeclaredField("mEdgeSize");
-            edgeSizeField.setAccessible(true);
-            int edgeSize = edgeSizeField.getInt(leftDragger);
-            // set new edgesize
-            // Point displaySize = new Point();
-            DisplayMetrics dm = new DisplayMetrics();
-            activity.getWindowManager().getDefaultDisplay().getMetrics(dm);
-            edgeSizeField.setInt(leftDragger, Math.max(edgeSize, (int) (dm.widthPixels * displayWidthPercentage)));
-        } catch (NoSuchFieldException e) {
-            Log.i(TAG, "setDrawerLeftEdgeSize: " + e);
-        } catch (IllegalArgumentException e) {
-            Log.i(TAG, "IllegalArgumentException: " + e);
-        } catch (IllegalAccessException e) {
-            Log.i(TAG, "IllegalAccessException: " + e);
-        }
-    }
 
     @Override
     public void expressSearch(BaseGson<OrderGson> packageSiteListBaseGson) {
