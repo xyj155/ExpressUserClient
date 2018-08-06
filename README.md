@@ -1,19 +1,19 @@
 ### 个人介绍：
 
-#### 本人是一个患有老年痴呆的程序员，大脑先天发达，写下如此庞大项目（前端后台代码一起撸）。我芳龄20，在浙江省嘉兴学院上社会大学。家里穷的掉渣，希望各位如果觉得在下的代码质量或者项目不错，加个好友捐本人几毛钱，在线临表涕零，感激不尽 ；
+####    本人是一个患有老年痴呆的程序员，大脑先天发达，写下如此庞大项目（前端后台代码一起撸）。我芳龄20，在浙江省嘉兴学院上社会大学。家里穷的掉渣，希望各位如果觉得在下的代码质量或者项目不错，加个好友捐本人几毛钱，在线临表涕零，感激不尽 ；
 
-#### 其实我的一个大二的学生啦，男生，就是长相痴呆，大脑发达，唯一的优点就是缺点多。手撸代码一级，有兴趣的小伙伴可以加我微信，一起撸或互撸
+####     其实我的一个大二的学生啦，男生，就是长相痴呆，大脑发达，唯一的优点就是缺点多。手撸代码一级，有兴趣的小伙伴可以加我微信，一起撸或互撸
 ### 项目介绍：
 
-#### 快递小哥为我参加浙江省新苗项目接下的新苗项目，然后和一个老年痴呆的导师一起商量，我写前端，我写后台，我写接口，我写后台管理程序，然后导师看戏。没错，就是这样子，臭不要脸的那种！！！！！
+####    快递小哥为我参加浙江省新苗项目接下的新苗项目，然后和一个老年痴呆的导师一起商量，我写前端，我写后台，我写接口，我写后台管理程序，然后导师看戏。没错，就是这样子，臭不要脸的那种！！！！！
 
-#### 快递小哥之前有一个1.0版的，已经在华为手机市场上线了，然后后面我搁着没有管，现在有1800多用户。随随便便啦！才1800，我觉得我这个APP可以上10K+，不是我吹，就吹的！！
+####    快递小哥之前有一个1.0版的，已经在华为手机市场上线了，然后后面我搁着没有管，现在有1800多用户。随随便便啦！才1800，我觉得我这个APP可以上10K+，不是我吹，就吹的！！
 
-#### APP里面采用的是MVP的架构模式，什么叫MVP呢，自己百度，或者，我教你百度？？嘿嘿！！
+####    APP里面采用的是MVP的架构模式，什么叫MVP呢，自己百度，或者，我教你百度？？嘿嘿！！
+  
+####    开发采用诸多流行框架，用响应式开发，Rxjava+Retrofit一起用，然后不够就用Volley一起。VOlley不够就用OkHttp。
 
-#### 开发采用诸多流行框架，用响应式开发，Rxjava+Retrofit一起用，然后不够就用Volley一起。VOlley不够就用OkHttp。
-
-#### 代码封装不错，我自己感觉不错，M层V层P层都进行了分开处理，逻辑清晰，代码简单，bug一行报十个错误吧！！！！！
+####    代码封装不错，我自己感觉不错，M层V层P层都进行了分开处理，逻辑清晰，代码简单，bug一行报十个错误吧！！！！！
 
 
 
@@ -56,14 +56,13 @@
 
 
 ## 项目截图
-![image](https://github.com/xyj155/ExpressUserClient/tree/master/image/Screenshot_2018-08-06-11-01-45-511_com.example.ad.png)
-![image](https://github.com/xyj155/ExpressUserClient/tree/master/image/Screenshot_2018-08-06-11-01-53-047_com.example.ad.png)
-![image](https://github.com/xyj155/ExpressUserClient/tree/master/image/Screenshot_2018-08-06-11-01-57-250_com.example.ad.png)
-![image](https://github.com/xyj155/ExpressUserClient/tree/master/image/Screenshot_2018-08-06-11-01-59-745_com.example.ad.png)
-![image](https://github.com/xyj155/ExpressUserClient/tree/master/image/Screenshot_2018-08-06-11-02-06-410_com.example.ad.png)
-![image](https://github.com/xyj155/ExpressUserClient/tree/master/image/Screenshot_2018-08-06-11-02-09-998_com.example.ad.png)
-![image](https://github.com/xyj155/ExpressUserClient/tree/master/image/Screenshot_2018-08-06-11-02-13-280_com.example.ad.png)
-![image](https://github.com/xyj155/ExpressUserClient/tree/master/image/Screenshot_2018-08-06-11-02-16-075_com.example.ad.png)
+![image](http://bmob-cdn-20920.b0.upaiyun.com/2018/08/06/5c033a2f404c1e568056767f38018320.png)
+![image](http://bmob-cdn-20920.b0.upaiyun.com/2018/08/06/84ab34cc40e43f5a803849f614aa0e11.png)
+![image](http://bmob-cdn-20920.b0.upaiyun.com/2018/08/06/0724654f40c1f8dd8094cb828d548ebf.png)
+![image](http://bmob-cdn-20920.b0.upaiyun.com/2018/08/06/b40c08804068e7b68051aa8f61761e09.png)
+![image](http://bmob-cdn-20920.b0.upaiyun.com/2018/08/06/48b3ed36400a1660803eea75abe0fba2.png)
+![image](http://bmob-cdn-20920.b0.upaiyun.com/2018/08/06/75314f5d403ef1b480d5babe758526c6.png)
+![image](http://bmob-cdn-20920.b0.upaiyun.com/2018/08/06/139aa80e407b91b180b5b1b9517c0b8a.png)
 
 
 ### 本人博客：
