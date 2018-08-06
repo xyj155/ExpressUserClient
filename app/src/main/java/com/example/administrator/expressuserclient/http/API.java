@@ -76,4 +76,11 @@ public interface API {
     @FormUrlEncoded
     @POST("/CurrierBrother/public/index.php/Index/Order/searchOrder")
     Observable<BaseGson<OrderGson>> searchOrder(@Field("input") String input);
+
+
+
+    //查询用户信息
+    @FormUrlEncoded
+    @POST("/CurrierBrother/public/index.php/index/User/queryUserInfor")
+    Observable<BaseGson<UserGson>> queryUserInfor(@Field("id") String id);
 }

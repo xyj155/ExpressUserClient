@@ -2,6 +2,7 @@ package com.example.administrator.expressuserclient.presenter.login;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.util.Log;
 
 import com.example.administrator.expressuserclient.base.BaseGson;
 import com.example.administrator.expressuserclient.base.BaseObserver;
@@ -10,7 +11,6 @@ import com.example.administrator.expressuserclient.commonUtil.ToastUtil;
 import com.example.administrator.expressuserclient.contract.login.LoginActivityContract;
 import com.example.administrator.expressuserclient.gson.UserGson;
 import com.example.administrator.expressuserclient.model.login.LoginActivityModel;
-import com.example.administrator.expressuserclient.view.activity.MainActivity;
 import com.example.administrator.expressuserclient.view.activity.SplashActivity;
 
 import java.util.HashMap;
@@ -44,6 +44,7 @@ public class LoginActivityPresenter implements LoginActivityContract.Presenter {
                         @Override
                         public void onError(String error) {
                             view.hideDialog();
+                            Log.i(TAG, "onError: "+error);
                             ToastUtil.showToastError("登陆失败，错误信息：" + error);
                         }
 
@@ -61,7 +62,13 @@ public class LoginActivityPresenter implements LoginActivityContract.Presenter {
                                 Map<String, Object> map = new HashMap<>();
                                 map.put("username", userGsonBaseGson.getData().get(0).getUsername());
                                 map.put("login", true);
-                                map.put("tel", userGsonBaseGson.getData().get(0).getUsertel());
+                                map.put("id", userGsonBaseGson.getData().get(0).getId());
+                                if (userGsonBaseGson.getData().get(0).getUsertel()==null){
+                                    map.put("tel", "null");
+                                }else {
+                                    map.put("tel", userGsonBaseGson.getData().get(0).getUsertel());
+                                }
+
                                 SPUtil.getInstance().saveSPData(map).save();
                             } else {
                                 ToastUtil.showToastInfor("登陆失败，错误：" + userGsonBaseGson.getMsg());

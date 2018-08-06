@@ -1,9 +1,6 @@
 package com.example.administrator.expressuserclient.commonUtil;
 
 import android.content.SharedPreferences;
-import android.util.Log;
-
-import com.example.administrator.expressuserclient.App;
 
 import java.util.Map;
 
@@ -37,8 +34,7 @@ public class SPUtil {
 
     public SPUtil saveSPData(Map<String, Object> value) {
         for (Map.Entry<String, Object> vo : value.entrySet()) {
-            Log.i(TAG, "saveSPData: " + vo.getValue().getClass().toString());
-            System.out.println(vo.getValue().getClass().toString());
+            System.out.println( "saveSPData: " +vo.getValue().getClass().toString());
             switch (vo.getValue().getClass().toString()) {
                 //整型
                 case "class java.lang.Integer":

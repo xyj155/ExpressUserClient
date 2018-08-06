@@ -21,19 +21,29 @@ public class UserGson {
      * starttime : null
      * imkey : null
      */
+    private String company;
+
 
     private int id;
     private String username;
     private String password;
     private String sex;
-    private Object head;
-    private Object location;
-    private Object identity;
-    private Object usertel;
-    private Object idcard;
-    private Object name;
-    private Object starttime;
-    private Object imkey;
+    private String head;
+    private String location;
+    private String identity;
+    private String usertel;
+    private String idcard;
+    private String name;
+    private String starttime;
+    private String imkey;
+
+    public String getCompany() {
+        return company;
+    }
+
+    public void setCompany(String company) {
+        this.company = company;
+    }
 
     public int getId() {
         return id;
@@ -67,67 +77,67 @@ public class UserGson {
         this.sex = sex;
     }
 
-    public Object getHead() {
+    public String getHead() {
         return head;
     }
 
-    public void setHead(Object head) {
+    public void setHead(String head) {
         this.head = head;
     }
 
-    public Object getLocation() {
+    public String getLocation() {
         return location;
     }
 
-    public void setLocation(Object location) {
+    public void setLocation(String location) {
         this.location = location;
     }
 
-    public Object getIdentity() {
+    public String getIdentity() {
         return identity;
     }
 
-    public void setIdentity(Object identity) {
+    public void setIdentity(String identity) {
         this.identity = identity;
     }
 
-    public Object getUsertel() {
+    public String getUsertel() {
         return usertel;
     }
 
-    public void setUsertel(Object usertel) {
+    public void setUsertel(String usertel) {
         this.usertel = usertel;
     }
 
-    public Object getIdcard() {
+    public String getIdcard() {
         return idcard;
     }
 
-    public void setIdcard(Object idcard) {
+    public void setIdcard(String idcard) {
         this.idcard = idcard;
     }
 
-    public Object getName() {
+    public String getName() {
         return name;
     }
 
-    public void setName(Object name) {
+    public void setName(String name) {
         this.name = name;
     }
 
-    public Object getStarttime() {
+    public String getStarttime() {
         return starttime;
     }
 
-    public void setStarttime(Object starttime) {
+    public void setStarttime(String starttime) {
         this.starttime = starttime;
     }
 
-    public Object getImkey() {
+    public String getImkey() {
         return imkey;
     }
 
-    public void setImkey(Object imkey) {
+    public void setImkey(String imkey) {
         this.imkey = imkey;
     }
 }

@@ -8,9 +8,11 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -20,6 +22,7 @@ import com.example.administrator.expressuserclient.contract.user.UserFragmentCon
 import com.example.administrator.expressuserclient.presenter.user.UserFragmentPresenter;
 import com.example.administrator.expressuserclient.view.activity.ServiceActivity;
 import com.example.administrator.expressuserclient.view.activity.SettingActivity;
+import com.example.administrator.expressuserclient.view.activity.UserDetailActivity;
 import com.example.administrator.expressuserclient.weight.CircleImageView;
 
 import java.io.File;
@@ -59,6 +62,8 @@ public class UserFragment extends BaseFragment implements UserFragmentContract.V
     TextView tvUsername;
     @InjectView(R.id.tv_tel)
     TextView tvTel;
+    @InjectView(R.id.fl_user_detail)
+    FrameLayout flUserDetail;
     private UserFragmentPresenter presenter = new UserFragmentPresenter(this, getActivity());
 
     @Override
@@ -78,9 +83,10 @@ public class UserFragment extends BaseFragment implements UserFragmentContract.V
         SharedPreferences sp = getActivity().getSharedPreferences("user", MODE_PRIVATE);
         String username = sp.getString("username", "");
         String tel = sp.getString("tel", "");
-        if (username.isEmpty()){
+        Log.i(TAG, "setUpData: " + tel);
+        if (tel.equals("null")) {
             tvTel.setText("你还没有绑定手机号码哦！");
-        }else {
+        } else {
             tvTel.setText(tel);
         }
         tvUsername.setText(username);
@@ -136,9 +142,12 @@ public class UserFragment extends BaseFragment implements UserFragmentContract.V
 
     private static final String TAG = "UserFragment";
 
-    @OnClick({R.id.img_user_head, R.id.tv_problem_order, R.id.tv_address_list, R.id.tv_my_collection, R.id.tv_service, R.id.tv_settting})
+    @OnClick({R.id.fl_user_detail, R.id.img_user_head, R.id.tv_problem_order, R.id.tv_address_list, R.id.tv_my_collection, R.id.tv_service, R.id.tv_settting})
     public void onViewClicked(View view) {
         switch (view.getId()) {
+            case R.id.fl_user_detail:
+                startActivity(new Intent(getContext(), UserDetailActivity.class));
+                break;
             case R.id.img_user_head:
                 Intent intent = new Intent(Intent.ACTION_PICK,
                         MediaStore.Images.Media.EXTERNAL_CONTENT_URI);

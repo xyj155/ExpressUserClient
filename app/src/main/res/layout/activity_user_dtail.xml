@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.administrator.expressuserclient.view.activity.UserDetailActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#fff" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#fafafa" />
+
+    <TextView
+        android:id="@+id/tv_username"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50"
+        android:background="#fff"
+        android:drawablePadding="@dimen/dp_10"
+        android:drawableRight="@mipmap/ic_go"
+        android:gravity="center|left"
+        android:paddingLeft="@dimen/dp_30"
+        android:paddingRight="8dp"
+        android:text="用户名"
+        android:textColor="#000" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#fafafa" />
+
+    <TextView
+        android:id="@+id/tv_identity"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50"
+        android:background="#fff"
+        android:drawablePadding="@dimen/dp_10"
+        android:drawableRight="@mipmap/ic_go"
+        android:gravity="center|left"
+        android:paddingLeft="@dimen/dp_30"
+        android:paddingRight="8dp"
+        android:text="身份"
+        android:textColor="#000" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#fafafa" />
+
+    <TextView
+        android:id="@+id/tv_ltd"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50"
+        android:background="#fff"
+        android:drawablePadding="@dimen/dp_10"
+        android:drawableRight="@mipmap/ic_go"
+        android:gravity="center|left"
+        android:paddingLeft="@dimen/dp_30"
+        android:paddingRight="8dp"
+        android:text="所属快递公司"
+        android:textColor="#000" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#fafafa" />
+
+    <TextView
+        android:id="@+id/tv_tel"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50"
+        android:background="#fff"
+        android:drawablePadding="@dimen/dp_10"
+        android:drawableRight="@mipmap/ic_go"
+        android:gravity="center|left"
+        android:paddingLeft="@dimen/dp_30"
+        android:paddingRight="8dp"
+        android:text="电话号码"
+        android:textColor="#000" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#fafafa" />
+</LinearLayout>

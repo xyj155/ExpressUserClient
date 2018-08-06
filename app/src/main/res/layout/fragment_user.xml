@@ -11,40 +11,52 @@
         android:layout_height="wrap_content"
         android:background="#fff" />
 
-    <LinearLayout
+    <FrameLayout
+        android:id="@+id/fl_user_detail"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <com.example.administrator.expressuserclient.weight.CircleImageView
-            android:layout_width="@dimen/dp_70"
-            android:id="@+id/img_user_head"
-            android:layout_height="@dimen/dp_70"
-            android:layout_margin="@dimen/dp_15"
-            android:src="@mipmap/w3" />
+        android:layout_height="wrap_content">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/tv_username"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/dp_10"
-                android:text="用户名"
-                android:textColor="#000"
-                android:textSize="18sp" />
+            <com.example.administrator.expressuserclient.weight.CircleImageView
+                android:id="@+id/img_user_head"
+                android:layout_width="@dimen/dp_70"
+                android:layout_height="@dimen/dp_70"
+                android:layout_margin="@dimen/dp_15"
+                android:src="@mipmap/w3" />
 
-            <TextView
-                android:id="@+id/tv_tel"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="手机号码" />
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_username"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/dp_10"
+                    android:text="用户名"
+                    android:textColor="#000"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/tv_tel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="手机号码" />
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="right"
+            android:src="@mipmap/ic_go" />
+    </FrameLayout>
 
     <View
         android:layout_width="match_parent"
@@ -52,17 +64,17 @@
         android:background="#fafafa" />
 
     <TextView
-        android:layout_width="match_parent"
-        android:id="@+id/tv_problem_order"
-        android:layout_height="@dimen/dp_50"
-        android:drawableLeft="@mipmap/ic_user_proble"
-        android:drawablePadding="@dimen/dp_10"
-        android:drawableRight="@mipmap/ic_go"
-        android:gravity="center|left"
-        android:paddingLeft="@dimen/dp_10"
-        android:paddingRight="8dp"
-        android:text="问题订单"
-        android:textColor="#000" />
+    android:id="@+id/tv_problem_order"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dp_50"
+    android:drawableLeft="@mipmap/ic_user_proble"
+    android:drawablePadding="@dimen/dp_10"
+    android:drawableRight="@mipmap/ic_go"
+    android:gravity="center|left"
+    android:paddingLeft="@dimen/dp_10"
+    android:paddingRight="8dp"
+    android:text="问题订单"
+    android:textColor="#000" />
 
 
     <View
@@ -71,9 +83,9 @@
         android:background="#fafafa" />
 
     <TextView
+        android:id="@+id/tv_address_list"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_50"
-        android:id="@+id/tv_address_list"
         android:drawableLeft="@mipmap/ic_user_location_list"
         android:drawablePadding="@dimen/dp_10"
         android:drawableRight="@mipmap/ic_go"
@@ -90,13 +102,13 @@
         android:background="#fafafa" />
 
     <TextView
+        android:id="@+id/tv_my_collection"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_50"
+        android:drawableLeft="@mipmap/ic_user_colletion"
         android:drawablePadding="@dimen/dp_10"
         android:drawableRight="@mipmap/ic_go"
-        android:id="@+id/tv_my_collection"
         android:gravity="center|left"
-        android:drawableLeft="@mipmap/ic_user_colletion"
         android:paddingLeft="@dimen/dp_10"
         android:paddingRight="8dp"
         android:text="我的收藏"
@@ -107,15 +119,16 @@
         android:layout_width="match_parent"
         android:layout_height="10dp"
         android:background="#fafafa" />
+
     <TextView
+        android:id="@+id/tv_service"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_50"
+        android:drawableLeft="@mipmap/ic_user_service"
         android:drawablePadding="@dimen/dp_10"
         android:drawableRight="@mipmap/ic_go"
         android:gravity="center|left"
-        android:id="@+id/tv_service"
         android:paddingLeft="@dimen/dp_10"
-        android:drawableLeft="@mipmap/ic_user_service"
         android:paddingRight="8dp"
         android:text="服务中心"
         android:textColor="#000" />
@@ -124,14 +137,15 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="#fafafa" />
+
     <TextView
+        android:id="@+id/tv_settting"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_50"
         android:drawableLeft="@mipmap/ic_user_setting"
         android:drawablePadding="@dimen/dp_10"
         android:drawableRight="@mipmap/ic_go"
         android:gravity="center|left"
-        android:id="@+id/tv_settting"
         android:paddingLeft="@dimen/dp_10"
         android:paddingRight="8dp"
         android:text="设置"
