@@ -1,6 +1,7 @@
 package com.example.administrator.expressuserclient.http;
 
 import com.example.administrator.expressuserclient.base.BaseGson;
+import com.example.administrator.expressuserclient.gson.EmptyGson;
 import com.example.administrator.expressuserclient.gson.ExpressGson;
 import com.example.administrator.expressuserclient.gson.OrderGson;
 import com.example.administrator.expressuserclient.gson.PackageSiteList;
@@ -78,9 +79,18 @@ public interface API {
     Observable<BaseGson<OrderGson>> searchOrder(@Field("input") String input);
 
 
-
     //查询用户信息
     @FormUrlEncoded
     @POST("/CurrierBrother/public/index.php/index/User/queryUserInfor")
     Observable<BaseGson<UserGson>> queryUserInfor(@Field("id") String id);
+
+
+    //提交意见反馈
+    @FormUrlEncoded
+    @POST("/CurrierBrother/public/index.php/index/Feedback/UserFeedBack")
+    Observable<BaseGson<EmptyGson>> UserFeedBack(@Field("im") String im,
+                                                 @Field("username") String username,
+                                                 @Field("id") String id,
+                                                 @Field("content") String content);
+
 }

@@ -25,11 +25,15 @@ import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.example.administrator.expressuserclient.R;
 import com.example.administrator.expressuserclient.base.BaseFragment;
+import com.example.administrator.expressuserclient.base.BaseGson;
 import com.example.administrator.expressuserclient.commonUtil.ToastUtil;
+import com.example.administrator.expressuserclient.contract.order.TicketFragmentContract;
 import com.example.administrator.expressuserclient.gson.NewsGson;
+import com.example.administrator.expressuserclient.gson.OrderGson;
 import com.example.administrator.expressuserclient.gson.WeatherGson;
 import com.example.administrator.expressuserclient.http.volley.VolleyRequestCllBack;
 import com.example.administrator.expressuserclient.http.volley.VolleyRequestUtil;
+import com.example.administrator.expressuserclient.presenter.order.TicketFragmentPresenter;
 import com.example.administrator.expressuserclient.view.activity.ExpressSearchActivity;
 import com.example.administrator.expressuserclient.view.activity.ExpressSiteListActivity;
 import com.example.administrator.expressuserclient.view.activity.NewTaskActivity;
@@ -60,7 +64,7 @@ import static com.example.administrator.expressuserclient.config.SysConfig.REQUE
  * Created by Administrator on 2018/7/29.
  */
 
-public class HomeFragment extends BaseFragment implements AMapLocationListener {
+public class HomeFragment extends BaseFragment implements AMapLocationListener, TicketFragmentContract.View {
 
 
     @InjectView(R.id.btn_scan)
@@ -101,11 +105,19 @@ public class HomeFragment extends BaseFragment implements AMapLocationListener {
     NestedScrollView scrollView;
     @InjectView(R.id.new_task)
     LinearLayout newTask;
+    @InjectView(R.id.tv_sum)
+    TextView tvSum;
     private RequestQueue queue;
     //声明mlocationClient对象
     public AMapLocationClient mlocationClient;
     //声明mLocationOption对象
     public AMapLocationClientOption mLocationOption = null;
+    private TicketFragmentPresenter presenter = new TicketFragmentPresenter(this);
+    @InjectView(R.id.ic_box)
+    ImageView ic_box;
+    @InjectView(R.id.new_task)
+    LinearLayout new_task;
+
 
     @Override
     protected int setLayoutResourceID() {
@@ -116,6 +128,8 @@ public class HomeFragment extends BaseFragment implements AMapLocationListener {
     protected void setUpView(View view, Bundle bundle) {
         initVScrollLayout();
         setBanner();
+
+
     }
 
     @Override
@@ -141,6 +155,7 @@ public class HomeFragment extends BaseFragment implements AMapLocationListener {
             @Override
             public void onRefresh(@NonNull RefreshLayout refreshLayout) {
                 smart.finishRefresh();
+                presenter.getOrderList("0");
             }
         });
         return rootView;
@@ -265,6 +280,20 @@ public class HomeFragment extends BaseFragment implements AMapLocationListener {
     }
 
     private static final String TAG = "HomeFragment";
+
+    @Override
+    public void showData(BaseGson<OrderGson> baseGson) {
+        Log.i(TAG, "showData: " + baseGson.getData().size());
+        if (baseGson.getData().size() > 0) {
+            ic_box.setVisibility(View.VISIBLE);
+            new_task.setVisibility(View.VISIBLE);
+            tvSum.setText("配送快递数量："+baseGson.getData().size()+"件");
+        } else {
+            ic_box.setVisibility(View.GONE);
+            new_task.setVisibility(View.GONE);
+
+        }
+    }
 
 
     private static class ScrollLayoutAdapter extends BaseAdapter {

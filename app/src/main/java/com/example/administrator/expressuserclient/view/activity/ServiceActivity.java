@@ -1,5 +1,6 @@
 package com.example.administrator.expressuserclient.view.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.widget.LinearLayoutManager;
@@ -9,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseMultiItemQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
@@ -39,6 +41,8 @@ public class ServiceActivity extends BaseActivity implements ServiceActivityCont
     ImageView btnSend;
     @InjectView(R.id.toolbar)
     Toolbar toolbar;
+    @InjectView(R.id.tv_callback)
+    TextView tvCallback;
     private ServiceActivityPresenter presenter = new ServiceActivityPresenter(this);
     private BaseMultiItemQuickAdapter<ChatEntity, BaseViewHolder> mChatAdapter;
     private List<ChatEntity> data = new ArrayList<>();
@@ -82,9 +86,12 @@ public class ServiceActivity extends BaseActivity implements ServiceActivityCont
         ryContact.setLayoutManager(manager);
     }
 
-    @OnClick({R.id.btn_send})
-    public void onViewClicked(View view)  {
+    @OnClick({R.id.btn_send, R.id.tv_callback})
+    public void onViewClicked(View view) {
         switch (view.getId()) {
+            case R.id.tv_callback:
+                startActivityForResult(new Intent(ServiceActivity.this, FeedbackActivity.class), 0);
+                break;
             case R.id.btn_send:
                 try {
                     presenter.chatWithRobot(etContent.getText().toString());
@@ -114,5 +121,15 @@ public class ServiceActivity extends BaseActivity implements ServiceActivityCont
         data.add(ChatEntity.service(turLingGson));
         mChatAdapter = new ChatAdapter(data);
         ryContact.setAdapter(mChatAdapter);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case 0:
+                finish();
+                break;
+        }
     }
 }

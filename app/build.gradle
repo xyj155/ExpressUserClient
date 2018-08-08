@@ -37,6 +37,8 @@ dependencies {
     }
     // SmartRefreshLayout
     //高德地图
+    //Glide
+    //Retrofit
     //  rxjava
     //adapter
     //轮播图

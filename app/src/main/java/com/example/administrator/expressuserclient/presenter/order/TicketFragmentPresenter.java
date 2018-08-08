@@ -40,14 +40,7 @@ public class TicketFragmentPresenter implements TicketFragmentContract.Presenter
 
                     @Override
                     public void onNext(BaseGson<OrderGson> orderGsonBaseGson) {
-                        if (orderGsonBaseGson.getData().size() > 0) {
                             view.showData(orderGsonBaseGson);
-                            ToastUtil.showToastUsual("今天有订单哦！要辛苦你了");
-                        } else {
-                            view.showData(orderGsonBaseGson);
-                            ToastUtil.showToastInfor("你今天没有要派送的订单哦！");
-                        }
-
                     }
                 });
     }

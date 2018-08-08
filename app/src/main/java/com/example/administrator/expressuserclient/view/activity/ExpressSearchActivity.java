@@ -1,11 +1,14 @@
 package com.example.administrator.expressuserclient.view.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -82,7 +85,7 @@ public class ExpressSearchActivity extends BaseActivity implements ExpressSearch
     @Override
     public void expressSearch(BaseGson<OrderGson> packageSiteListBaseGson) {
         rySearch.setLayoutManager(new LinearLayoutManager(ExpressSearchActivity.this));
-        rySearch.setAdapter(new ExpressSearchAdapter(ExpressSearchActivity.this,packageSiteListBaseGson.getData()));
+        rySearch.setAdapter(new ExpressSearchAdapter(ExpressSearchActivity.this, packageSiteListBaseGson.getData()));
     }
 
     @OnClick(R.id.btn_scan)
@@ -99,10 +102,24 @@ public class ExpressSearchActivity extends BaseActivity implements ExpressSearch
         }
 
         @Override
-        protected void convert(BaseViewHolder helper, OrderGson item) {
-            helper.setText(R.id.tv_num, item.getOrdernum())
+        protected void convert(BaseViewHolder helper, final OrderGson item) {
+            helper.setText(R.id.tv_num, "订单号：" + item.getOrdernum())
                     .setText(R.id.tv_username, "收件人：" + item.getUsername())
-                    .setText(R.id.tv_address, "地址：" + item.getEndlocation());
+                    .setText(R.id.tv_address, "地址：" + item.getEndlocation())
+                    .setOnClickListener(R.id.tv_detail, new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Intent intent = new Intent(context, UserExpressDetailActivity.class);
+                            Log.i(TAG, "onClick: " + item.getLatitude() + "," + item.getLongitude());
+                            intent.putExtra("location", item.getLatitude() + "," + item.getLongitude());
+                            intent.putExtra("num", item.getOrdernum());
+                            intent.putExtra("tel", item.getUsertel());
+                            intent.putExtra("username", item.getUsername());
+                            intent.putExtra("address", item.getEndlocation());
+                            intent.putExtra("id", item.getId());
+                            context.startActivity(intent);
+                        }
+                    });
 
         }
     }

@@ -15,6 +15,7 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.administrator.expressuserclient.R;
 import com.example.administrator.expressuserclient.base.BaseFragment;
 import com.example.administrator.expressuserclient.base.BaseGson;
+import com.example.administrator.expressuserclient.commonUtil.ToastUtil;
 import com.example.administrator.expressuserclient.contract.order.TicketFragmentContract;
 import com.example.administrator.expressuserclient.gson.OrderGson;
 import com.example.administrator.expressuserclient.presenter.order.TicketFragmentPresenter;
@@ -85,12 +86,14 @@ public class TicketFragment extends BaseFragment implements TicketFragmentContra
     @Override
     public void showData(BaseGson<OrderGson> baseGson) {
         System.out.println(baseGson.getData().size() + "size");
-        if (baseGson.getData().size() == 0) {
+        if (baseGson.getData().size()< 1) {
             ryVisible.setVisibility(View.VISIBLE);
             ryTicket.setVisibility(View.GONE);
+            ToastUtil.showToastUsual("今天可以休息哦！");
         } else {
             ryVisible.setVisibility(View.GONE);
             ryTicket.setVisibility(View.VISIBLE);
+            ToastUtil.showToastSuccess("今天有订单哦！要辛苦你了");
             TicketAdapter adapter = new TicketAdapter(baseGson.getData());
             ryTicket.setAdapter(adapter);
         }

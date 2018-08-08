@@ -217,6 +217,8 @@
                     android:layout_height="match_parent">
 
                     <ImageView
+                        android:id="@+id/ic_box"
+                        android:visibility="gone"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="right|center"
@@ -224,9 +226,10 @@
                         android:src="@mipmap/ic_box" />
 
                     <LinearLayout
+                        android:visibility="gone"
+                        android:id="@+id/new_task"
                         android:layout_width="match_parent"
                         android:layout_height="90dp"
-                        android:id="@+id/new_task"
                         android:orientation="vertical"
                         android:paddingLeft="@dimen/dp_30">
 
@@ -259,6 +262,7 @@
                             android:layout_height="match_parent"
                             android:gravity="center|left"
                             android:paddingLeft="20dp"
+                            android:id="@+id/tv_sum"
                             android:text="配送单数量：105件" />
 
                     </LinearLayout>
