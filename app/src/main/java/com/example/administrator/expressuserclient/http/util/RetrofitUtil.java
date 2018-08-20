@@ -12,16 +12,26 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 
 public class RetrofitUtil {
-    public static final String BASE_URL = "http://111.230.18.100/";
+    public static final String BASE_URL = "http://122.152.231.185/";
+    public static final String BASE_URL_JAVA = "http://122.152.231.185:8080/";
     public static final String KUAIDINIAO = "http://api.kdniao.cc/";
     private Retrofit retrofit;
     private static RetrofitUtil sInstance;
+    private static RetrofitUtil javaInstance;
     public RetrofitUtil(String url) {
         retrofit = new Retrofit.Builder()
                 .baseUrl(url)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build();
+    }
+    public static RetrofitUtil getInstanceInJava(String url) {
+        synchronized (RetrofitUtil.class) {
+            if (javaInstance == null) {
+                javaInstance = new RetrofitUtil(url);
+            }
+        }
+        return javaInstance;
     }
     public static RetrofitUtil getInstance(String url) {
         synchronized (RetrofitUtil.class) {
@@ -31,6 +41,7 @@ public class RetrofitUtil {
         }
         return sInstance;
     }
+
     public API getServerices() {
         return retrofit.create(API.class);
     }

@@ -4,7 +4,7 @@ import com.example.administrator.expressuserclient.base.BaseGson;
 import com.example.administrator.expressuserclient.base.BaseObserver;
 import com.example.administrator.expressuserclient.commonUtil.ToastUtil;
 import com.example.administrator.expressuserclient.contract.home.PackagePointListActivityContract;
-import com.example.administrator.expressuserclient.gson.PackageSiteList;
+import com.example.administrator.expressuserclient.gson.OrderGson;
 import com.example.administrator.expressuserclient.model.home.PackagePointListActivityModel;
 
 import rx.android.schedulers.AndroidSchedulers;
@@ -28,7 +28,7 @@ public class PackagePointListActivityPresenter implements PackagePointListActivi
         model.getPackageStation(userid)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new BaseObserver<BaseGson<PackageSiteList>>() {
+                .subscribe(new BaseObserver<BaseGson<OrderGson>>() {
                     @Override
                     public void onError(String error) {
                         ToastUtil.showToastError("服务器出错！" + error);
@@ -40,8 +40,11 @@ public class PackagePointListActivityPresenter implements PackagePointListActivi
                     }
 
                     @Override
-                    public void onNext(BaseGson<PackageSiteList> packageSiteListBaseGson) {
+                    public void onNext(BaseGson<OrderGson> packageSiteListBaseGson) {
                         view.hideDialog();
+                        for (int i = 0; i < packageSiteListBaseGson.getData().size(); i++) {
+                            System.out.println(packageSiteListBaseGson.getData().get(i).getLatintude() + "packageStation");
+                        }
                         view.showData(packageSiteListBaseGson);
                     }
                 });

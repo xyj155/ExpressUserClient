@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="#fff"
+        android:gravity="center">
+
+        <View
+            android:id="@+id/view_red"
+            android:layout_width="@dimen/dp_5"
+            android:layout_height="@dimen/dp_5"
+            android:layout_margin="3dp"
+            android:layout_gravity="top|right"
+            android:background="@drawable/circle_point"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:padding="@dimen/dp_8"
+            android:text="派单日期：2018-85-8"
+            android:textColor="#000"
+            android:textSize="18sp" />
+    </FrameLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_2"
+        android:background="#fafafa" />
+</LinearLayout>

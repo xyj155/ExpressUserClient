@@ -1,22 +1,33 @@
 package com.example.administrator.expressuserclient.gson;
 
 /**
- * Created by Administrator on 2018/7/31/031.
+ * Created by Administrator on 2018/8/20/020.
  */
 
 public class NewsGson {
-    private String img;
-    private String title;
-    private String content;
-    private String date;
-    private String location;
 
-    public String getImg() {
-        return img;
+    /**
+     * id : 1
+     * title : xyj
+     * url : sd
+     * content : ds
+     * time : 0000-00-00 00:00:00
+     * pic : ds
+     */
+
+    private int id;
+    private String title;
+    private String url;
+    private String content;
+    private String time;
+    private String pic;
+
+    public int getId() {
+        return id;
     }
 
-    public void setImg(String img) {
-        this.img = img;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getTitle() {
@@ -27,6 +38,14 @@ public class NewsGson {
         this.title = title;
     }
 
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
     public String getContent() {
         return content;
     }
@@ -35,19 +54,19 @@ public class NewsGson {
         this.content = content;
     }
 
-    public String getDate() {
-        return date;
+    public String getTime() {
+        return time;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setTime(String time) {
+        this.time = time;
     }
 
-    public String getLocation() {
-        return location;
+    public String getPic() {
+        return pic;
     }
 
-    public void setLocation(String location) {
-        this.location = location;
+    public void setPic(String pic) {
+        this.pic = pic;
     }
 }

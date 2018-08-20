@@ -1,13 +1,20 @@
 package com.example.administrator.expressuserclient.http;
 
 import com.example.administrator.expressuserclient.base.BaseGson;
+import com.example.administrator.expressuserclient.gson.BannerGson;
+import com.example.administrator.expressuserclient.gson.DeliverHistory;
 import com.example.administrator.expressuserclient.gson.EmptyGson;
 import com.example.administrator.expressuserclient.gson.ExpressGson;
+import com.example.administrator.expressuserclient.gson.NewsGson;
 import com.example.administrator.expressuserclient.gson.OrderGson;
-import com.example.administrator.expressuserclient.gson.PackageSiteList;
 import com.example.administrator.expressuserclient.gson.PushGson;
+import com.example.administrator.expressuserclient.gson.ShiperTraceGson;
+import com.example.administrator.expressuserclient.gson.ShiptraceBean;
 import com.example.administrator.expressuserclient.gson.TurLingGson;
 import com.example.administrator.expressuserclient.gson.UserGson;
+import com.youth.banner.Banner;
+
+import java.util.List;
 
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -51,7 +58,7 @@ public interface API {
     @Streaming
     @Multipart
     @POST("/CurrierBrother/public/index.php/Index/User/loadHead")
-    Call<ResponseBody> uploadAvatar(@Part("id") RequestBody id, @Part MultipartBody.Part part);
+    Call<BaseGson<UserGson>> uploadAvatar(@Part("id") RequestBody id, @Part MultipartBody.Part part);
 
     //消息推送
     @GET("/CurrierBrother/public/index.php/Index/Push/newsPush")
@@ -59,8 +66,14 @@ public interface API {
 
     //订单列表
     @FormUrlEncoded
-    @POST("/CurrierBrother/public/index.php/Index/Order/getOrderList")
+    @POST("/currierbrother/solution/vrp")
     Observable<BaseGson<OrderGson>> getOrderList(@Field("userid") String userid);
+
+    //配送列表
+    @FormUrlEncoded
+    @POST("/currierbrother/solution/vrp")
+    Observable<BaseGson<OrderGson>> getPackageStation(@Field("userid") String userid);
+
 
     //图灵机器人
     @FormUrlEncoded
@@ -68,10 +81,6 @@ public interface API {
     Call<TurLingGson> chatWithTurling(@Field("key") String key,
                                       @Field("info") String info);
 
-    //配送列表
-    @FormUrlEncoded
-    @POST("/CurrierBrother/public/index.php/Index/Order/getPackageStation")
-    Observable<BaseGson<PackageSiteList>> getPackageStation(@Field("userid") String userid);
 
     //查询订单
     @FormUrlEncoded
@@ -92,5 +101,21 @@ public interface API {
                                                  @Field("username") String username,
                                                  @Field("id") String id,
                                                  @Field("content") String content);
+    //派件记录
+    @FormUrlEncoded
+    @POST("/CurrierBrother/public/index.php/index/Order/getDeliverHistoryByUid")
+    Observable<BaseGson<DeliverHistory>>    getDeliverHistoryByUid(@Field("uid") int id);
 
+    //派件记录
+    @FormUrlEncoded
+    @POST("/CurrierBrother/public/index.php/Index/Package/searchPackage")
+    Observable<BaseGson<ShiperTraceGson<ShiptraceBean>>> queryTraceByNum(@Field("num") String num);
+
+    //查询轮播图
+    @GET("/CurrierBrother/public/index.php/Index/Home/serBanner")
+    Observable<BaseGson<BannerGson>> queryBanner();
+
+    //查询主页消息
+    @GET("/CurrierBrother/public/index.php/Index/Home/setNewsList")
+    Observable<BaseGson<NewsGson>> setNewsList();
 }

@@ -1,6 +1,8 @@
 package com.example.administrator.expressuserclient.model.user;
 
+import com.example.administrator.expressuserclient.base.BaseGson;
 import com.example.administrator.expressuserclient.contract.user.UserFragmentContract;
+import com.example.administrator.expressuserclient.gson.UserGson;
 import com.example.administrator.expressuserclient.http.util.RetrofitUtil;
 
 import okhttp3.MultipartBody;
@@ -15,7 +17,7 @@ import retrofit2.Call;
 public class UserFragmentModel implements UserFragmentContract.Model {
 
     @Override
-    public Call<ResponseBody> uploadAvatar(RequestBody id, MultipartBody.Part file) {
+    public Call<BaseGson<UserGson>> uploadAvatar(RequestBody id, MultipartBody.Part file) {
         return RetrofitUtil
                 .getInstance(RetrofitUtil.BASE_URL)
                 .getServerices()

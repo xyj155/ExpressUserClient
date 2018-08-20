@@ -73,7 +73,9 @@ public class UserFragment extends BaseFragment implements UserFragmentContract.V
 
     @Override
     protected void setUpView(View view, Bundle bundle) {
-
+        SharedPreferences sp = getActivity().getSharedPreferences("user", MODE_PRIVATE);
+        String userhead = sp.getString("userhead", "");
+        Glide.with(getActivity()).load(userhead).asBitmap().into(imgUserHead);
     }
 
     @Override

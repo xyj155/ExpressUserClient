@@ -1,7 +1,6 @@
 package com.example.administrator.expressuserclient.commonUtil;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.view.View;
 
 import com.amap.api.maps.AMap;
@@ -12,7 +11,6 @@ import com.amap.api.maps.model.LatLngBounds;
 import com.amap.api.maps.model.Marker;
 import com.amap.api.maps.model.MarkerOptions;
 import com.example.administrator.expressuserclient.R;
-import com.example.administrator.expressuserclient.view.activity.PackagePointListActivity;
 
 import java.util.ArrayList;
 import java.util.List;

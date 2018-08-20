@@ -1,7 +1,7 @@
 package com.example.administrator.expressuserclient.contract.home;
 
 import com.example.administrator.expressuserclient.base.BaseGson;
-import com.example.administrator.expressuserclient.gson.PackageSiteList;
+import com.example.administrator.expressuserclient.gson.OrderGson;
 
 import rx.Observable;
 
@@ -11,7 +11,7 @@ import rx.Observable;
 
 public interface PackagePointListActivityContract {
     interface Model {
-        Observable<BaseGson<PackageSiteList>> getPackageStation( String userid);
+        Observable<BaseGson<OrderGson>> getPackageStation(String userid);
     }
 
     interface View {
@@ -19,7 +19,7 @@ public interface PackagePointListActivityContract {
 
         void hideDialog();
 
-        void showData(BaseGson<PackageSiteList> packageStation);
+        void showData(BaseGson<OrderGson> packageStation);
     }
 
     interface Presenter {

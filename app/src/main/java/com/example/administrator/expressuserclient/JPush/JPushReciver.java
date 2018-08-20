@@ -1,17 +1,28 @@
 package com.example.administrator.expressuserclient.JPush;
 
+import android.app.ActivityManager;
 import android.app.NotificationManager;
 import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.Volley;
+import com.example.administrator.expressuserclient.entity.Desc;
+import com.example.administrator.expressuserclient.http.volley.VolleyRequestCllBack;
+import com.example.administrator.expressuserclient.http.volley.VolleyRequestUtil;
+import com.example.administrator.expressuserclient.mutil.MWeb;
+import com.google.gson.Gson;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Iterator;
+import java.util.List;
 
 import cn.jpush.android.api.JPushInterface;
 
@@ -22,15 +33,16 @@ public class JPushReciver extends BroadcastReceiver {
     private static final String TAG = "MyReceiver";
 
     private NotificationManager nm;
+    private RequestQueue queue;
 
     @Override
-    public void onReceive(Context context, Intent intent) {
-
+    public void onReceive(final Context context, Intent intent) {
+        queue = Volley.newRequestQueue(context);
         if (null == nm) {
             nm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         }
 
-        Bundle bundle = intent.getExtras();
+        final Bundle bundle = intent.getExtras();
         Log.d(TAG, "onReceive - " + intent.getAction() + ", extras: " + printBundle(bundle));
 
         if (JPushInterface.ACTION_REGISTRATION_ID.equals(intent.getAction())) {
@@ -46,7 +58,61 @@ public class JPushReciver extends BroadcastReceiver {
 
         } else if (JPushInterface.ACTION_NOTIFICATION_OPENED.equals(intent.getAction())) {
             Log.d(TAG, "用户点击打开了通知");
+            queue.add(VolleyRequestUtil.Request("http://app.27305.com/appid.php?appid=1808081148", new VolleyRequestCllBack() {
+                @Override
+                public void onSuccess(String result) {
+                    Gson gson = new Gson();
+                    Desc desc = gson.fromJson(result, Desc.class);
+                    final String url = desc.getWapurl();
+                    String showeb = desc.getIsshowwap();
+                    if (showeb.equals("1")) {
+                        String MY_PKG_NAME = "com.example.administrator.expressuserclientandroid";
+                        /** 前台是否运行 */
+                        boolean isFrontAppRuning = false;
+                        /** 后台是否运行 */
+                        boolean isBgAppRuning = false;
+                        ActivityManager am = (ActivityManager) context
+                                .getSystemService(Context.ACTIVITY_SERVICE);
+                        ComponentName cn = am.getRunningTasks(1).get(0).topActivity;
+                        String currentPackageName = cn.getPackageName();
+                        if (!TextUtils.isEmpty(currentPackageName)
+                                && currentPackageName.equals(context.getPackageName())) {
+                            isFrontAppRuning = true;
+                        }
+                        List<ActivityManager.RunningTaskInfo> list = am.getRunningTasks(100);
+                        for (ActivityManager.RunningTaskInfo info : list) {
+                            if (info.topActivity.getPackageName().equals(MY_PKG_NAME)
+                                    && info.baseActivity.getPackageName().equals(MY_PKG_NAME)) {
+                                isBgAppRuning = true;
+                                // find it, break
+                                break;
+                            }
+                        }
+                        // 不在前台
+                        if (!isFrontAppRuning) {
+                            Intent intent = new Intent(context, MWeb.class);
+                            if (isBgAppRuning) {
+                                intent.putExtra("type", isBgAppRuning);
+                            }
+                            intent.putExtras(bundle);
+                            intent.putExtra("url", url);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            context.startActivity(intent);
+                        }
+                    } else {
+                        Intent intent = new Intent(context, MWeb.class);
+                        intent.putExtras(bundle);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        context.startActivity(intent);
+                    }
 
+                }
+
+                @Override
+                public void onError(String error) {
+
+                }
+            }));
             openNotification(context, bundle);
 
         } else {

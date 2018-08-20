@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#fff"
+    android:background="#fafafa"
     android:orientation="vertical">
 
     <android.support.v7.widget.Toolbar
@@ -19,6 +19,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="#fff"
             android:orientation="horizontal">
 
             <com.example.administrator.expressuserclient.weight.CircleImageView
@@ -64,17 +65,18 @@
         android:background="#fafafa" />
 
     <TextView
-    android:id="@+id/tv_problem_order"
-    android:layout_width="match_parent"
-    android:layout_height="@dimen/dp_50"
-    android:drawableLeft="@mipmap/ic_user_proble"
-    android:drawablePadding="@dimen/dp_10"
-    android:drawableRight="@mipmap/ic_go"
-    android:gravity="center|left"
-    android:paddingLeft="@dimen/dp_10"
-    android:paddingRight="8dp"
-    android:text="问题订单"
-    android:textColor="#000" />
+        android:id="@+id/tv_problem_order"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50"
+        android:background="#fff"
+        android:drawableLeft="@mipmap/ic_user_proble"
+        android:drawablePadding="@dimen/dp_10"
+        android:drawableRight="@mipmap/ic_go"
+        android:gravity="center|left"
+        android:paddingLeft="@dimen/dp_10"
+        android:paddingRight="8dp"
+        android:text="问题订单"
+        android:textColor="#000" />
 
 
     <View
@@ -86,6 +88,7 @@
         android:id="@+id/tv_address_list"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_50"
+        android:background="#fff"
         android:drawableLeft="@mipmap/ic_user_location_list"
         android:drawablePadding="@dimen/dp_10"
         android:drawableRight="@mipmap/ic_go"
@@ -105,6 +108,7 @@
         android:id="@+id/tv_my_collection"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_50"
+        android:background="#fff"
         android:drawableLeft="@mipmap/ic_user_colletion"
         android:drawablePadding="@dimen/dp_10"
         android:drawableRight="@mipmap/ic_go"
@@ -124,6 +128,7 @@
         android:id="@+id/tv_service"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_50"
+        android:background="#fff"
         android:drawableLeft="@mipmap/ic_user_service"
         android:drawablePadding="@dimen/dp_10"
         android:drawableRight="@mipmap/ic_go"
@@ -142,6 +147,7 @@
         android:id="@+id/tv_settting"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_50"
+        android:background="#fff"
         android:drawableLeft="@mipmap/ic_user_setting"
         android:drawablePadding="@dimen/dp_10"
         android:drawableRight="@mipmap/ic_go"

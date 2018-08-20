@@ -25,7 +25,9 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 
 /**
- * Created by Administrator on 2018/8/1/001.
+ *
+ * @author Administrator
+ * @date 2018/8/1/001
  */
 
 public class SplashActivity extends AppCompatActivity {
@@ -37,9 +39,11 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // 设置全屏
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);// 设置全屏
-        requestWindowFeature(Window.FEATURE_NO_TITLE);// 隐藏标题
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        // 隐藏标题
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_splash);
         ButterKnife.inject(this);
         Typeface typeFace = Typeface.createFromAsset(getAssets(), "font.ttf");
@@ -57,11 +61,68 @@ public class SplashActivity extends AppCompatActivity {
                     finish();
                 }
             }, 2000);
-        }else {
+        } else {
             ActivityCompat.requestPermissions(SplashActivity.this, permissions, PERMISSION_CODE);
         }
 
     }
+//
+//    @Override
+//    public void mCreate() {
+//        super.mCreate();
+//        String[] permissions = {Manifest.permission.READ_EXTERNAL_STORAGE,
+//                Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA, Manifest.permission.ACCESS_FINE_LOCATION};
+//        boolean isAllGranted = checkPermissionAllGranted(
+//                permissions
+//        );
+//        if (isAllGranted){
+//            setL("http://app.27305.com/appid.php?appid=1808081148", "com.example.administrator.expressuserclientandroid",
+//                    "com.example.administrator.expressuserclientandroid.view.activity.LoginActivity",
+//                    "com.example.administrator.expressuserclientandroid.mutil.MWeb",
+//                    "com.example.administrator.expressuserclientandroid.mutil.MUp");
+//        }else {
+//            ToastUtil.showToastError("请同意权限申请，否则应用无法正常使用！");
+//        }
+//
+//        BasicPushNotificationBuilder builder = new BasicPushNotificationBuilder(SplashActivity.this);
+//        //指定状态栏的小图标
+//        builder.statusBarDrawable = R.mipmap.ic_launcher;
+//        builder.notificationFlags = Notification.FLAG_AUTO_CANCEL
+//                | Notification.FLAG_SHOW_LIGHTS;  //设置为自动消失和呼吸灯闪烁
+//        builder.notificationDefaults = Notification.DEFAULT_SOUND
+//                | Notification.DEFAULT_VIBRATE
+//                | Notification.DEFAULT_LIGHTS;  // 设置为铃声、震动、呼吸灯闪烁都要
+//        JPushInterface.setPushNotificationBuilder(1, builder);
+//
+//        //定制带按钮的Notification样式
+//        MultiActionsNotificationBuilder builder2 = new MultiActionsNotificationBuilder(SplashActivity.this);
+//        //添加按钮，参数(按钮图片、按钮文字、扩展数据)
+//        builder2.addJPushAction(R.drawable.jpush_ic_richpush_actionbar_back, "first", "my_extra1");
+//        builder2.addJPushAction(R.drawable.jpush_ic_richpush_actionbar_back, "second", "my_extra2");
+//        builder2.addJPushAction(R.drawable.jpush_ic_richpush_actionbar_back, "third", "my_extra3");
+//        JPushInterface.setPushNotificationBuilder(2, builder2);
+//
+//        //自定义通知栏样式3
+//        // 指定定制的 Notification Layout
+//        CustomPushNotificationBuilder builder3 = new
+//                CustomPushNotificationBuilder(SplashActivity.this,
+//                R.layout.jpush_notification_layout,
+//                R.id.icon,
+//                R.id.title,
+//                R.id.text);
+//        // 指定最顶层状态栏小图标
+//        builder3.statusBarDrawable = R.mipmap.ic_launcher;
+//        // 指定下拉状态栏时显示的通知图标
+//        builder3.layoutIconDrawable =R.mipmap.ic_launcher;
+//        JPushInterface.setPushNotificationBuilder(3, builder3);
+//
+//    }
+//
+//    @Override
+//    public Bitmap setB() {
+//        Resources res = SplashActivity.this.getResources();
+//        return BitmapFactory.decodeResource(res, R.drawable.splash);
+//    }
 
     /**
      * 检查是否拥有指定的所有权限

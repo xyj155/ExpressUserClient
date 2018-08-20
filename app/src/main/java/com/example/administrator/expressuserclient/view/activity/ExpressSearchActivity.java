@@ -7,7 +7,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.FrameLayout;
@@ -110,10 +109,9 @@ public class ExpressSearchActivity extends BaseActivity implements ExpressSearch
                         @Override
                         public void onClick(View view) {
                             Intent intent = new Intent(context, UserExpressDetailActivity.class);
-                            Log.i(TAG, "onClick: " + item.getLatitude() + "," + item.getLongitude());
-                            intent.putExtra("location", item.getLatitude() + "," + item.getLongitude());
+                            intent.putExtra("location", item.getLatintude() + "," + item.getLongtitude());
                             intent.putExtra("num", item.getOrdernum());
-                            intent.putExtra("tel", item.getUsertel());
+                            intent.putExtra("tel", item.getTel());
                             intent.putExtra("username", item.getUsername());
                             intent.putExtra("address", item.getEndlocation());
                             intent.putExtra("id", item.getId());

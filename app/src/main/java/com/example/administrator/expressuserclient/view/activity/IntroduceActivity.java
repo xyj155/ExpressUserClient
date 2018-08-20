@@ -10,12 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.administrator.expressuserclient.R;
 import com.example.administrator.expressuserclient.base.BaseActivity;
 
@@ -24,8 +20,6 @@ import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
-
-import static cn.jpush.android.api.b.n;
 
 public class IntroduceActivity extends BaseActivity {
 

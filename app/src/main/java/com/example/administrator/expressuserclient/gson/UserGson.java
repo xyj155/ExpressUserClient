@@ -49,6 +49,25 @@ public class UserGson {
         return id;
     }
 
+    @Override
+    public String toString() {
+        return "UserGson{" +
+                "company='" + company + '\'' +
+                ", id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", sex='" + sex + '\'' +
+                ", head='" + head + '\'' +
+                ", location='" + location + '\'' +
+                ", identity='" + identity + '\'' +
+                ", usertel='" + usertel + '\'' +
+                ", idcard='" + idcard + '\'' +
+                ", name='" + name + '\'' +
+                ", starttime='" + starttime + '\'' +
+                ", imkey='" + imkey + '\'' +
+                '}';
+    }
+
     public void setId(int id) {
         this.id = id;
     }

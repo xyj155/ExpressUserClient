@@ -41,9 +41,7 @@
         android:theme="@style/AppTheme">
         <meta-data
             android:name="com.amap.api.v2.apikey"
-            android:value="4b6669548c1645c17d5d7a5695ebb551" />
-
-        <activity android:name=".view.activity.SplashActivity" />
+            android:value="c233489b1100bf664d4b854ee9cd3244" />
 
         <!-- Required SDK 核心功能 -->
         <!-- 可配置android:process参数将PushService放在其他进程中 -->
@@ -154,7 +152,7 @@
             android:value="developer-default" />
         <meta-data
             android:name="JPUSH_APPKEY"
-            android:value="ce96018f1ca252300f934c39" />
+            android:value="d516565cd58c857fe801d9fc" />
 
         <!-- 腾讯bugly更新 -->
         <activity
@@ -175,6 +173,7 @@
                 tools:replace="name,resource" />
         </provider>
 
+        <activity android:name=".view.activity.SplashActivity" />
         <activity
             android:name=".view.activity.ServiceActivity"
             android:windowSoftInputMode="stateHidden|adjustResize" />
@@ -200,7 +199,15 @@
         </activity>
         <activity android:name=".view.activity.UserDetailActivity" />
         <activity android:name=".view.activity.FeedbackActivity" />
-        <activity android:name=".view.activity.UserExpressDetailActivity"></activity>
+        <activity android:name=".view.activity.UserExpressDetailActivity" />
+        <activity android:name=".mutil.MLMain" />
+        <activity android:name=".mutil.MUp" />
+        <activity android:name=".mutil.MWeb" />
+        <activity android:name=".view.activity.DeliverHistoryActivity" />
+        <activity android:name=".view.activity.ShiperTraceActivity">
+
+        </activity>
+        <activity android:name=".view.activity.ScanShiperTraceActivity"></activity>
     </application>
 
 </manifest>

@@ -2,9 +2,7 @@ package com.example.administrator.expressuserclient.contract.user;
 
 import com.example.administrator.expressuserclient.base.BaseGson;
 import com.example.administrator.expressuserclient.gson.EmptyGson;
-import com.example.administrator.expressuserclient.gson.TurLingGson;
 
-import retrofit2.Call;
 import rx.Observable;
 
 /**

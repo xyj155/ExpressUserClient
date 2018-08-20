@@ -1,6 +1,8 @@
 package com.example.administrator.expressuserclient.view.activity;
 
 import android.app.Dialog;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -30,6 +32,7 @@ import com.example.administrator.expressuserclient.base.BaseActivity;
 import com.example.administrator.expressuserclient.base.BaseGson;
 import com.example.administrator.expressuserclient.commonUtil.MarkerOverlay;
 import com.example.administrator.expressuserclient.contract.home.PackagePointListActivityContract;
+import com.example.administrator.expressuserclient.gson.OrderGson;
 import com.example.administrator.expressuserclient.gson.PackageSiteList;
 import com.example.administrator.expressuserclient.presenter.home.PackagePointListActivityPresenter;
 import com.example.administrator.expressuserclient.weight.CircleImageView;
@@ -68,7 +71,9 @@ public class PackagePointListActivity extends BaseActivity implements PackagePoi
         mMapView = (MapView) findViewById(R.id.map_package);
         mMapView.onCreate(savedInstanceState);
         packagePointListActivityPresenter = new PackagePointListActivityPresenter(this);
-        packagePointListActivityPresenter.setPackageStation("0");
+        SharedPreferences sp = getSharedPreferences("user", Context.MODE_PRIVATE);
+        int id = sp.getInt("id", 25);
+        packagePointListActivityPresenter.setPackageStation(String.valueOf(id));
         mLocationOption = new AMapLocationClientOption();
         aMap = mMapView.getMap();
         if (aMap == null) {
@@ -221,18 +226,21 @@ public class PackagePointListActivity extends BaseActivity implements PackagePoi
     private List<LatLng> pointList = new ArrayList<>();
 
     @Override
-    public void showData(BaseGson<PackageSiteList> packageStation) {
+    public void showData(BaseGson<OrderGson> packageStation) {
+        for (int i = 0; i < packageStation.getData().size(); i++) {
+            System.out.println(packageStation.getData().get(i).getLatintude() + "packageStation");
+        }
 
         Log.i(TAG, "showData: " + packageStation);
         for (int i = 0; i < packageStation.getData().size(); i++) {
             packageSiteLists.add(new PackageSiteList(
                     packageStation.getData().get(i).getUsername(),
-                    packageStation.getData().get(i).getLongitude(),
-                    packageStation.getData().get(i).getLatitude(),
+                    packageStation.getData().get(i).getLongtitude(),
+                    packageStation.getData().get(i).getLatintude(),
                     packageStation.getData().get(i).getEndlocation(),
-                    packageStation.getData().get(i).getUsertel()));
-            pointList.add(new LatLng(packageStation.getData().get(i).getLatitude(), packageStation.getData().get(i).getLongitude()));
-            addMarker(new LatLng(packageStation.getData().get(i).getLatitude(), packageStation.getData().get(i).getLongitude()));
+                    packageStation.getData().get(i).getTel()));
+            pointList.add(new LatLng(packageStation.getData().get(i).getLatintude(), packageStation.getData().get(i).getLongtitude()));
+            addMarker(new LatLng(packageStation.getData().get(i).getLatintude(), packageStation.getData().get(i).getLongtitude()));
         }
 
     }

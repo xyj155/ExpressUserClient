@@ -26,13 +26,13 @@
     <TextView
         android:id="@+id/tv_news2"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:drawableLeft="@mipmap/ic_home_thumb"
-        android:drawablePadding="@dimen/dp_8"
-        android:drawableRight="@mipmap/ic_go"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/dp_5"
+        android:paddingTop="@dimen/dp_5"
+        android:maxLines="3"
+        android:ellipsize="end"
         android:gravity="center|left"
         android:paddingLeft="@dimen/dp_10"
         android:paddingRight="@dimen/dp_8"
-        android:text="新闻标题"
-        android:textColor="#000" />
+        android:text="新闻标题" />
 </LinearLayout>

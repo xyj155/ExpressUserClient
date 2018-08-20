@@ -15,7 +15,7 @@ public class TicketFragmentModel implements TicketFragmentContract.Model {
     @Override
     public Observable<BaseGson<OrderGson>> getOderList(String userid) {
         return RetrofitUtil.
-                getInstance(RetrofitUtil.BASE_URL)
+                getInstanceInJava(RetrofitUtil.BASE_URL_JAVA)
                 .getServerices().getOrderList(userid);
     }
 }

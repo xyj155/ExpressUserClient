@@ -2,7 +2,6 @@ package com.example.administrator.expressuserclient.contract;
 
 import android.content.Context;
 
-import com.android.volley.toolbox.StringRequest;
 import com.example.administrator.expressuserclient.commonUtil.DataLoader;
 import com.example.administrator.expressuserclient.gson.POIGson;
 

@@ -3,7 +3,6 @@ package com.example.administrator.expressuserclient.model.user;
 import com.example.administrator.expressuserclient.base.BaseGson;
 import com.example.administrator.expressuserclient.contract.user.FeedbackActivityContract;
 import com.example.administrator.expressuserclient.gson.EmptyGson;
-import com.example.administrator.expressuserclient.gson.TurLingGson;
 import com.example.administrator.expressuserclient.http.util.RetrofitUtil;
 
 import rx.Observable;

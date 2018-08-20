@@ -2,6 +2,7 @@ package com.example.administrator.expressuserclient.view.fragment;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.widget.NestedScrollView;
@@ -14,7 +15,6 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
@@ -27,17 +27,24 @@ import com.example.administrator.expressuserclient.R;
 import com.example.administrator.expressuserclient.base.BaseFragment;
 import com.example.administrator.expressuserclient.base.BaseGson;
 import com.example.administrator.expressuserclient.commonUtil.ToastUtil;
+import com.example.administrator.expressuserclient.contract.home.HomeFragmentContract;
 import com.example.administrator.expressuserclient.contract.order.TicketFragmentContract;
+import com.example.administrator.expressuserclient.gson.BannerGson;
+import com.example.administrator.expressuserclient.gson.MessageGson;
 import com.example.administrator.expressuserclient.gson.NewsGson;
 import com.example.administrator.expressuserclient.gson.OrderGson;
 import com.example.administrator.expressuserclient.gson.WeatherGson;
 import com.example.administrator.expressuserclient.http.volley.VolleyRequestCllBack;
 import com.example.administrator.expressuserclient.http.volley.VolleyRequestUtil;
+import com.example.administrator.expressuserclient.presenter.home.HomeFragmentPresenter;
 import com.example.administrator.expressuserclient.presenter.order.TicketFragmentPresenter;
+import com.example.administrator.expressuserclient.view.activity.DeliverHistoryActivity;
 import com.example.administrator.expressuserclient.view.activity.ExpressSearchActivity;
 import com.example.administrator.expressuserclient.view.activity.ExpressSiteListActivity;
 import com.example.administrator.expressuserclient.view.activity.NewTaskActivity;
 import com.example.administrator.expressuserclient.view.activity.PackagePointListActivity;
+import com.example.administrator.expressuserclient.view.activity.ScanShiperTraceActivity;
+import com.example.administrator.expressuserclient.view.activity.ShiperTraceActivity;
 import com.example.administrator.expressuserclient.weight.VerticalScrollLayout;
 import com.google.gson.Gson;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -64,9 +71,9 @@ import static com.example.administrator.expressuserclient.config.SysConfig.REQUE
  * Created by Administrator on 2018/7/29.
  */
 
-public class HomeFragment extends BaseFragment implements AMapLocationListener, TicketFragmentContract.View {
+public class HomeFragment extends BaseFragment implements AMapLocationListener, TicketFragmentContract.View, HomeFragmentContract.View {
 
-
+    private HomeFragmentPresenter homeFragmentPresenter;
     @InjectView(R.id.btn_scan)
     ImageView btnScan;
     @InjectView(R.id.frameLayout)
@@ -126,8 +133,6 @@ public class HomeFragment extends BaseFragment implements AMapLocationListener, 
 
     @Override
     protected void setUpView(View view, Bundle bundle) {
-        initVScrollLayout();
-        setBanner();
 
 
     }
@@ -144,6 +149,7 @@ public class HomeFragment extends BaseFragment implements AMapLocationListener, 
         ButterKnife.inject(this, rootView);
         queue = Volley.newRequestQueue(getActivity());
         //高德地图
+        homeFragmentPresenter=new HomeFragmentPresenter(this);
         mlocationClient = new AMapLocationClient(getActivity());
         mLocationOption = new AMapLocationClientOption();
         mlocationClient.setLocationListener(this);
@@ -155,9 +161,13 @@ public class HomeFragment extends BaseFragment implements AMapLocationListener, 
             @Override
             public void onRefresh(@NonNull RefreshLayout refreshLayout) {
                 smart.finishRefresh();
-                presenter.getOrderList("0");
+                SharedPreferences sp = getActivity().getSharedPreferences("user", Context.MODE_PRIVATE);
+                int id = sp.getInt("id", 25);
+                homeFragmentPresenter.setMainFragmentData();
+                presenter.getOrderList(String.valueOf(id));
             }
         });
+
         return rootView;
     }
 
@@ -181,8 +191,10 @@ public class HomeFragment extends BaseFragment implements AMapLocationListener, 
                 startActivityForResult(intent, REQUEST_QR_CODE);
                 break;
             case R.id.btn_packet_search:
+                startActivity(new Intent(getContext(), ShiperTraceActivity.class));
                 break;
             case R.id.btn_packet_history:
+                startActivity(new Intent(getContext(), DeliverHistoryActivity.class));
                 break;
             case R.id.btn_packet_deliver:
                 startActivity(new Intent(getContext(), PackagePointListActivity.class));
@@ -200,41 +212,13 @@ public class HomeFragment extends BaseFragment implements AMapLocationListener, 
                 && requestCode == REQUEST_QR_CODE
                 && data != null) {
             String result = data.getStringExtra("result");
-            Toast.makeText(getActivity(), result, Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(getContext(), ScanShiperTraceActivity.class);
+            intent.putExtra("code", result);
+            startActivity(intent);
         }
     }
 
-    private void initVScrollLayout() {
-        List<NewsGson> items = new ArrayList<>();
-        for (int i = 0; i < 6; i++) {
-            NewsGson item = new NewsGson();
-            item.setTitle("标签" + i);
-            item.setTitle("应该显示的内容标题" + i);
-            items.add(item);
-        }
-        ScrollLayoutAdapter adapter = new ScrollLayoutAdapter();
-        scrollLayout.setAdapter(adapter);
-        adapter.setList(items);
-    }
 
-    private void setBanner() {
-        List<String> list = new ArrayList<>();
-        list.add("http://img.zcool.cn/community/01ed0a5a38d390a80121db808813d6.jpg@2o.jpg");
-        list.add("http://img.zcool.cn/community/01497856f108896ac7257d2053f0d4.jpg@1280w_1l_2o_100sh.png");
-        list.add("http://img.zcool.cn/community/0186185973f3c8a8012193a3a25adc.jpg");
-        list.add("http://img.zcool.cn/community/0122eb5973f3e3a8012193a329ce2c.jpg");
-        homeBanner.setImageLoader(new ImageLoader() {
-            @Override
-            public void displayImage(Context context, Object path, ImageView imageView) {
-                Glide.with(context).load(path.toString()).asBitmap().into(imageView);
-            }
-        });
-        homeBanner.setIndicatorGravity(BannerConfig.CENTER);
-        homeBanner.setImages(list);
-        homeBanner.setDelayTime(5000);
-        homeBanner.start();
-
-    }
 
     @Override
     public void onLocationChanged(final AMapLocation aMapLocation) {
@@ -287,12 +271,33 @@ public class HomeFragment extends BaseFragment implements AMapLocationListener, 
         if (baseGson.getData().size() > 0) {
             ic_box.setVisibility(View.VISIBLE);
             new_task.setVisibility(View.VISIBLE);
-            tvSum.setText("配送快递数量："+baseGson.getData().size()+"件");
+            tvSum.setText("配送快递数量：" + baseGson.getData().size() + "件");
         } else {
             ic_box.setVisibility(View.GONE);
             new_task.setVisibility(View.GONE);
 
         }
+    }
+
+    @Override
+    public void setBanner(List<BannerGson> bannerGsonBaseGson, List<NewsGson> baseGson) {
+        List<String> list = new ArrayList<>();
+        for (int i=0;i<bannerGsonBaseGson.size();i++){
+            list.add(bannerGsonBaseGson.get(i).getPic());
+        }
+        homeBanner.setImageLoader(new ImageLoader() {
+            @Override
+            public void displayImage(Context context, Object path, ImageView imageView) {
+                Glide.with(context).load(path.toString()).asBitmap().into(imageView);
+            }
+        });
+        homeBanner.setIndicatorGravity(BannerConfig.CENTER);
+        homeBanner.setImages(list);
+        homeBanner.setDelayTime(5000);
+        homeBanner.start();
+        ScrollLayoutAdapter adapter = new ScrollLayoutAdapter();
+        scrollLayout.setAdapter(adapter);
+        adapter.setList(baseGson);
     }
 
 
@@ -334,8 +339,8 @@ public class HomeFragment extends BaseFragment implements AMapLocationListener, 
                 holder = (ViewHolder) convertView.getTag();
             }
             NewsGson item = getItem(position);
-            holder.title.setText(item.getTitle() + "1");
-            holder.text.setText(item.getTitle() + "2");
+            holder.title.setText(item.getTitle());
+            holder.text.setText(item.getContent());
             return convertView;
         }
     }

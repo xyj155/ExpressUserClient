@@ -3,10 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="#fafafa"
     android:orientation="vertical">
 
     <com.example.administrator.expressuserclient.weight.CouponDisplayView
-        android:id="@+id/ty_ticket"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/dp_15"
@@ -19,6 +19,7 @@
         android:paddingBottom="@dimen/dp_5">
 
         <LinearLayout
+            android:id="@+id/ty_ticket"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
