@@ -30,7 +30,6 @@ import com.example.administrator.expressuserclient.commonUtil.ToastUtil;
 import com.example.administrator.expressuserclient.contract.home.HomeFragmentContract;
 import com.example.administrator.expressuserclient.contract.order.TicketFragmentContract;
 import com.example.administrator.expressuserclient.gson.BannerGson;
-import com.example.administrator.expressuserclient.gson.MessageGson;
 import com.example.administrator.expressuserclient.gson.NewsGson;
 import com.example.administrator.expressuserclient.gson.OrderGson;
 import com.example.administrator.expressuserclient.gson.WeatherGson;
@@ -42,6 +41,7 @@ import com.example.administrator.expressuserclient.view.activity.DeliverHistoryA
 import com.example.administrator.expressuserclient.view.activity.ExpressSearchActivity;
 import com.example.administrator.expressuserclient.view.activity.ExpressSiteListActivity;
 import com.example.administrator.expressuserclient.view.activity.NewTaskActivity;
+import com.example.administrator.expressuserclient.view.activity.NewsActivity;
 import com.example.administrator.expressuserclient.view.activity.PackagePointListActivity;
 import com.example.administrator.expressuserclient.view.activity.ScanShiperTraceActivity;
 import com.example.administrator.expressuserclient.view.activity.ShiperTraceActivity;
@@ -149,7 +149,7 @@ public class HomeFragment extends BaseFragment implements AMapLocationListener, 
         ButterKnife.inject(this, rootView);
         queue = Volley.newRequestQueue(getActivity());
         //高德地图
-        homeFragmentPresenter=new HomeFragmentPresenter(this);
+        homeFragmentPresenter = new HomeFragmentPresenter(this);
         mlocationClient = new AMapLocationClient(getActivity());
         mLocationOption = new AMapLocationClientOption();
         mlocationClient.setLocationListener(this);
@@ -177,9 +177,12 @@ public class HomeFragment extends BaseFragment implements AMapLocationListener, 
         ButterKnife.reset(this);
     }
 
-    @OnClick({R.id.new_task, R.id.tv_search, R.id.btn_scan, R.id.btn_packet_search, R.id.btn_packet_history, R.id.btn_packet_deliver, R.id.btn_deliver_points})
+    @OnClick({R.id.tv_distance,R.id.new_task, R.id.tv_search, R.id.btn_scan, R.id.btn_packet_search, R.id.btn_packet_history, R.id.btn_packet_deliver, R.id.btn_deliver_points})
     public void onViewClicked(View view) {
         switch (view.getId()) {
+            case R.id.tv_distance:
+                startActivity(new Intent(getContext(), NewsActivity.class));
+                break;
             case R.id.new_task:
                 startActivity(new Intent(getContext(), NewTaskActivity.class));
                 break;
@@ -217,7 +220,6 @@ public class HomeFragment extends BaseFragment implements AMapLocationListener, 
             startActivity(intent);
         }
     }
-
 
 
     @Override
@@ -282,7 +284,7 @@ public class HomeFragment extends BaseFragment implements AMapLocationListener, 
     @Override
     public void setBanner(List<BannerGson> bannerGsonBaseGson, List<NewsGson> baseGson) {
         List<String> list = new ArrayList<>();
-        for (int i=0;i<bannerGsonBaseGson.size();i++){
+        for (int i = 0; i < bannerGsonBaseGson.size(); i++) {
             list.add(bannerGsonBaseGson.get(i).getPic());
         }
         homeBanner.setImageLoader(new ImageLoader() {

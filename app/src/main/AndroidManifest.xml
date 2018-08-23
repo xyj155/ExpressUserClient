@@ -200,14 +200,12 @@
         <activity android:name=".view.activity.UserDetailActivity" />
         <activity android:name=".view.activity.FeedbackActivity" />
         <activity android:name=".view.activity.UserExpressDetailActivity" />
-        <activity android:name=".mutil.MLMain" />
-        <activity android:name=".mutil.MUp" />
-        <activity android:name=".mutil.MWeb" />
         <activity android:name=".view.activity.DeliverHistoryActivity" />
-        <activity android:name=".view.activity.ShiperTraceActivity">
+        <activity android:name=".view.activity.ShiperTraceActivity"></activity>
+        <activity android:name=".view.activity.ScanShiperTraceActivity" />
+        <activity android:name=".view.activity.NewsActivity">
 
         </activity>
-        <activity android:name=".view.activity.ScanShiperTraceActivity"></activity>
     </application>
 
 </manifest>

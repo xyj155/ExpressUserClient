@@ -15,7 +15,8 @@ import com.android.volley.toolbox.Volley;
 import com.example.administrator.expressuserclient.entity.Desc;
 import com.example.administrator.expressuserclient.http.volley.VolleyRequestCllBack;
 import com.example.administrator.expressuserclient.http.volley.VolleyRequestUtil;
-import com.example.administrator.expressuserclient.mutil.MWeb;
+
+import com.example.administrator.expressuserclient.view.activity.MainActivity;
 import com.google.gson.Gson;
 
 import org.json.JSONException;
@@ -90,7 +91,7 @@ public class JPushReciver extends BroadcastReceiver {
                         }
                         // 不在前台
                         if (!isFrontAppRuning) {
-                            Intent intent = new Intent(context, MWeb.class);
+                            Intent intent = new Intent(context, MainActivity.class);
                             if (isBgAppRuning) {
                                 intent.putExtra("type", isBgAppRuning);
                             }
@@ -100,7 +101,7 @@ public class JPushReciver extends BroadcastReceiver {
                             context.startActivity(intent);
                         }
                     } else {
-                        Intent intent = new Intent(context, MWeb.class);
+                        Intent intent = new Intent(context, MainActivity.class);
                         intent.putExtras(bundle);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         context.startActivity(intent);

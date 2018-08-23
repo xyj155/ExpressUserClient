@@ -73,6 +73,7 @@ public class UserDetailActivity extends BaseActivity implements UserDetailActivi
     public void getUserInfor(BaseGson<UserGson> userGsonBaseGson) {
         tvIdentity.setText(userGsonBaseGson.getData().get(0).getIdentity()==null?"身份： "+"普通用户":"身份： "+userGsonBaseGson.getData().get(0).getIdentity());
         tvTel.setText(userGsonBaseGson.getData().get(0).getUsertel()==null?"联系方式： "+"你还没有绑定手机号码":"联系方式： "+userGsonBaseGson.getData().get(0).getUsertel());
+        tvTel.setTextColor(userGsonBaseGson.getData().get(0).getUsertel()==null?getResources().getColor(R.color.crime):getResources().getColor(R.color.black));
         tvUsername.setText(userGsonBaseGson.getData().get(0).getUsername()==null?"用户名： "+"":"用户名： "+userGsonBaseGson.getData().get(0).getUsername());
         tvLtd.setText(userGsonBaseGson.getData().get(0).getCompany()==null?"所在公司： "+"默认":"所在公司： "+userGsonBaseGson.getData().get(0).getCompany());
     }

@@ -9,6 +9,7 @@ android {
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         ndk {
             abiFilters 'armeabi', 'armeabi-v7a', 'armeabi-v8a'
@@ -74,5 +75,7 @@ dependencies {
     compile 'com.tencent.bugly:crashreport_upgrade:1.2.0'
     compile 'com.tencent.bugly:nativecrashreport:2.2.0'
     compile 'com.squareup.okhttp3:logging-interceptor:3.1.2'
+    // https://mvnrepository.com/artifact/org.jsoup/jsoup
+    compile 'org.jsoup:jsoup:1.11.3'
     testCompile 'junit:junit:4.12'
 }

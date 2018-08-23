@@ -86,12 +86,12 @@ public class UserFragment extends BaseFragment implements UserFragmentContract.V
         String username = sp.getString("username", "");
         String tel = sp.getString("tel", "");
         Log.i(TAG, "setUpData: " + tel);
-        if (tel.equals("null")) {
+        if (tel.equals("")) {
             tvTel.setText("你还没有绑定手机号码哦！");
         } else {
-            tvTel.setText(tel);
+            tvTel.setText("手机："+tel);
         }
-        tvUsername.setText(username);
+        tvUsername.setText("用户："+username);
     }
 
     @Override

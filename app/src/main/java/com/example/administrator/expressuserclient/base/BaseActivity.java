@@ -41,11 +41,12 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     public void showmDialog(String msg) {
         dialog = AppleDialog.createLoadingDialog(BaseActivity.this, msg);
-      dialog.show();
+        dialog.show();
     }
-public void hidemDialog(){
-    dialog.dismiss();
-}
+
+    public void hidemDialog() {
+        dialog.dismiss();
+    }
 
     public BaseActivity initToolBar() {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -91,7 +92,7 @@ public void hidemDialog(){
     /**
      * 初始化布局
      */
-    public abstract void initView(Bundle savedInstanceState);
+    public abstract void initView(Bundle savedInstanceState) ;
 
     /**
      * 设置数据
