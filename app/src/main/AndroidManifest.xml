@@ -42,6 +42,15 @@
         <meta-data
             android:name="com.amap.api.v2.apikey"
             android:value="c233489b1100bf664d4b854ee9cd3244" />
+        <!--bugly-->
+        <!-- 配置APP ID -->
+        <meta-data
+            android:name="BUGLY_APPID"
+            android:value="f2c794a75c" />
+        <!-- 配置Bugly调试模式（true或者false）-->
+        <meta-data
+            android:name="BUGLY_ENABLE_DEBUG"
+            android:value="false" />
 
         <!-- Required SDK 核心功能 -->
         <!-- 可配置android:process参数将PushService放在其他进程中 -->
@@ -161,16 +170,15 @@
             android:theme="@android:style/Theme.Translucent" />
 
         <!-- dataProvider -->
+
         <provider
-            android:name=".commonUtil.FileProviderUtil"
+            android:name="android.support.v4.content.FileProvider"
             android:authorities="${applicationId}.fileProvider"
             android:exported="false"
-            android:grantUriPermissions="true"
-            tools:replace="name,authorities,exported,grantUriPermissions">
+            android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/provider_paths"
-                tools:replace="name,resource" />
+                android:resource="@xml/provider_paths" />
         </provider>
 
         <activity android:name=".view.activity.SplashActivity" />
