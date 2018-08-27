@@ -204,7 +204,6 @@
         <activity
             android:name=".view.activity.MainActivity"
             android:hardwareAccelerated="false" />
-        <activity android:name=".view.activity.LoginActivity" />
         <activity android:name="io.github.xudaojie.qrcodelib.CaptureActivity" />
         <activity android:name=".view.activity.ExpressSiteListActivity" />
         <activity android:name=".view.activity.ExpressSearchActivity" />
@@ -214,9 +213,7 @@
         <activity android:name=".view.activity.ExpressStationDetailActivity" />
         <activity android:name=".view.activity.NewTaskActivity" />
         <activity android:name=".view.activity.IntroduceActivity" />
-        <activity android:name=".view.activity.JudeMentActivity">
-
-        </activity>
+        <activity android:name=".view.activity.JudeMentActivity"></activity>
         <activity android:name=".view.activity.UserDetailActivity" />
         <activity android:name=".view.activity.FeedbackActivity" />
         <activity android:name=".view.activity.UserExpressDetailActivity" />
@@ -224,16 +221,16 @@
         <activity android:name=".view.activity.ShiperTraceActivity" />
         <activity android:name=".view.activity.ScanShiperTraceActivity" />
         <activity android:name=".view.activity.NewsActivity" />
-        <activity android:name=".view.activity.ContactListActivity" >
+        <activity android:name=".view.activity.ContactListActivity"></activity>
+        <activity android:name=".view.activity.ConversationActivity" />
+        <activity android:name=".view.activity.AddContactUserActivity"></activity>
+        <activity android:name=".view.activity.LoginAndRegisterActivity"
+            android:theme="@style/BlueAppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity android:name=".view.activity.ConversationActivity" />
-        <activity android:name=".view.activity.AddContactUserActivity">
-
         </activity>
     </application>
 
