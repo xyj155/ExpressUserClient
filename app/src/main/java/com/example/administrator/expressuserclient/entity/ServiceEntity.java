@@ -7,7 +7,7 @@ import com.example.administrator.expressuserclient.gson.TurLingGson;
  * Created by Administrator on 2018/7/11.
  */
 
-public class ChatEntity implements MultiItemEntity {
+public class ServiceEntity implements MultiItemEntity {
 
     public static final int TYPE_SERVICES_MESSAGE = 1;
 
@@ -26,17 +26,17 @@ public class ChatEntity implements MultiItemEntity {
         this.inputText = inputText;
     }
 
-    public ChatEntity(int itemType, TurLingGson data, String inputText) {
+    public ServiceEntity(int itemType, TurLingGson data, String inputText) {
         this.itemType = itemType;
         this.data = data;
         this.inputText = inputText;
     }
 
-    public ChatEntity(int itemType, TurLingGson data) {
+    public ServiceEntity(int itemType, TurLingGson data) {
         this.itemType = itemType;
         this.data = data;
     }
-    public ChatEntity(int itemType, String inputText) {
+    public ServiceEntity(int itemType, String inputText) {
         this.itemType = itemType;
         this.inputText = inputText;
     }
@@ -44,8 +44,8 @@ public class ChatEntity implements MultiItemEntity {
      * @param data
      * @return
      */
-    public static ChatEntity service(TurLingGson data) {
-        return new ChatEntity(TYPE_SERVICES_MESSAGE, data);
+    public static ServiceEntity service(TurLingGson data) {
+        return new ServiceEntity(TYPE_SERVICES_MESSAGE, data);
     }
 
 
@@ -53,8 +53,8 @@ public class ChatEntity implements MultiItemEntity {
      * @param data
      * @return
      */
-    public static ChatEntity client(String data) {
-        return new ChatEntity(TYPE_CLIENT_MESSAGE, data);
+    public static ServiceEntity client(String data) {
+        return new ServiceEntity(TYPE_CLIENT_MESSAGE, data);
     }
 
     @Override

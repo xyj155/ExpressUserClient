@@ -9,14 +9,32 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#fff" />
+        android:background="#fff" >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="match_parent">
+            <TextView
+                android:textColor="#000"
+                android:textSize="17sp"
+                android:id="@+id/tv_contact"
+                android:layout_marginRight="@dimen/dp_10"
+                android:layout_alignParentRight="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="联系人"
+                android:gravity="center" />
+        </RelativeLayout>
+
+    </android.support.v7.widget.Toolbar>
 
     <com.scwang.smartrefresh.layout.SmartRefreshLayout
         android:layout_width="match_parent"
         android:id="@+id/smart"
         android:layout_height="match_parent">
 
-        <com.scwang.smartrefresh.header.DeliveryHeader
+
+        <com.scwang.smartrefresh.header.TaurusHeader
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 

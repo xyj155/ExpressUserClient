@@ -1,4 +1,4 @@
-package com.example.administrator.expressuserclient.contract;
+package com.example.administrator.expressuserclient.contract.message;
 
 import com.example.administrator.expressuserclient.base.BaseGson;
 import com.example.administrator.expressuserclient.gson.PushGson;

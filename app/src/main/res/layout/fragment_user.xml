@@ -10,7 +10,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#fff" />
-
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#fafafa" />
     <FrameLayout
         android:id="@+id/fl_user_detail"
         android:layout_width="match_parent"

@@ -334,7 +334,7 @@ public class HomeFragment extends BaseFragment implements AMapLocationListener, 
         public View getView(int position, View convertView, ViewGroup parent) {
             ViewHolder holder;
             if (convertView == null) {
-                convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_home_scrolllayout, parent, false);
+                convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.ry_item_home_scrolllayout, parent, false);
                 holder = new ViewHolder(convertView);
                 convertView.setTag(holder);
             } else {

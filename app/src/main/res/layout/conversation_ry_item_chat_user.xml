@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:weightSum="4"
+    android:layout_height="wrap_content">
+
+    <com.example.administrator.expressuserclient.weight.bubble.BubbleTextView
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:layout_gravity="center"
+        android:layout_height="wrap_content"
+        android:text="Hello BubbleTextVew"
+        android:padding="15dp"
+        android:textColor="#fff"
+        app:arrowWidth="8dp"
+        android:layout_marginLeft="80dp"
+        app:angle="8dp"
+        android:id="@+id/tv_main_item_content"
+        app:arrowHeight="10dp"
+        app:arrowPosition="14dp"
+        app:arrowLocation="right"
+        app:arrowCenter="true"
+        app:bubbleColor="#FFA500"/>
+    <com.example.administrator.expressuserclient.weight.CircleImageView
+        android:layout_width="match_parent"
+        android:layout_weight="3"
+        android:src="@mipmap/w3"
+        android:layout_height="50dp"
+        android:layout_margin="10dp"/>
+</LinearLayout>

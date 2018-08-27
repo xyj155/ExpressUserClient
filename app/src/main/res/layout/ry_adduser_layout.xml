@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_contact"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#fff"
+            android:orientation="horizontal">
+
+            <com.example.administrator.expressuserclient.weight.CircleImageView
+                android:id="@+id/img_head"
+                android:layout_width="@dimen/dp_55"
+                android:layout_height="@dimen/dp_55"
+                android:layout_marginBottom="@dimen/dp_8"
+                android:layout_marginLeft="@dimen/dp_15"
+                android:layout_marginRight="@dimen/dp_10"
+                android:layout_marginTop="@dimen/dp_8"
+                android:src="@mipmap/w3" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_username"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center|left|top"
+                    android:paddingBottom="@dimen/dp_8"
+                    android:paddingLeft="@dimen/dp_10"
+                    android:paddingRight="@dimen/dp_10"
+                    android:paddingTop="@dimen/dp_8"
+                    android:text="首蓝"
+                    android:textColor="#000"
+                    android:textSize="19sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:id="@+id/tv_identity"
+                    android:paddingLeft="@dimen/dp_10"
+                    android:layout_height="match_parent"
+                    android:gravity="center|left"
+                    android:text="身份：普通用户" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/img_add"
+            android:padding="@dimen/dp_8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right|center"
+            android:layout_marginRight="@dimen/dp_20"
+            android:src="@mipmap/ic_add" />
+    </FrameLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_0.1"
+        android:background="#d8d8d8" />
+</LinearLayout>

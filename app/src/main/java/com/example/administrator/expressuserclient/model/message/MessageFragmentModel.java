@@ -1,7 +1,7 @@
-package com.example.administrator.expressuserclient.model;
+package com.example.administrator.expressuserclient.model.message;
 
 import com.example.administrator.expressuserclient.base.BaseGson;
-import com.example.administrator.expressuserclient.contract.MessageFragmentContract;
+import com.example.administrator.expressuserclient.contract.message.MessageFragmentContract;
 import com.example.administrator.expressuserclient.gson.PushGson;
 import com.example.administrator.expressuserclient.http.util.RetrofitUtil;
 

@@ -15,7 +15,6 @@ import com.android.volley.toolbox.Volley;
 import com.example.administrator.expressuserclient.entity.Desc;
 import com.example.administrator.expressuserclient.http.volley.VolleyRequestCllBack;
 import com.example.administrator.expressuserclient.http.volley.VolleyRequestUtil;
-
 import com.example.administrator.expressuserclient.view.activity.MainActivity;
 import com.google.gson.Gson;
 
@@ -26,6 +25,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import cn.jpush.android.api.JPushInterface;
+
 
 /**
  * Created by Administrator on 2018/7/23/023.

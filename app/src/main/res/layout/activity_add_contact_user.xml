@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff"
+    android:orientation="vertical"
+    tools:context="com.example.administrator.expressuserclient.view.activity.AddContactUserActivity">
+
+    <include layout="@layout/common_toolbar" />
+
+    <com.example.administrator.expressuserclient.weight.CustomEditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#fff"
+        android:id="@+id/et_search"
+        android:hint="请输入用户账号"
+        android:drawableRight="@mipmap/ic_search"
+        android:paddingRight="@dimen/dp_30"
+        android:paddingLeft="@dimen/dp_30"
+        android:paddingBottom="@dimen/dp_11"
+        android:paddingTop="@dimen/dp_11" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_2"
+        android:background="#fafafa" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/ry_add"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</LinearLayout>

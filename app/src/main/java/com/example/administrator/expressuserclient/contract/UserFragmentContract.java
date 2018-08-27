@@ -16,7 +16,7 @@ public interface UserFragmentContract {
     interface Model {
         Call<BaseGson<UserGson>> uploadAvatar(RequestBody requestBody, MultipartBody.Part file);
 //        @Override
-//        public Observable<BaseData<EmptyData>> addData(RequestBody content, RequestBody contact, List<MultipartBody.Part> files) {
+//        public Observable<BaseData<EmptyData>> addUserAvar(RequestBody content, RequestBody contact, List<MultipartBody.Part> files) {
 //            return RetrofitUtils
 //                    .getInstance()
 //                    .getServerices()

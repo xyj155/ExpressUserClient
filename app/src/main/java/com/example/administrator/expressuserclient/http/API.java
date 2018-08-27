@@ -12,13 +12,9 @@ import com.example.administrator.expressuserclient.gson.ShiperTraceGson;
 import com.example.administrator.expressuserclient.gson.ShiptraceBean;
 import com.example.administrator.expressuserclient.gson.TurLingGson;
 import com.example.administrator.expressuserclient.gson.UserGson;
-import com.youth.banner.Banner;
-
-import java.util.List;
 
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
@@ -118,4 +114,19 @@ public interface API {
     //查询主页消息
     @GET("/CurrierBrother/public/index.php/Index/Home/setNewsList")
     Observable<BaseGson<NewsGson>> setNewsList();
+
+    //添加好友
+    @FormUrlEncoded
+    @POST("/CurrierBrother/public/index.php/Index/Contact/setUserContact")
+    Observable<BaseGson<EmptyGson>> setNewContact(@Field("pid") String pid, @Field("uid") String uid);
+
+    //查询好友
+    @FormUrlEncoded
+    @POST("/CurrierBrother/public/index.php/Index/Contact/queryContactList")
+    Observable<BaseGson<UserGson>> queryContactList(@Field("uid")String uid);
+
+    //z账号查询好友
+    @FormUrlEncoded
+    @POST("/CurrierBrother/public/index.php/Index/Contact/queryContactByUid")
+    Observable<BaseGson<UserGson>> queryContactByUid(@Field("uid")String uid);
 }

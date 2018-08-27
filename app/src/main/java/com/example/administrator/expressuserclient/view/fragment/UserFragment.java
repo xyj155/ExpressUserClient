@@ -89,9 +89,9 @@ public class UserFragment extends BaseFragment implements UserFragmentContract.V
         if (tel.equals("")) {
             tvTel.setText("你还没有绑定手机号码哦！");
         } else {
-            tvTel.setText("手机："+tel);
+            tvTel.setText("手机：" + tel);
         }
-        tvUsername.setText("用户："+username);
+        tvUsername.setText("用户：" + username);
     }
 
     @Override
@@ -134,7 +134,8 @@ public class UserFragment extends BaseFragment implements UserFragmentContract.V
             int columnIndex = c.getColumnIndex(filePathColumns[0]);
             String imagePath = c.getString(columnIndex);
             System.out.println(imagePath);
-            presenter.addData("0", imagePath);
+            SharedPreferences sp = getActivity().getSharedPreferences("user", MODE_PRIVATE);
+            presenter.addUserAvar(String.valueOf(sp.getInt("id", 20)), imagePath);
             Glide.with(getActivity()).load(imagePath).asBitmap().into(imgUserHead);
             c.close();
         }

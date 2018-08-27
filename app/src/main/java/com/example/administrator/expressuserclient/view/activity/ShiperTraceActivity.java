@@ -1,11 +1,7 @@
 package com.example.administrator.expressuserclient.view.activity;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -23,20 +19,13 @@ import com.example.administrator.expressuserclient.gson.ShiptraceBean;
 import com.example.administrator.expressuserclient.presenter.home.ShiperTraceActivityPresenter;
 import com.example.administrator.expressuserclient.weight.UnderLineLinearLayout;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
-import com.scwang.smartrefresh.layout.api.RefreshLayout;
-import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
-import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 import io.github.xudaojie.qrcodelib.CaptureActivity;
 
-import static android.R.attr.data;
-import static android.R.attr.id;
-import static com.example.administrator.expressuserclient.R.id.smart;
 import static com.example.administrator.expressuserclient.config.SysConfig.REQUEST_QR_CODE;
-import static java.security.AccessController.getContext;
 
 public class ShiperTraceActivity extends BaseActivity implements ShiperTraceActivityContract.View {
 
@@ -82,7 +71,7 @@ public class ShiperTraceActivity extends BaseActivity implements ShiperTraceActi
     @Override
     public void loadFromShiper(BaseGson<ShiperTraceGson<ShiptraceBean>> baseGson) {
         for (int i = 0; i < baseGson.getData().get(0).getShiptrace().size(); i++) {
-            View v = LayoutInflater.from(this).inflate(R.layout.item_shipertrace_layout, mUnderLineLinearLayout, false);
+            View v = LayoutInflater.from(this).inflate(R.layout.ry_item_shipertrace_layout, mUnderLineLinearLayout, false);
             ((TextView) v.findViewById(R.id.tx_action)).setText(baseGson.getData().get(0).getShiptrace().get(i).getAcceptStation());
             ((TextView) v.findViewById(R.id.tx_action_time)).setText(baseGson.getData().get(0).getShiptrace().get(i).getAcceptTime());
             ((TextView) v.findViewById(R.id.tx_action_status)).setText("完成");

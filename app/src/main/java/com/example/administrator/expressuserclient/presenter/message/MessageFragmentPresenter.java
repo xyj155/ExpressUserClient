@@ -1,10 +1,10 @@
-package com.example.administrator.expressuserclient.presenter;
+package com.example.administrator.expressuserclient.presenter.message;
 
 import com.example.administrator.expressuserclient.base.BaseGson;
 import com.example.administrator.expressuserclient.commonUtil.ToastUtil;
-import com.example.administrator.expressuserclient.contract.MessageFragmentContract;
+import com.example.administrator.expressuserclient.contract.message.MessageFragmentContract;
 import com.example.administrator.expressuserclient.gson.PushGson;
-import com.example.administrator.expressuserclient.model.MessageFragmentModel;
+import com.example.administrator.expressuserclient.model.message.MessageFragmentModel;
 
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;

@@ -22,6 +22,6 @@ public interface UserFragmentContract {
     }
 
     interface Presenter {
-        void addData(String id, String files);
+        void addUserAvar(String id, String files);
     }
 }

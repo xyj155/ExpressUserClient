@@ -18,7 +18,7 @@ import com.example.administrator.expressuserclient.R;
 import com.example.administrator.expressuserclient.adapter.ChatAdapter;
 import com.example.administrator.expressuserclient.base.BaseActivity;
 import com.example.administrator.expressuserclient.contract.user.ServiceActivityContract;
-import com.example.administrator.expressuserclient.entity.ChatEntity;
+import com.example.administrator.expressuserclient.entity.ServiceEntity;
 import com.example.administrator.expressuserclient.gson.TurLingGson;
 import com.example.administrator.expressuserclient.presenter.user.ServiceActivityPresenter;
 
@@ -44,8 +44,8 @@ public class ServiceActivity extends BaseActivity implements ServiceActivityCont
     @InjectView(R.id.tv_callback)
     TextView tvCallback;
     private ServiceActivityPresenter presenter = new ServiceActivityPresenter(this);
-    private BaseMultiItemQuickAdapter<ChatEntity, BaseViewHolder> mChatAdapter;
-    private List<ChatEntity> data = new ArrayList<>();
+    private BaseMultiItemQuickAdapter<ServiceEntity, BaseViewHolder> mChatAdapter;
+    private List<ServiceEntity> data = new ArrayList<>();
 
     @Override
     public int intiLayout() {
@@ -98,7 +98,7 @@ public class ServiceActivity extends BaseActivity implements ServiceActivityCont
                 } catch (UnsupportedEncodingException e) {
                     e.printStackTrace();
                 }
-                data.add(ChatEntity.client(etContent.getText().toString()));
+                data.add(ServiceEntity.client(etContent.getText().toString()));
                 etContent.setText("");
                 break;
         }
@@ -118,7 +118,7 @@ public class ServiceActivity extends BaseActivity implements ServiceActivityCont
     @Override
     public void loadContent(TurLingGson turLingGson) {
         Log.i(TAG, "loadContent: " + turLingGson.getText());
-        data.add(ChatEntity.service(turLingGson));
+        data.add(ServiceEntity.service(turLingGson));
         mChatAdapter = new ChatAdapter(data);
         ryContact.setAdapter(mChatAdapter);
     }
