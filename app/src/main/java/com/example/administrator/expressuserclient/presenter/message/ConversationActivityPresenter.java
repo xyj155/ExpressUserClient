@@ -12,9 +12,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cn.jpush.im.android.api.JMessageClient;
+import cn.jpush.im.android.api.content.MessageContent;
 import cn.jpush.im.android.api.model.Conversation;
 import cn.jpush.im.android.api.model.Message;
 import cn.jpush.im.api.BasicCallback;
+
+import static cn.jpush.im.android.tasks.GetUserInfoListTask.IDType.username;
 
 /**
  * Created by Administrator on 2018/8/26/026.
@@ -55,9 +58,10 @@ public class ConversationActivityPresenter implements ConversationActivityContra
     }
 
     private static final String TAG = "ConversationActivityPre";
+
     @Override
     public void messageToEntity(List<Message> messages) {
-        Log.i(TAG, "messageToEntity: "+messages.size());
+        Log.i(TAG, "messageToEntity: " + messages.size());
         List<ConversationEntity> list = new ArrayList<>();
         for (Message message : messages) {
             if (message.getFromName().equals("123456")) {
@@ -71,15 +75,29 @@ public class ConversationActivityPresenter implements ConversationActivityContra
 
     @Override
     public void login() {
+        view.showDialog("数据加载中...");
         IMUtils.login("123456", "123456", new BasicCallback() {
             @Override
             public void gotResult(int i, final String s) {
                 if (i == 0) {
+                    view.hideDialog();
                     view.loginSuccess();
                 } else {
+                    view.hideDialog();
                     ToastUtil.showToastError("未知错误：请联系开发者,错误详情：" + s);
                 }
             }
         });
+    }
+
+    @Override
+    public void getHistoryMessage() {
+        Conversation conversation = JMessageClient.getSingleConversation("456789", "ce96018f1ca252300f934c39");
+
+        List<Message> allMessage = conversation.getAllMessage();
+        for (Message m : allMessage) {
+            MessageContent content = m.getContent();
+            Log.i(TAG, "getHistoryMessage: "+ content.toJson());
+        }
     }
 }

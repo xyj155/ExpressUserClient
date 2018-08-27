@@ -215,11 +215,7 @@
         <activity android:name=".view.activity.NewTaskActivity" />
         <activity android:name=".view.activity.IntroduceActivity" />
         <activity android:name=".view.activity.JudeMentActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".view.activity.UserDetailActivity" />
         <activity android:name=".view.activity.FeedbackActivity" />
@@ -229,7 +225,11 @@
         <activity android:name=".view.activity.ScanShiperTraceActivity" />
         <activity android:name=".view.activity.NewsActivity" />
         <activity android:name=".view.activity.ContactListActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".view.activity.ConversationActivity" />
         <activity android:name=".view.activity.AddContactUserActivity">

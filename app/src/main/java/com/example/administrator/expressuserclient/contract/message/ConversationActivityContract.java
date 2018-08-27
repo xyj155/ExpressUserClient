@@ -21,15 +21,22 @@ public interface ConversationActivityContract {
          * 刷新消息
          */
         void refreshMessage();
+
         /**
          * 获取会话
          */
         void getConversation(List<ConversationEntity> conversationEntities);
+
         /**
          * 登录是否成功
          */
         void loginSuccess();
 
+        void loadHistoryMessage(List<Message> messages);
+
+        void showDialog(String msg);
+
+        void hideDialog();
     }
 
     interface Presenter {
@@ -39,6 +46,7 @@ public interface ConversationActivityContract {
          * @param message
          */
         void sendMessage(Message message);
+
         /**
          * 会话列表
          *
@@ -47,9 +55,12 @@ public interface ConversationActivityContract {
         void conversionToUser(List<Conversation> conversations);
 
         void messageToEntity(List<Message> message);
+
         /**
          * im登录
          */
         void login();
+
+        void getHistoryMessage();
     }
 }
