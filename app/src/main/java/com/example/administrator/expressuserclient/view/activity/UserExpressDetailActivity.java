@@ -4,6 +4,7 @@ package com.example.administrator.expressuserclient.view.activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
@@ -34,6 +35,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 import com.example.administrator.expressuserclient.R;
 import com.example.administrator.expressuserclient.base.BaseActivity;
+import com.example.administrator.expressuserclient.commonUtil.AMapUtil;
 import com.example.administrator.expressuserclient.commonUtil.ToastUtil;
 import com.example.administrator.expressuserclient.gson.DistanceGson;
 import com.example.administrator.expressuserclient.http.volley.VolleyRequestCllBack;
@@ -50,12 +52,13 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 
-import static android.icu.lang.UCharacter.GraphemeClusterBreak.V;
 import static com.amap.api.services.route.RouteSearch.DRIVING_SINGLE_SHORTEST;
 import static com.example.administrator.expressuserclient.view.activity.PackagePointListActivity.convertViewToBitmap;
 
 public class UserExpressDetailActivity extends BaseActivity {
 
+    @InjectView(R.id.fb_navi)
+    FloatingActionButton fbNavi;
     private RequestQueue queue;
     @InjectView(R.id.map)
     MapView map;
@@ -77,7 +80,7 @@ public class UserExpressDetailActivity extends BaseActivity {
     AMapLocationClient mlocationClient;
     AMapLocationClientOption mLocationOption;
 
-    private AMap.OnMarkerClickListener markerClickListener;
+    private String[] split;
 
     @Override
     public int intiLayout() {
@@ -92,7 +95,7 @@ public class UserExpressDetailActivity extends BaseActivity {
 
         Intent intent = getIntent();
         final String stringExtra = intent.getStringExtra("location");
-        final String[] split = stringExtra.split(",");
+        split = stringExtra.split(",");
         tvAddress.setText("收件地址：" + intent.getStringExtra("address"));
         tvUsername.setText("收件人：" + intent.getStringExtra("username"));
         tvTel.setText("联系方式：" + intent.getStringExtra("tel"));
@@ -137,7 +140,7 @@ public class UserExpressDetailActivity extends BaseActivity {
                 } else {
                     Map<String, String> map = new HashMap<>();
                     map.put("key", "4e0f85e120108994af79bfebb175b85b");
-                    map.put("destination", split[1]+","+split[0]);
+                    map.put("destination", split[1] + "," + split[0]);
                     map.put("origins", aMapLocation.getLongitude() + "," + aMapLocation.getLatitude());
                     queue.add(VolleyRequestUtil.RequestWithParams("https://restapi.amap.com/v3/distance", map, new VolleyRequestCllBack() {
                         @Override
@@ -145,9 +148,9 @@ public class UserExpressDetailActivity extends BaseActivity {
                             System.out.println(result + "result");
                             Gson gson = new Gson();
                             DistanceGson distanceGson = gson.fromJson(result, DistanceGson.class);
-                            if (distanceGson.getStatus().equals("1")){
+                            if (distanceGson.getStatus().equals("1")) {
                                 new AlertDialog(UserExpressDetailActivity.this).builder().setTitle("距离目的地")
-                                        .setMsg(String.format("%.1fkm", (Integer.valueOf(distanceGson.getResults().get(0).getDistance())) * 1.0 / 1000)+"\n\n"+"耗时："+String.format("%.2f小时", (Integer.valueOf(distanceGson.getResults().get(0).getDuration())) * 1.0 / 3600))
+                                        .setMsg(String.format("%.1fkm", (Integer.valueOf(distanceGson.getResults().get(0).getDistance())) * 1.0 / 1000) + "\n\n" + "耗时：" + String.format("%.2f小时", (Integer.valueOf(distanceGson.getResults().get(0).getDuration())) * 1.0 / 3600))
                                         .setNegativeButton("确定", new View.OnClickListener() {
                                             @Override
                                             public void onClick(View v) {
@@ -282,9 +285,27 @@ public class UserExpressDetailActivity extends BaseActivity {
 
     }
 
-    @OnClick({R.id.tv_detail, R.id.tv_num, R.id.tv_username, R.id.tv_tel, R.id.tv_address})
+    @OnClick({R.id.fb_navi, R.id.tv_detail, R.id.tv_num, R.id.tv_username, R.id.tv_tel, R.id.tv_address})
     public void onViewClicked(View view) {
         switch (view.getId()) {
+            case R.id.fb_navi:
+                new AlertDialog(UserExpressDetailActivity.this).builder().setTitle("提示")
+                        .setMsg("是否启用高德进行导航！")
+                        .setNegativeButton("确定", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                if (AMapUtil.isInstallByRead("com.autonavi.minimap")) {
+                                    AMapUtil.goToNaviActivity(UserExpressDetailActivity.this, "快递小哥", null, split[0], split[1], "1", "2");
+                                }
+                            }
+                        }).setPositiveButton("取消", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                    }
+                }).show();
+
+                break;
             case R.id.tv_detail:
                 new AlertDialog(UserExpressDetailActivity.this).builder().setTitle("距离目的地")
                         .setMsg("")
@@ -305,4 +326,6 @@ public class UserExpressDetailActivity extends BaseActivity {
                 break;
         }
     }
+
+
 }

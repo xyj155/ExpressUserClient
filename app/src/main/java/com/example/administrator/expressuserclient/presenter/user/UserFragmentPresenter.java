@@ -1,9 +1,11 @@
 package com.example.administrator.expressuserclient.presenter.user;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.util.Log;
 
 import com.example.administrator.expressuserclient.base.BaseGson;
+import com.example.administrator.expressuserclient.commonUtil.BitmapUtils;
 import com.example.administrator.expressuserclient.commonUtil.SPUtil;
 import com.example.administrator.expressuserclient.commonUtil.ToastUtil;
 import com.example.administrator.expressuserclient.contract.user.UserFragmentContract;
@@ -46,26 +48,32 @@ public class UserFragmentPresenter implements UserFragmentContract.Presenter {
 
     @Override
     public void addUserAvar(String id, String files) {
-        File file = new File(files);
+        Bitmap getimage = BitmapUtils.getimage(files);
+        File file = BitmapUtils.Bitmap2File(getimage);
         RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
         MultipartBody.Part part = MultipartBody.Part.createFormData("image", file.getName(), requestFile);
-        RequestBody body = toRequestBody(id);
+        final RequestBody body = toRequestBody(id);
         model.uploadAvatar(body, part)
                 .enqueue(new Callback<BaseGson<UserGson>>() {
                     @Override
                     public void onResponse(Call<BaseGson<UserGson>> call, Response<BaseGson<UserGson>> response) {
                         if (response.isSuccessful()) {
-                            Log.i(TAG, "onResponse: "+response);
-                            if (response.body().isSuccess()){
-                                BaseGson<UserGson> body1 = response.body();
-                                Map<String, Object> map = new HashMap<String, Object>();
-                                assert body1 != null;
-                                System.out.println(body1.getData().get(0).getHead() + "url");
-                                map.put("userhead",body1.getData().get(0).getHead());
-                                SPUtil.getInstance().saveSPData(map).save();
-                                ToastUtil.showToastSuccess("上传头像成功！");
+                            Log.i(TAG, "onResponse: " + response);
+                            if (response.isSuccessful()) {
+                                Log.i(TAG, "onResponse: " + response.body());
+                                if (response.body().isSuccess()) {
+                                    ToastUtil.showToastSuccess("上传头像成功！");
+                                    Map<String, Object> map = new HashMap<String, Object>();
+                                    if (response.body().getData().size() > 0) {
+                                        map.put("userhead", response.body().getData().get(0).getHead());
+                                        SPUtil.getInstance().saveSPData(map).save();
+                                    } else {
+                                        ToastUtil.showToastError("上传头像失败" + response);
+                                    }
+                                } else {
+                                    ToastUtil.showToastError("上传头像失败" + response);
+                                }
                             }
-
                         } else {
                             ToastUtil.showToastError("上传头像失败" + response);
                         }

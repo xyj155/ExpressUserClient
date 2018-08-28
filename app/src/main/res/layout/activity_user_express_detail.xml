@@ -30,6 +30,7 @@
             android:orientation="vertical"
             android:paddingBottom="@dimen/dp_5"
             app:CircleColor="@color/blue">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -78,19 +79,29 @@
                     android:text="地址：浙江省嘉兴浙江省嘉兴市嘉浙江省嘉兴市嘉兴学院看看浙江省嘉兴市嘉兴学院看看浙江省嘉兴市嘉兴学院看看兴学院看看市嘉浙江省嘉兴市嘉兴学院看看浙江省嘉兴市嘉兴学院看看浙江省嘉兴市嘉兴学院看看兴学院看看"
                     android:textColor="#000"
                     android:textSize="17sp" />
+
                 <TextView
+                    android:id="@+id/tv_detail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="查看详情"
                     android:layout_gravity="right"
-                    android:visibility="gone"
-                    android:id="@+id/tv_detail"
                     android:layout_marginRight="@dimen/dp_10"
-                    android:layout_marginTop="@dimen/dp_5"/>
+                    android:layout_marginTop="@dimen/dp_5"
+                    android:text="查看详情"
+                    android:visibility="gone" />
             </LinearLayout>
 
         </com.example.administrator.expressuserclient.weight.CouponDisplayView>
 
+        <android.support.design.widget.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/fb_navi"
+            android:layout_gravity="bottom|right"
+            android:src="@mipmap/ic_navimap"
+            android:layout_margin="@dimen/dp_30"
+            android:background="#fff"
+            app:backgroundTint="#fff" />
     </FrameLayout>
 
 </LinearLayout>
