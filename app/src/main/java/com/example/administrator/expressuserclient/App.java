@@ -2,6 +2,7 @@ package com.example.administrator.expressuserclient;
 
 import android.app.Application;
 
+import com.mob.MobSDK;
 import com.tencent.bugly.Bugly;
 
 import cn.jpush.im.android.api.JMessageClient;
@@ -27,8 +28,7 @@ public class App extends Application {
         super.onCreate();
         app = this;
         Bugly.init(getApplicationContext(), "f2c794a75c", false);
-//        JPushInterface.setDebugMode(true);
-//        JPushInterface.init(this);
+        MobSDK.init(this);
         JMessageClient.init(this);
         JMessageClient.setDebugMode(true);    }
 

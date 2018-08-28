@@ -11,7 +11,7 @@ import rx.Observable;
  * Created by Administrator on 2018/7/28.
  */
 
-public interface LoginActivityContract {
+public interface LoginFragmentContract {
     interface Model {
         Observable<BaseGson<UserGson>> loginWithUserName(Activity context,String username, String password);
     }
