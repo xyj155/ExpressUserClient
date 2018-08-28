@@ -13,14 +13,24 @@ import rx.Observable;
 
 public interface RegisterFragmentContract {
     interface Model {
-        Observable<BaseGson<UserGson>> register(String  username, String password, String tel);
+        Observable<BaseGson<UserGson>> register(String username, String password, String tel);
+
+        Observable<BaseGson<UserGson>> querySameUser(String username);
+
     }
 
     interface View {
         void register(BaseGson<UserGson> baseGson);
+
+        void querySameUser(BaseGson<UserGson> baseGson);
+
+        void showDialog(String msg);
+
+        void hideDialog();
     }
 
     interface Presenter {
-        void register(Activity activity,String username, String password, String tel);
+        void register(Activity activity, String username, String password, String tel);
+        void querySameUser(String username);
     }
 }

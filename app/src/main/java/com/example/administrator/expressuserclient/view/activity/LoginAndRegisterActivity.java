@@ -6,11 +6,15 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.administrator.expressuserclient.R;
 import com.example.administrator.expressuserclient.base.BaseActivity;
+import com.example.administrator.expressuserclient.commonUtil.ToastUtil;
 import com.example.administrator.expressuserclient.view.fragment.login.LoginFragment;
 import com.example.administrator.expressuserclient.view.fragment.login.RegisterFragment;
+import com.example.administrator.expressuserclient.weight.back.MirrorSwipeBack;
+import com.example.administrator.expressuserclient.weight.back.MirrorSwipeBackLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +23,9 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 
+/**
+ * @author Administrator
+ */
 public class LoginAndRegisterActivity extends BaseActivity {
 
 
@@ -27,15 +34,19 @@ public class LoginAndRegisterActivity extends BaseActivity {
     @InjectView(R.id.img_finish)
     ImageView imgFinish;
 
+
     @Override
     public int intiLayout() {
+
         return R.layout.activity_login_and_register;
     }
 
     @Override
     public void initView(Bundle savedInstanceState) {
         ButterKnife.inject(this);
+
         List<Fragment> list = new ArrayList<>();
+
         list.add(new LoginFragment());
         list.add(new RegisterFragment());
         FragmentAdapter adapter = new FragmentAdapter(getSupportFragmentManager(), list);
@@ -45,6 +56,13 @@ public class LoginAndRegisterActivity extends BaseActivity {
     @Override
     public void initData() {
 
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.inject(this);
     }
 
     private class FragmentAdapter extends FragmentPagerAdapter {

@@ -4,7 +4,9 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,7 +32,8 @@ import cn.smssdk.EventHandler;
 import cn.smssdk.SMSSDK;
 
 /**
- * Created by Administrator on 2018/8/28/028.
+ * @author Administrator
+ * @date 2018/8/28/028
  */
 
 public class RegisterFragment extends BaseFragment implements RegisterFragmentContract.View {
@@ -46,8 +49,10 @@ public class RegisterFragment extends BaseFragment implements RegisterFragmentCo
     EditText etSmscode;
     @InjectView(R.id.btn_login)
     Button btnLogin;
-
+    @InjectView(R.id.tv_send)
     CheckCodeCountDown mCheckCodeCountDown;
+    @InjectView(R.id.tv_already)
+    TextView tvAlready;
     private RegisterFragmentPresenter presenter = new RegisterFragmentPresenter(this);
     Handler handler = new Handler() {
         @Override
@@ -62,7 +67,6 @@ public class RegisterFragment extends BaseFragment implements RegisterFragmentCo
                 if (event == SMSSDK.EVENT_SUBMIT_VERIFICATION_CODE) {
                     if (event == SMSSDK.EVENT_SUBMIT_VERIFICATION_CODE) {//提交验证码成功
                         presenter.register(getActivity(), etUsername.getText().toString(), etPassword.getText().toString(), etUsername.getText().toString());
-
                     } else if (event == SMSSDK.EVENT_GET_VERIFICATION_CODE) {
                         ToastUtil.showToastInfor("验证码已发送！");
                     } else if (event == SMSSDK.EVENT_GET_SUPPORTED_COUNTRIES) {//返回支持发送验证码的国家列表
@@ -85,11 +89,52 @@ public class RegisterFragment extends BaseFragment implements RegisterFragmentCo
     protected void setUpView(View view, Bundle bundle) {
         Typeface typeFace = Typeface.createFromAsset(getActivity().getAssets(), "font.ttf");
         tvTitle.setTypeface(typeFace);
-        mCheckCodeCountDown=view.findViewById(R.id.tv_send);
+        TextWatcher textWatcher = new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                presenter.querySameUser(etUsername.getText().toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        };
+        etUsername.addTextChangedListener(textWatcher);
+    }
+
+
+    @Override
+    protected void setUpData() {
+
+        EventHandler eh = new EventHandler() {
+            @Override
+            public void afterEvent(int event, int result, Object data) {
+                Message msg = new Message();
+                msg.arg1 = event;
+                msg.arg2 = result;
+                msg.obj = data;
+                handler.sendMessage(msg);
+            }
+        };
+
+        SMSSDK.registerEventHandler(eh);
+    }
+
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        // TODO: inflate a fragment view
+        View rootView = super.onCreateView(inflater, container, savedInstanceState);
+        ButterKnife.inject(this, rootView);
         mCheckCodeCountDown.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //必须调用 , 输入框中输入的是手机号 true , 否则 false ,这么做是为了防止不是手机号也进入倒计时
                 boolean phoneNumber = isPhoneNumber(etUsername.getText().toString());
                 mCheckCodeCountDown.performOnClick(phoneNumber);
             }
@@ -112,42 +157,14 @@ public class RegisterFragment extends BaseFragment implements RegisterFragmentCo
                 mCheckCodeCountDown.setText("重新发送");
             }
         });
-    }
-
-
-    @Override
-    protected void setUpData() {
-
-        EventHandler eh = new EventHandler() {
-            @Override
-            public void afterEvent(int event, int result, Object data) {
-                Message msg = new Message();
-                msg.arg1 = event;
-                msg.arg2 = result;
-                msg.obj = data;
-                handler.sendMessage(msg);
-            }
-        };
-
-        SMSSDK.registerEventHandler(eh);
-    }
-
-
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // TODO: inflate a fragment view
-        View rootView = super.onCreateView(inflater, container, savedInstanceState);
-        ButterKnife.inject(this, rootView);
-
         return rootView;
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        ButterKnife.reset(this);
         SMSSDK.unregisterAllEventHandler();
+        ButterKnife.reset(this);
     }
 
     @OnClick({R.id.btn_login, R.id.tv_send})
@@ -178,5 +195,27 @@ public class RegisterFragment extends BaseFragment implements RegisterFragmentCo
     @Override
     public void register(BaseGson<UserGson> baseGson) {
 
+    }
+
+    @Override
+    public void querySameUser(BaseGson<UserGson> baseGson) {
+        System.out.println(baseGson.getData()+"data");
+        if (!baseGson.isSuccess()) {
+            tvAlready.setText("可注册");
+            tvAlready.setTextColor(getResources().getColor(R.color.green));
+        }else {
+            tvAlready.setText("已被注册");
+            tvAlready.setTextColor(getResources().getColor(R.color.player_red));
+        }
+    }
+
+    @Override
+    public void showDialog(String msg) {
+        showFragmentDialog(msg);
+    }
+
+    @Override
+    public void hideDialog() {
+        hideFragmentDialog();
     }
 }

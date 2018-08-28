@@ -32,14 +32,16 @@ public class RegisterFragmentPresenter implements RegisterFragmentContract.Prese
 
     @Override
     public void register(final Activity context, String username, String password, String tel) {
+        view.showDialog("注册中...");
         model.register(username, password, tel)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new BaseObserver<BaseGson<UserGson>>() {
                     @Override
                     public void onError(String error) {
-                        System.out.println(error+"onError");
-                        ToastUtil.showToastWarning("注册失败"+error);
+                        System.out.println(error + "onError");
+                        view.hideDialog();
+                        ToastUtil.showToastWarning("注册失败" + error);
                     }
 
                     @Override
@@ -49,6 +51,7 @@ public class RegisterFragmentPresenter implements RegisterFragmentContract.Prese
 
                     @Override
                     public void onNext(BaseGson<UserGson> emptyGsonBaseGson) {
+                        view.hideDialog();
                         if (emptyGsonBaseGson.isSuccess()) {
                             view.register(emptyGsonBaseGson);
                             ToastUtil.showToastSuccess("注册成功");
@@ -57,17 +60,36 @@ public class RegisterFragmentPresenter implements RegisterFragmentContract.Prese
                             Map<String, Object> map = new HashMap<>();
                             map.put("username", emptyGsonBaseGson.getData().get(0).getUsername());
                             map.put("login", true);
-                            map.put("userhead", emptyGsonBaseGson.getData().get(0).getHead().isEmpty()?"":emptyGsonBaseGson.getData().get(0).getHead());
+                            map.put("userhead", emptyGsonBaseGson.getData().get(0).getHead() == null ? "" : emptyGsonBaseGson.getData().get(0).getHead());
                             map.put("id", emptyGsonBaseGson.getData().get(0).getId());
-                            if (emptyGsonBaseGson.getData().get(0).getUsertel()==null){
-                                map.put("tel", "");
-                            }else {
-                                map.put("tel", emptyGsonBaseGson.getData().get(0).getUsertel());
-                            }
+                            map.put("tel", emptyGsonBaseGson.getData().get(0).getUsertel() == null ? "" : map.put("tel", emptyGsonBaseGson.getData().get(0).getUsertel()));
                             SPUtil.getInstance().saveSPData(map).save();
-                        }else {
+                        } else {
                             ToastUtil.showToastWarning(emptyGsonBaseGson.getMsg());
                         }
+                    }
+                });
+    }
+
+    @Override
+    public void querySameUser(String username) {
+        model.querySameUser(username)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new BaseObserver<BaseGson<UserGson>>() {
+                    @Override
+                    public void onError(String error) {
+
+                    }
+
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onNext(BaseGson<UserGson> userGsonBaseGson) {
+                        view.querySameUser(userGsonBaseGson);
                     }
                 });
     }

@@ -16,4 +16,9 @@ public class RegisterFragmentModel implements RegisterFragmentContract.Model {
     public Observable<BaseGson<UserGson>> register(String username, String password, String tel) {
         return RetrofitUtil.getInstance(RetrofitUtil.BASE_URL).getServerices().register(username,password,tel);
     }
+
+    @Override
+    public Observable<BaseGson<UserGson>> querySameUser(String username) {
+        return RetrofitUtil.getInstance(RetrofitUtil.BASE_URL).getServerices().querySameUser(username);
+    }
 }

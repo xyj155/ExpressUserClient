@@ -7,10 +7,10 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:gravity="center"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginBottom="@dimen/dp_50"
+        android:gravity="center"
         android:orientation="vertical">
 
 
@@ -42,47 +42,64 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <RadioGroup
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_34"
                     android:orientation="horizontal"
                     android:weightSum="2">
 
-                    <RadioButton
+                    <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:button="@null"
                         android:gravity="center"
                         android:text="登录"
-                        android:textColor="@color/login_tv_title_color"
+                        android:textColor="#000"
                         android:textSize="22sp" />
 
-                    <RadioButton
+                    <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:button="@null"
-                        android:checked="true"
                         android:gravity="center"
                         android:text="注册"
-                        android:textColor="@color/login_tv_title_color"
+                        android:textColor="@color/blue"
                         android:textSize="22sp" />
-                </RadioGroup>
+                </LinearLayout>
 
-                <EditText
-                    android:id="@+id/et_username"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/dp_15"
                     android:layout_marginRight="@dimen/dp_15"
                     android:layout_marginTop="@dimen/dp_10"
-                    android:background="#fff"
-                    android:drawableLeft="@mipmap/ic_mobile"
-                    android:drawablePadding="@dimen/dp_10"
-                    android:inputType="number"
-                    android:paddingLeft="@dimen/dp_10" />
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:weightSum="3">
+
+                    <EditText
+                        android:id="@+id/et_username"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_weight="0.8"
+                        android:background="#fff"
+                        android:drawableLeft="@mipmap/ic_mobile"
+                        android:drawablePadding="@dimen/dp_10"
+                        android:hint="Tel"
+                        android:inputType="number"
+                        android:maxLength="12"
+                        android:paddingLeft="@dimen/dp_10" />
+
+                    <TextView
+                        android:id="@+id/tv_already"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2.2"
+                        android:gravity="center"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
 
                 <View
                     android:layout_width="match_parent"
@@ -100,6 +117,7 @@
                     android:background="#fff"
                     android:drawableLeft="@mipmap/ic_password"
                     android:drawablePadding="@dimen/dp_8"
+                    android:hint="PassWord"
                     android:inputType="textPassword"
                     android:paddingLeft="@dimen/dp_10" />
 
@@ -113,30 +131,32 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:weightSum="3"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:weightSum="3">
 
                     <EditText
                         android:id="@+id/et_smscode"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
-                        android:layout_weight="1"
                         android:layout_marginLeft="@dimen/dp_15"
                         android:layout_marginRight="@dimen/dp_15"
+                        android:layout_weight="1"
                         android:background="#fff"
                         android:drawableLeft="@mipmap/ic_sms"
                         android:drawablePadding="@dimen/dp_8"
+                        android:hint="Verify"
                         android:inputType="number"
                         android:maxLines="6"
                         android:paddingLeft="@dimen/dp_10" />
+
                     <com.example.administrator.expressuserclient.weight.CheckCodeCountDown
-                        android:layout_weight="2"
-                        android:text="发送验证码"
-                        android:gravity="center"
                         android:id="@+id/tv_send"
-                        android:textColor="@color/blue"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
+                        android:gravity="center"
+                        android:text="发送验证码"
+                        android:textColor="@color/blue" />
                 </LinearLayout>
 
 
@@ -163,61 +183,5 @@
         </android.support.v7.widget.CardView>
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_gravity="bottom"
-        android:layout_marginBottom="15dp"
-        android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:paddingLeft="@dimen/dp_30"
-                android:paddingRight="@dimen/dp_30"
-                android:weightSum="3">
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp_1"
-                    android:layout_weight="1"
-                    android:background="#d8d8d8" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="Other"
-                    android:textColor="#d8d8d8"
-                    android:textSize="22sp" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp_1"
-                    android:layout_weight="1"
-                    android:background="#d8d8d8" />
-            </LinearLayout>
-
-
-            <ImageView
-                android:layout_width="38dp"
-                android:layout_height="38dp"
-                android:layout_gravity="center"
-                android:layout_marginBottom="@dimen/dp_10"
-                android:layout_marginTop="@dimen/dp_10"
-                android:src="@mipmap/ic_login_qq" />
-        </LinearLayout>
-
-    </LinearLayout>
 </FrameLayout>
