@@ -3,7 +3,7 @@ package com.example.administrator.expressuserclient.model.login;
 import android.app.Activity;
 
 import com.example.administrator.expressuserclient.base.BaseGson;
-import com.example.administrator.expressuserclient.contract.login.LoginActivityContract;
+import com.example.administrator.expressuserclient.contract.login.LoginFragmentContract;
 import com.example.administrator.expressuserclient.gson.UserGson;
 import com.example.administrator.expressuserclient.http.util.RetrofitUtil;
 
@@ -15,7 +15,7 @@ import static com.example.administrator.expressuserclient.http.util.RetrofitUtil
  * Created by Administrator on 2018/7/28.
  */
 
-public class LoginActivityModel implements LoginActivityContract.Model {
+public class LoginActivityModel implements LoginFragmentContract.Model {
 
     @Override
     public Observable<BaseGson<UserGson>> loginWithUserName(Activity context, String username, String password) {

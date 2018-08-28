@@ -8,7 +8,6 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
@@ -31,23 +30,33 @@ import com.amap.api.services.route.DriveStep;
 import com.amap.api.services.route.RideRouteResult;
 import com.amap.api.services.route.RouteSearch;
 import com.amap.api.services.route.WalkRouteResult;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.Volley;
 import com.example.administrator.expressuserclient.R;
 import com.example.administrator.expressuserclient.base.BaseActivity;
 import com.example.administrator.expressuserclient.commonUtil.ToastUtil;
+import com.example.administrator.expressuserclient.gson.DistanceGson;
+import com.example.administrator.expressuserclient.http.volley.VolleyRequestCllBack;
+import com.example.administrator.expressuserclient.http.volley.VolleyRequestUtil;
+import com.example.administrator.expressuserclient.weight.iosDialog.AlertDialog;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 
+import static android.icu.lang.UCharacter.GraphemeClusterBreak.V;
 import static com.amap.api.services.route.RouteSearch.DRIVING_SINGLE_SHORTEST;
 import static com.example.administrator.expressuserclient.view.activity.PackagePointListActivity.convertViewToBitmap;
 
 public class UserExpressDetailActivity extends BaseActivity {
 
-
+    private RequestQueue queue;
     @InjectView(R.id.map)
     MapView map;
     @InjectView(R.id.toolbar)
@@ -60,12 +69,15 @@ public class UserExpressDetailActivity extends BaseActivity {
     TextView tvTel;
     @InjectView(R.id.tv_address)
     TextView tvAddress;
+    @InjectView(R.id.tv_detail)
+    TextView tvDetail;
     private MapView mMapView = null;
     private AMap aMap;
 
     AMapLocationClient mlocationClient;
     AMapLocationClientOption mLocationOption;
 
+    private AMap.OnMarkerClickListener markerClickListener;
 
     @Override
     public int intiLayout() {
@@ -76,8 +88,10 @@ public class UserExpressDetailActivity extends BaseActivity {
     @Override
     public void initView(Bundle savedInstanceState) {
         ButterKnife.inject(this);
+        queue = Volley.newRequestQueue(UserExpressDetailActivity.this);
+
         Intent intent = getIntent();
-        String stringExtra = intent.getStringExtra("location");
+        final String stringExtra = intent.getStringExtra("location");
         final String[] split = stringExtra.split(",");
         tvAddress.setText("收件地址：" + intent.getStringExtra("address"));
         tvUsername.setText("收件人：" + intent.getStringExtra("username"));
@@ -92,7 +106,7 @@ public class UserExpressDetailActivity extends BaseActivity {
         if (aMap == null) {
             aMap = mMapView.getMap();
         }
-        LatLng latLng = new LatLng(Double.valueOf(split[0]),Double.valueOf(split[1]));
+        LatLng latLng = new LatLng(Double.valueOf(split[0]), Double.valueOf(split[1]));
         MarkerOptions position = new MarkerOptions().position(latLng);
         position.icon(BitmapDescriptorFactory.fromBitmap(convertViewToBitmap(View.inflate(UserExpressDetailActivity.this, R.layout.map_location_end_marker, null))));
         aMap.addMarker(position);
@@ -117,10 +131,38 @@ public class UserExpressDetailActivity extends BaseActivity {
         mMapView.getMap().moveCamera(cameraUpdate);
         mlocationClient.setLocationListener(new AMapLocationListener() {
             @Override
-            public void onLocationChanged(AMapLocation aMapLocation) {
+            public void onLocationChanged(final AMapLocation aMapLocation) {
                 if (aMapLocation == null) {
                     ToastUtil.showToastWarning("定位错误");
                 } else {
+                    Map<String, String> map = new HashMap<>();
+                    map.put("key", "4e0f85e120108994af79bfebb175b85b");
+                    map.put("destination", split[1]+","+split[0]);
+                    map.put("origins", aMapLocation.getLongitude() + "," + aMapLocation.getLatitude());
+                    queue.add(VolleyRequestUtil.RequestWithParams("https://restapi.amap.com/v3/distance", map, new VolleyRequestCllBack() {
+                        @Override
+                        public void onSuccess(String result) {
+                            System.out.println(result + "result");
+                            Gson gson = new Gson();
+                            DistanceGson distanceGson = gson.fromJson(result, DistanceGson.class);
+                            if (distanceGson.getStatus().equals("1")){
+                                new AlertDialog(UserExpressDetailActivity.this).builder().setTitle("距离目的地")
+                                        .setMsg(String.format("%.1fkm", (Integer.valueOf(distanceGson.getResults().get(0).getDistance())) * 1.0 / 1000)+"\n\n"+"耗时："+String.format("%.2f小时", (Integer.valueOf(distanceGson.getResults().get(0).getDuration())) * 1.0 / 3600))
+                                        .setNegativeButton("确定", new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View v) {
+
+                                            }
+                                        }).show();
+                            }
+
+                        }
+
+                        @Override
+                        public void onError(String error) {
+
+                        }
+                    }));
                     RouteSearch routeSearch = new RouteSearch(UserExpressDetailActivity.this);
                     final RouteSearch.FromAndTo fromAndTo = new RouteSearch.FromAndTo(new LatLonPoint(aMapLocation.getLatitude(), aMapLocation.getLongitude()),
                             new LatLonPoint(Double.valueOf(split[0]), Double.valueOf(split[1])));
@@ -155,7 +197,7 @@ public class UserExpressDetailActivity extends BaseActivity {
                                 mPolylineOptions.setPoints(latLonPoints);
                                 aMap.addPolyline(mPolylineOptions);
                             } else {
-                                Toast.makeText(UserExpressDetailActivity.this, "规划出错", Toast.LENGTH_SHORT).show();
+                                ToastUtil.showToastError("规划出错");
                             }
 
                         }
@@ -175,6 +217,7 @@ public class UserExpressDetailActivity extends BaseActivity {
         });
         mlocationClient.setLocationOption(mLocationOption);
         mlocationClient.startLocation();//启动定位
+
 
         initToolBar().setToolNavigationIco(R.mipmap.ic_back)
                 .setToolNavigationIcoOnClickListener(new OnClickListener() {
@@ -239,9 +282,19 @@ public class UserExpressDetailActivity extends BaseActivity {
 
     }
 
-    @OnClick({R.id.tv_num, R.id.tv_username, R.id.tv_tel, R.id.tv_address})
+    @OnClick({R.id.tv_detail, R.id.tv_num, R.id.tv_username, R.id.tv_tel, R.id.tv_address})
     public void onViewClicked(View view) {
         switch (view.getId()) {
+            case R.id.tv_detail:
+                new AlertDialog(UserExpressDetailActivity.this).builder().setTitle("距离目的地")
+                        .setMsg("")
+                        .setNegativeButton("确定", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+
+                            }
+                        }).show();
+                break;
             case R.id.tv_num:
                 break;
             case R.id.tv_username:

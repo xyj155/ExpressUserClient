@@ -75,7 +75,7 @@ public class UserFragment extends BaseFragment implements UserFragmentContract.V
     protected void setUpView(View view, Bundle bundle) {
         SharedPreferences sp = getActivity().getSharedPreferences("user", MODE_PRIVATE);
         String userhead = sp.getString("userhead", "");
-        Glide.with(getActivity()).load(userhead).asBitmap().into(imgUserHead);
+        Glide.with(getActivity()).load(userhead).asBitmap().error(R.mipmap.w3).into(imgUserHead);
     }
 
     @Override
@@ -86,6 +86,8 @@ public class UserFragment extends BaseFragment implements UserFragmentContract.V
         String username = sp.getString("username", "");
         String tel = sp.getString("tel", "");
         Log.i(TAG, "setUpData: " + tel);
+        String headurl = sp.getString("userhead", "").isEmpty() ? "" : sp.getString("userhead", "");
+        Glide.with(getActivity()).load(headurl).asBitmap().error(R.mipmap.w3).into(imgUserHead);
         if (tel.equals("")) {
             tvTel.setText("你还没有绑定手机号码哦！");
         } else {
@@ -136,7 +138,7 @@ public class UserFragment extends BaseFragment implements UserFragmentContract.V
             System.out.println(imagePath);
             SharedPreferences sp = getActivity().getSharedPreferences("user", MODE_PRIVATE);
             presenter.addUserAvar(String.valueOf(sp.getInt("id", 20)), imagePath);
-            Glide.with(getActivity()).load(imagePath).asBitmap().into(imgUserHead);
+            Glide.with(getActivity()).load(imagePath).asBitmap().error(R.mipmap.w3).into(imgUserHead);
             c.close();
         }
 

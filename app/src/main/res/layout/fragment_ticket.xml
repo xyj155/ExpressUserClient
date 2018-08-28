@@ -17,7 +17,7 @@
         android:layout_height="match_parent"
         android:layout_marginBottom="@dimen/dp_60">
 
-        <com.scwang.smartrefresh.header.TaurusHeader
+        <com.scwang.smartrefresh.layout.header.ClassicsHeader
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 

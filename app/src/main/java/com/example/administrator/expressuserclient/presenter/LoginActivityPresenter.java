@@ -70,5 +70,5 @@ public class LoginActivityPresenter implements LoginActivityContract.Presenter {
 
     }
 
-    private static final String TAG = "LoginActivityPresenter";
+    private static final String TAG = "LoginFragmentPresenter";
 }

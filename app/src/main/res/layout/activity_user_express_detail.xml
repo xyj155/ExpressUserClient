@@ -14,70 +14,83 @@
         android:layout_height="match_parent">
 
 
-
         <com.amap.api.maps.MapView
             android:id="@+id/map"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
-        <android.support.v7.widget.CardView
-            android:layout_width="match_parent"
-            android:paddingBottom="@dimen/dp_25"
-            android:elevation="@dimen/dp_2"
-            app:cardCornerRadius="@dimen/dp_4"
 
-            android:layout_marginLeft="@dimen/dp_8"
-            android:layout_marginRight="@dimen/dp_8"
-            android:layout_marginTop="@dimen/dp_5"
-            android:layout_height="wrap_content">
-        <LinearLayout
+        <com.example.administrator.expressuserclient.weight.CouponDisplayView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="@dimen/dp_8"
-            android:background="#fff"
-            android:paddingTop="@dimen/dp_8"
-            android:orientation="vertical">
+            android:layout_marginLeft="@dimen/dp_7"
+            android:layout_marginRight="@dimen/dp_7"
+            android:layout_marginTop="@dimen/dp_7"
+            android:background="@drawable/dialog_round_layout"
+            android:foreground="?selectableItemBackground"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/dp_5"
+            app:CircleColor="@color/blue">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_15"
+                android:background="#fff"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/dp_8"
+                android:paddingTop="@dimen/dp_8">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:id="@+id/tv_num"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/dp_20"
-                android:padding="@dimen/dp_8"
-                android:text="订单号码：55454545"
-                android:textSize="14sp" />
+                <TextView
+                    android:id="@+id/tv_num"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_20"
+                    android:padding="@dimen/dp_8"
+                    android:text="订单号码：55454545"
+                    android:textSize="14sp" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/dp_20"
-                android:padding="@dimen/dp_5"
-                android:text="寄件人：徐易杰"
-                android:id="@+id/tv_username"
-                android:textColor="#000"
-                android:textSize="17sp" />
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/dp_20"
-                android:padding="@dimen/dp_5"
-                android:id="@+id/tv_tel"
-                android:text="联系电话：17374131273"
-                android:textColor="#000"
-                android:textSize="17sp" />
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/dp_20"
-                android:layout_marginRight="@dimen/dp_20"
-                android:ellipsize="end"
-                android:id="@+id/tv_address"
-                android:maxLines="2"
-                android:padding="@dimen/dp_8"
-                android:text="地址：浙江省嘉兴浙江省嘉兴市嘉浙江省嘉兴市嘉兴学院看看浙江省嘉兴市嘉兴学院看看浙江省嘉兴市嘉兴学院看看兴学院看看市嘉浙江省嘉兴市嘉兴学院看看浙江省嘉兴市嘉兴学院看看浙江省嘉兴市嘉兴学院看看兴学院看看"
-                android:textColor="#000"
-                android:textSize="17sp" />
-        </LinearLayout>
-        </android.support.v7.widget.CardView>
+                <TextView
+                    android:id="@+id/tv_username"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_20"
+                    android:padding="@dimen/dp_5"
+                    android:text="寄件人：徐易杰"
+                    android:textSize="17sp" />
+
+                <TextView
+                    android:id="@+id/tv_tel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_20"
+                    android:padding="@dimen/dp_5"
+                    android:text="联系电话：17374131273"
+                    android:textSize="17sp" />
+
+                <TextView
+                    android:id="@+id/tv_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_20"
+                    android:layout_marginRight="@dimen/dp_20"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:padding="@dimen/dp_8"
+                    android:text="地址：浙江省嘉兴浙江省嘉兴市嘉浙江省嘉兴市嘉兴学院看看浙江省嘉兴市嘉兴学院看看浙江省嘉兴市嘉兴学院看看兴学院看看市嘉浙江省嘉兴市嘉兴学院看看浙江省嘉兴市嘉兴学院看看浙江省嘉兴市嘉兴学院看看兴学院看看"
+                    android:textColor="#000"
+                    android:textSize="17sp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="查看详情"
+                    android:layout_gravity="right"
+                    android:visibility="gone"
+                    android:id="@+id/tv_detail"
+                    android:layout_marginRight="@dimen/dp_10"
+                    android:layout_marginTop="@dimen/dp_5"/>
+            </LinearLayout>
+
+        </com.example.administrator.expressuserclient.weight.CouponDisplayView>
+
     </FrameLayout>
 
 </LinearLayout>

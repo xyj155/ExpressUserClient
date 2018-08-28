@@ -7,6 +7,10 @@
     <color name="dark">#707070</color>
     <color name="green">#3CB371</color>
     <color name="yellow">#EE7600</color>
+    <color name="load_red">#fa007a</color>
+    <color name="load_purple">#935fe7</color>
+    <color name="load_yellow">#f9b11f</color>
+    <color name="load_blue">#009cfa</color>
     <color name="crime">#EE0000</color>
     <color name="android_layout_bg">#fafafa</color>
     <color name="colorblack">#000000</color>

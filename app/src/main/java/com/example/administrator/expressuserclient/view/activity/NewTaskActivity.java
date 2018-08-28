@@ -240,8 +240,8 @@ public class NewTaskActivity extends BaseActivity implements ExpressSearchActivi
                             new LatLonPoint(aMapLocation.getLatitude(), aMapLocation.getLongitude()));
                     List<LatLonPoint> lists = new ArrayList<LatLonPoint>();
                     for (int i = 0; i < baseGson.getData().size(); i++) {
-                        addMarker(new LatLng(baseGson.getData().get(i).getLatintude(), baseGson.getData().get(i).getLongtitude()));
-                        lists.add(new LatLonPoint(baseGson.getData().get(i).getLatintude(), baseGson.getData().get(i).getLongtitude()));
+                        addMarker(new LatLng(baseGson.getData().get(i).getLatitude(), baseGson.getData().get(i).getLongitude()));
+                        lists.add(new LatLonPoint(baseGson.getData().get(i).getLatitude(), baseGson.getData().get(i).getLongitude()));
                     }
                     RouteSearch.DriveRouteQuery query = new RouteSearch.DriveRouteQuery(fromAndTo, DRIVING_SINGLE_SHORTEST, lists, null, "");
                     routeSearch.calculateDriveRouteAsyn(query);

@@ -45,8 +45,7 @@
         android:layout_height="match_parent"
         android:layout_marginTop="@dimen/dp_50">
 
-
-        <com.scwang.smartrefresh.header.TaurusHeader
+        <com.scwang.smartrefresh.layout.header.ClassicsHeader
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
@@ -73,7 +72,7 @@
                     <ImageView
                         android:id="@+id/img_weather"
                         android:layout_width="wrap_content"
-                        android:layout_height="50dp"
+                        android:layout_height="70dp"
                         android:layout_margin="@dimen/dp_7"
                         android:src="@mipmap/ic_sun1" />
 
@@ -97,9 +96,19 @@
 
                         <TextView
                             android:id="@+id/tv_air"
+                            android:layout_marginBottom="@dimen/dp_5"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:drawableLeft="@mipmap/ic_air"
+                            android:drawablePadding="@dimen/dp_10"
+                            android:gravity="center|left"
+                            android:text="加载中..."
+                            android:textColor="#000" />
+                        <TextView
+                            android:id="@+id/tv_weather"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:drawableLeft="@mipmap/ic_weather"
                             android:drawablePadding="@dimen/dp_10"
                             android:gravity="center|left"
                             android:text="加载中..."

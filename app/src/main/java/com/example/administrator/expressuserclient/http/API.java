@@ -38,6 +38,16 @@ public interface API {
     Observable<BaseGson<UserGson>> loginWithUserName(@Field("username") String username,
                                                      @Field("password") String password);
 
+    //注册
+    @FormUrlEncoded
+    @POST("/CurrierBrother/public/index.php/Index/User/register")
+    Observable<BaseGson<UserGson>> register(@Field("username") String username,
+                                                     @Field("password") String password,
+                                                     @Field("tel") String tel);    //注册
+    @FormUrlEncoded
+    @POST("/CurrierBrother/public/index.php/Index/User/querySameUser")
+    Observable<BaseGson<UserGson>> querySameUser(@Field("username") String username);
+
     @Headers({
             "accept:*/*",
             "connection:Keep-Alive",
@@ -97,10 +107,11 @@ public interface API {
                                                  @Field("username") String username,
                                                  @Field("id") String id,
                                                  @Field("content") String content);
+
     //派件记录
     @FormUrlEncoded
     @POST("/CurrierBrother/public/index.php/index/Order/getDeliverHistoryByUid")
-    Observable<BaseGson<DeliverHistory>>    getDeliverHistoryByUid(@Field("uid") int id);
+    Observable<BaseGson<DeliverHistory>> getDeliverHistoryByUid(@Field("uid") int id);
 
     //派件记录
     @FormUrlEncoded
@@ -123,10 +134,10 @@ public interface API {
     //查询好友
     @FormUrlEncoded
     @POST("/CurrierBrother/public/index.php/Index/Contact/queryContactList")
-    Observable<BaseGson<UserGson>> queryContactList(@Field("uid")String uid);
+    Observable<BaseGson<UserGson>> queryContactList(@Field("uid") String uid);
 
     //z账号查询好友
     @FormUrlEncoded
     @POST("/CurrierBrother/public/index.php/Index/Contact/queryContactByUid")
-    Observable<BaseGson<UserGson>> queryContactByUid(@Field("uid")String uid);
+    Observable<BaseGson<UserGson>> queryContactByUid(@Field("uid") String uid);
 }

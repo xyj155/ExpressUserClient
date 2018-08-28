@@ -8,40 +8,30 @@ public class OrderGson {
 
 
     /**
-     * id : 1
-     * ordernum : 421313213
-     * date : 2018-08-16T08:44:40.000+0000
-     * latintude : 30.745759
-     * longtitude : 120.76896
-     * username : 毛泽东
-     * servicetime : 301
-     * endtime : 305
+     * id : 11
      * startlocation : 长沙
+     * ordernum : 421313213
+     * username : 毛泽东
+     * usertel : 1454565615
+     * idcard : 430223199711157474
+     * userid : 1
      * endlocation : 十三陵镇西山口村
-     * uid : 0
+     * createtime : 2018-08-23 00:15:38
+     * longitude : 121.76896
+     * latitude : 30.745759
      */
 
     private int id;
-    private String tel;
-
-    public String getTel() {
-        return tel;
-    }
-
-    public void setTel(String tel) {
-        this.tel = tel;
-    }
-
-    private String ordernum;
-    private String date;
-    private double latintude;
-    private double longtitude;
-    private String username;
-    private int servicetime;
-    private int endtime;
     private String startlocation;
+    private String ordernum;
+    private String username;
+    private String usertel;
+    private String idcard;
+    private String userid;
     private String endlocation;
-    private int uid;
+    private String createtime;
+    private double longitude;
+    private double latitude;
 
     public int getId() {
         return id;
@@ -49,62 +39,6 @@ public class OrderGson {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public String getOrdernum() {
-        return ordernum;
-    }
-
-    public void setOrdernum(String ordernum) {
-        this.ordernum = ordernum;
-    }
-
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
-    }
-
-    public double getLatintude() {
-        return latintude;
-    }
-
-    public void setLatintude(double latintude) {
-        this.latintude = latintude;
-    }
-
-    public double getLongtitude() {
-        return longtitude;
-    }
-
-    public void setLongtitude(double longtitude) {
-        this.longtitude = longtitude;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public int getServicetime() {
-        return servicetime;
-    }
-
-    public void setServicetime(int servicetime) {
-        this.servicetime = servicetime;
-    }
-
-    public int getEndtime() {
-        return endtime;
-    }
-
-    public void setEndtime(int endtime) {
-        this.endtime = endtime;
     }
 
     public String getStartlocation() {
@@ -115,6 +49,46 @@ public class OrderGson {
         this.startlocation = startlocation;
     }
 
+    public String getOrdernum() {
+        return ordernum;
+    }
+
+    public void setOrdernum(String ordernum) {
+        this.ordernum = ordernum;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getUsertel() {
+        return usertel;
+    }
+
+    public void setUsertel(String usertel) {
+        this.usertel = usertel;
+    }
+
+    public String getIdcard() {
+        return idcard;
+    }
+
+    public void setIdcard(String idcard) {
+        this.idcard = idcard;
+    }
+
+    public String getUserid() {
+        return userid;
+    }
+
+    public void setUserid(String userid) {
+        this.userid = userid;
+    }
+
     public String getEndlocation() {
         return endlocation;
     }
@@ -123,11 +97,27 @@ public class OrderGson {
         this.endlocation = endlocation;
     }
 
-    public int getUid() {
-        return uid;
+    public String getCreatetime() {
+        return createtime;
     }
 
-    public void setUid(int uid) {
-        this.uid = uid;
+    public void setCreatetime(String createtime) {
+        this.createtime = createtime;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
     }
 }

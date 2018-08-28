@@ -73,6 +73,8 @@ import static com.example.administrator.expressuserclient.config.SysConfig.REQUE
 
 public class HomeFragment extends BaseFragment implements AMapLocationListener, TicketFragmentContract.View, HomeFragmentContract.View {
 
+    @InjectView(R.id.tv_weather)
+    TextView tvWeather;
     private HomeFragmentPresenter homeFragmentPresenter;
     @InjectView(R.id.btn_scan)
     ImageView btnScan;
@@ -177,7 +179,7 @@ public class HomeFragment extends BaseFragment implements AMapLocationListener, 
         ButterKnife.reset(this);
     }
 
-    @OnClick({R.id.tv_distance,R.id.new_task, R.id.tv_search, R.id.btn_scan, R.id.btn_packet_search, R.id.btn_packet_history, R.id.btn_packet_deliver, R.id.btn_deliver_points})
+    @OnClick({R.id.tv_distance, R.id.new_task, R.id.tv_search, R.id.btn_scan, R.id.btn_packet_search, R.id.btn_packet_history, R.id.btn_packet_deliver, R.id.btn_deliver_points})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv_distance:
@@ -239,6 +241,7 @@ public class HomeFragment extends BaseFragment implements AMapLocationListener, 
                         WeatherGson weatherGson = gson.fromJson(result, WeatherGson.class);
                         Log.i(TAG, "onSuccess: " + weatherGson.getMsg());
                         tvAir.setText("空气：" + weatherGson.getResult().get(0).getAirCondition());
+                        tvWeather.setText("天气:" + weatherGson.getResult().get(0).getWeather());
                         tvTemp.setText("气温：" + weatherGson.getResult().get(0).getTemperature());
                         if (weatherGson.getResult().get(0).getWeather().contains("晴")) {
                             Glide.with(getActivity()).load(R.mipmap.ic_sun1).asBitmap().into(imgWeather);

@@ -109,9 +109,9 @@ public class ExpressSearchActivity extends BaseActivity implements ExpressSearch
                         @Override
                         public void onClick(View view) {
                             Intent intent = new Intent(context, UserExpressDetailActivity.class);
-                            intent.putExtra("location", item.getLatintude() + "," + item.getLongtitude());
+                            intent.putExtra("location", item.getLatitude() + "," + item.getLongitude());
                             intent.putExtra("num", item.getOrdernum());
-                            intent.putExtra("tel", item.getTel());
+                            intent.putExtra("tel", item.getUsertel());
                             intent.putExtra("username", item.getUsername());
                             intent.putExtra("address", item.getEndlocation());
                             intent.putExtra("id", item.getId());

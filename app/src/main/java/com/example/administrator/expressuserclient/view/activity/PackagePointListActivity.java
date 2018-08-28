@@ -228,19 +228,19 @@ public class PackagePointListActivity extends BaseActivity implements PackagePoi
     @Override
     public void showData(BaseGson<OrderGson> packageStation) {
         for (int i = 0; i < packageStation.getData().size(); i++) {
-            System.out.println(packageStation.getData().get(i).getLatintude() + "packageStation");
+            System.out.println(packageStation.getData().get(i).getLatitude() + "packageStation");
         }
 
         Log.i(TAG, "showData: " + packageStation);
         for (int i = 0; i < packageStation.getData().size(); i++) {
             packageSiteLists.add(new PackageSiteList(
                     packageStation.getData().get(i).getUsername(),
-                    packageStation.getData().get(i).getLongtitude(),
-                    packageStation.getData().get(i).getLatintude(),
+                    packageStation.getData().get(i).getLongitude(),
+                    packageStation.getData().get(i).getLatitude(),
                     packageStation.getData().get(i).getEndlocation(),
-                    packageStation.getData().get(i).getTel()));
-            pointList.add(new LatLng(packageStation.getData().get(i).getLatintude(), packageStation.getData().get(i).getLongtitude()));
-            addMarker(new LatLng(packageStation.getData().get(i).getLatintude(), packageStation.getData().get(i).getLongtitude()));
+                    packageStation.getData().get(i).getUsertel()));
+            pointList.add(new LatLng(packageStation.getData().get(i).getLatitude(), packageStation.getData().get(i).getLongitude()));
+            addMarker(new LatLng(packageStation.getData().get(i).getLatitude(), packageStation.getData().get(i).getLongitude()));
         }
 
     }

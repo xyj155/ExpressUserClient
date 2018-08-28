@@ -1,8 +1,17 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.mob.sdk'
 
+// 在MobSDK的扩展中注册SMSSDK的相关信息
+MobSDK {
+    appKey "2795c02b5ebed"
+    appSecret "4284ecfe0f6f86fa80e9c4584cc3947d"
+
+    SMSSDK {}
+}
 android {
     compileSdkVersion 27
     buildToolsVersion "28.0.0"
+
     defaultConfig {
         applicationId "com.example.administrator.expressuserclient"
         minSdkVersion 15
@@ -11,6 +20,9 @@ android {
         versionName "1.8"
         multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+
+
         ndk {
             abiFilters 'armeabi', 'armeabi-v7a', 'armeabi-v8a'
         }
@@ -26,6 +38,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
 }
 
 dependencies {

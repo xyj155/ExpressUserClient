@@ -43,7 +43,7 @@ public class PackagePointListActivityPresenter implements PackagePointListActivi
                     public void onNext(BaseGson<OrderGson> packageSiteListBaseGson) {
                         view.hideDialog();
                         for (int i = 0; i < packageSiteListBaseGson.getData().size(); i++) {
-                            System.out.println(packageSiteListBaseGson.getData().get(i).getLatintude() + "packageStation");
+                            System.out.println(packageSiteListBaseGson.getData().get(i).getLatitude() + "packageStation");
                         }
                         view.showData(packageSiteListBaseGson);
                     }
