@@ -1,10 +1,12 @@
 package com.example.administrator.expressuserclient.view.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -36,6 +38,7 @@ public class NewsActivity extends BaseActivity implements NewsActivityContract.V
     private int index = 2;
     List<NewsEntity> list = new ArrayList<>();
     NewsAdapter adapter;
+
     @Override
     public int intiLayout() {
         return R.layout.activity_news;
@@ -133,9 +136,17 @@ public class NewsActivity extends BaseActivity implements NewsActivityContract.V
         }
 
         @Override
-        protected void convert(BaseViewHolder helper, NewsEntity item) {
+        protected void convert(BaseViewHolder helper, final NewsEntity item) {
             helper.setText(R.id.tv_title, item.getTitle())
-                    .setText(R.id.tv_content, item.getContent());
+                    .setText(R.id.tv_content, item.getContent())
+                    .setOnClickListener(R.id.ry_item, new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Intent intent = new Intent(NewsActivity.this, NewsDetailActivity.class);
+                            intent.putExtra("url", item.getUrl());
+                            startActivity(intent);
+                        }
+                    });
             ImageView view = helper.getView(R.id.img_news);
             Glide.with(NewsActivity.this).load(item.getImg()).asBitmap().into(view);
         }

@@ -62,8 +62,6 @@ public class MessageFragment extends BaseFragment implements MessageFragmentCont
 
     @Override
     protected void setUpData() {
-        toolbar.setSubtitle("消息");
-        toolbar.setSubtitleTextColor(0xff000000);
         smart.autoRefresh();
         smart.setOnRefreshListener(new OnRefreshListener() {
             @Override

@@ -5,16 +5,24 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.NestedScrollView;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.BaseAdapter;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
@@ -26,6 +34,8 @@ import com.bumptech.glide.Glide;
 import com.example.administrator.expressuserclient.R;
 import com.example.administrator.expressuserclient.base.BaseFragment;
 import com.example.administrator.expressuserclient.base.BaseGson;
+import com.example.administrator.expressuserclient.commonUtil.BackHandlerHelper;
+import com.example.administrator.expressuserclient.commonUtil.FragmentBackHandler;
 import com.example.administrator.expressuserclient.commonUtil.ToastUtil;
 import com.example.administrator.expressuserclient.contract.home.HomeFragmentContract;
 import com.example.administrator.expressuserclient.contract.order.TicketFragmentContract;
@@ -45,13 +55,20 @@ import com.example.administrator.expressuserclient.view.activity.NewsActivity;
 import com.example.administrator.expressuserclient.view.activity.PackagePointListActivity;
 import com.example.administrator.expressuserclient.view.activity.ScanShiperTraceActivity;
 import com.example.administrator.expressuserclient.view.activity.ShiperTraceActivity;
+import com.example.administrator.expressuserclient.view.activity.WebActivity;
+import com.example.administrator.expressuserclient.weight.SupportPopupWindow;
 import com.example.administrator.expressuserclient.weight.VerticalScrollLayout;
+import com.example.administrator.expressuserclient.weight.card.CardFragmentPagerAdapter;
+import com.example.administrator.expressuserclient.weight.card.CardItem;
+import com.example.administrator.expressuserclient.weight.card.CardPagerAdapter;
+import com.example.administrator.expressuserclient.weight.card.ShadowTransformer;
 import com.google.gson.Gson;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
+import com.youth.banner.listener.OnBannerListener;
 import com.youth.banner.loader.ImageLoader;
 
 import java.util.ArrayList;
@@ -65,16 +82,20 @@ import butterknife.OnClick;
 import io.github.xudaojie.qrcodelib.CaptureActivity;
 
 import static android.app.Activity.RESULT_OK;
+import static cn.jpush.android.api.b.r;
+import static cn.jpush.android.api.b.t;
 import static com.example.administrator.expressuserclient.config.SysConfig.REQUEST_QR_CODE;
 
 /**
  * Created by Administrator on 2018/7/29.
  */
 
-public class HomeFragment extends BaseFragment implements AMapLocationListener, TicketFragmentContract.View, HomeFragmentContract.View {
+public class HomeFragment extends BaseFragment implements  AMapLocationListener, TicketFragmentContract.View, HomeFragmentContract.View {
 
     @InjectView(R.id.tv_weather)
     TextView tvWeather;
+    @InjectView(R.id.ll_weather)
+    LinearLayout llWeather;
     private HomeFragmentPresenter homeFragmentPresenter;
     @InjectView(R.id.btn_scan)
     ImageView btnScan;
@@ -126,7 +147,11 @@ public class HomeFragment extends BaseFragment implements AMapLocationListener, 
     ImageView ic_box;
     @InjectView(R.id.new_task)
     LinearLayout new_task;
-
+    private PopupWindow popupWindow;
+    private CardPagerAdapter mCardAdapter;
+    private ShadowTransformer mCardShadowTransformer;
+    private CardFragmentPagerAdapter mFragmentCardAdapter;
+    private ShadowTransformer mFragmentCardShadowTransformer;
 
     @Override
     protected int setLayoutResourceID() {
@@ -138,6 +163,28 @@ public class HomeFragment extends BaseFragment implements AMapLocationListener, 
 
 
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getView().setFocusableInTouchMode(true);
+        getView().requestFocus();
+        getView().setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View view, int i, KeyEvent keyEvent) {
+                if (keyEvent.getAction() == KeyEvent.ACTION_DOWN && i == KeyEvent.KEYCODE_BACK) {
+                    Log.i(TAG, "onKey: " + "返回键");
+                    if (popupWindow.isShowing()) {
+                        popupWindow.dismiss();
+                        backgroundAlpha(1f);
+                    }
+                    return true;
+                }
+                return false;
+            }
+        });
+    }
+
 
     @Override
     protected void setUpData() {
@@ -179,9 +226,12 @@ public class HomeFragment extends BaseFragment implements AMapLocationListener, 
         ButterKnife.reset(this);
     }
 
-    @OnClick({R.id.tv_distance, R.id.new_task, R.id.tv_search, R.id.btn_scan, R.id.btn_packet_search, R.id.btn_packet_history, R.id.btn_packet_deliver, R.id.btn_deliver_points})
+    @OnClick({R.id.ll_weather, R.id.tv_distance, R.id.new_task, R.id.tv_search, R.id.btn_scan, R.id.btn_packet_search, R.id.btn_packet_history, R.id.btn_packet_deliver, R.id.btn_deliver_points})
     public void onViewClicked(View view) {
         switch (view.getId()) {
+            case R.id.ll_weather:
+                showPopWindow();
+                break;
             case R.id.tv_distance:
                 startActivity(new Intent(getContext(), NewsActivity.class));
                 break;
@@ -207,8 +257,90 @@ public class HomeFragment extends BaseFragment implements AMapLocationListener, 
             case R.id.btn_deliver_points:
                 startActivity(new Intent(getContext(), ExpressSiteListActivity.class));
                 break;
+            default:
+                break;
         }
     }
+
+    private void showPopWindow() {
+        final View popupWindow_view = LayoutInflater.from(getActivity()).inflate(R.layout.popwindows_fragment_home_weather, null, false);
+        popupWindow = new PopupWindow(popupWindow_view, RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT, true);
+        popupWindow.setAnimationStyle(R.style.PopWindowAnimStyle);
+        popupWindow.showAtLocation(llWeather, Gravity.BOTTOM, 0, 0);
+        final ViewPager mViewPager = (ViewPager) popupWindow_view.findViewById(R.id.viewPager);
+        ImageView img_close = popupWindow_view.findViewById(R.id.img_close);
+        img_close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (popupWindow != null && popupWindow.isShowing()) {
+                    popupWindow.dismiss();
+                    backgroundAlpha(1f);
+                }
+            }
+        });
+        popupWindow.setOutsideTouchable(false);
+        popupWindow.setFocusable(false);
+        popupWindow.setTouchable(false);
+
+        popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                backgroundAlpha(1f);
+            }
+        });
+        mCardAdapter = new CardPagerAdapter();
+        Map<String, String> map = new HashMap<>();
+        map.put("key", "2415af360b224");
+        map.put("city", tvCity.getText().toString().replace("市", ""));
+        map.put("province", tvProvince.getText().toString().replace("省", ""));
+        queue.add(VolleyRequestUtil.RequestWithParams("http://apicloud.mob.com/v1/weather/query", map, new VolleyRequestCllBack() {
+            @Override
+            public void onSuccess(String result) {
+                Log.i(TAG, "onSuccess: " + result);
+                Gson gson = new Gson();
+                WeatherGson weatherGson = gson.fromJson(result, WeatherGson.class);
+                List<WeatherGson.ResultBean.FutureBean> future = weatherGson.getResult().get(0).getFuture();
+                for (int i = 0; i < future.size(); i++) {
+                    mCardAdapter.addCardItem(new CardItem(future.get(i).getDayTime(), future.get(i).getTemperature(),
+                            future.get(i).getWeek(), future.get(i).getWind()));
+                }
+                mFragmentCardAdapter = new CardFragmentPagerAdapter(getChildFragmentManager(),
+                        dpToPixels(2, getActivity()));
+                mCardShadowTransformer = new ShadowTransformer(mViewPager, mCardAdapter);
+                mFragmentCardShadowTransformer = new ShadowTransformer(mViewPager, mFragmentCardAdapter);
+                mCardShadowTransformer.enableScaling(true);
+                mFragmentCardShadowTransformer.enableScaling(true);
+                backgroundAlpha(0.5f);
+                mViewPager.setAdapter(mCardAdapter);
+                mViewPager.setPageTransformer(false, mCardShadowTransformer);
+                mViewPager.setOffscreenPageLimit(3);
+//
+            }
+
+            @Override
+            public void onError(String error) {
+
+            }
+        }));
+
+    }
+
+    public static float dpToPixels(int dp, Context context) {
+        return dp * (context.getResources().getDisplayMetrics().density);
+    }
+
+    /**
+     * 设置添加屏幕的背景透明度
+     *
+     * @param bgAlpha
+     */
+    public void backgroundAlpha(float bgAlpha) {
+        WindowManager.LayoutParams lp = getActivity().getWindow().getAttributes();
+        lp.alpha = bgAlpha; //0.0-1.0
+        getActivity().getWindow().setAttributes(lp);
+        getActivity().getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+    }
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -285,7 +417,7 @@ public class HomeFragment extends BaseFragment implements AMapLocationListener, 
     }
 
     @Override
-    public void setBanner(List<BannerGson> bannerGsonBaseGson, List<NewsGson> baseGson) {
+    public void setBanner(final List<BannerGson> bannerGsonBaseGson, List<NewsGson> baseGson) {
         List<String> list = new ArrayList<>();
         for (int i = 0; i < bannerGsonBaseGson.size(); i++) {
             list.add(bannerGsonBaseGson.get(i).getPic());
@@ -296,7 +428,15 @@ public class HomeFragment extends BaseFragment implements AMapLocationListener, 
                 Glide.with(context).load(path.toString()).asBitmap().into(imageView);
             }
         });
-        homeBanner.setIndicatorGravity(BannerConfig.CENTER);
+        homeBanner.setIndicatorGravity(BannerConfig.LEFT);
+        homeBanner.setOnBannerListener(new OnBannerListener() {
+            @Override
+            public void OnBannerClick(int position) {
+                Intent intent = new Intent(getContext(), WebActivity.class);
+                intent.putExtra("url", bannerGsonBaseGson.get(position).getUrl());
+                startActivity(intent);
+            }
+        });
         homeBanner.setImages(list);
         homeBanner.setDelayTime(5000);
         homeBanner.start();

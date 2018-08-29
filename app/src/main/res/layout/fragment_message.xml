@@ -15,7 +15,13 @@
             android:orientation="horizontal"
             android:layout_height="match_parent">
             <TextView
+                android:layout_width="wrap_content"
+                android:textSize="16sp"
                 android:textColor="#000"
+                android:layout_height="wrap_content"
+                android:text="消息"/>
+            <TextView
+                android:textColor="@color/blue"
                 android:textSize="17sp"
                 android:id="@+id/tv_contact"
                 android:layout_marginRight="@dimen/dp_10"

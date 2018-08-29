@@ -197,9 +197,7 @@
             android:value="ce96018f1ca252300f934c39" />
         <!-- ===========================极光推送================================== -->
 
-        <activity android:name=".view.activity.SplashActivity" >
-
-        </activity>
+        <activity android:name=".view.activity.SplashActivity"></activity>
         <activity
             android:name=".view.activity.ServiceActivity"
             android:windowSoftInputMode="stateHidden|adjustResize" />
@@ -229,13 +227,14 @@
         <activity android:name=".view.activity.ShiperTraceActivity" />
         <activity android:name=".view.activity.ScanShiperTraceActivity" />
         <activity android:name=".view.activity.NewsActivity" />
-        <activity android:name=".view.activity.ContactListActivity"></activity>
+        <activity android:name=".view.activity.ContactListActivity" />
         <activity android:name=".view.activity.ConversationActivity" />
-        <activity android:name=".view.activity.AddContactUserActivity"></activity>
-        <activity android:name=".view.activity.LoginAndRegisterActivity"
-            android:theme="@style/BlueAppTheme">
-
-        </activity>
+        <activity android:name=".view.activity.AddContactUserActivity" />
+        <activity
+            android:name=".view.activity.LoginAndRegisterActivity"
+            android:theme="@style/BlueAppTheme"></activity>
+        <activity android:name=".view.activity.WebActivity" />
+        <activity android:name=".view.activity.NewsDetailActivity"></activity>
     </application>
 
 </manifest>

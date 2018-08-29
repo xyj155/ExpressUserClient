@@ -1,5 +1,6 @@
 package com.example.administrator.expressuserclient.view.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -9,6 +10,7 @@ import com.example.administrator.expressuserclient.R;
 import com.example.administrator.expressuserclient.base.BaseActivity;
 import com.example.administrator.expressuserclient.commonUtil.DataCleanManager;
 import com.example.administrator.expressuserclient.commonUtil.ToastUtil;
+import com.example.administrator.expressuserclient.http.util.RetrofitUtil;
 import com.tencent.bugly.beta.Beta;
 import com.tencent.bugly.beta.UpgradeInfo;
 
@@ -85,8 +87,14 @@ public class SettingActivity extends BaseActivity {
                 }
                 break;
             case R.id.tv_about_us:
+                Intent intent=new Intent(SettingActivity.this,WebActivity.class);
+                intent.putExtra("url", RetrofitUtil.BASE_URL+"/CurrierBrother/public/index.php/index/Index/aboutUs");
+                startActivity(intent);
                 break;
             case R.id.tv_our_service:
+                Intent about=new Intent(SettingActivity.this,WebActivity.class);
+                about.putExtra("url",RetrofitUtil.BASE_URL+"/CurrierBrother/public/index.php/index/Index/introduce");
+                startActivity(about);
                 break;
             case R.id.tv_update:
                 Beta.checkUpgrade();

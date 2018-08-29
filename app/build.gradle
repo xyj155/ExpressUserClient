@@ -46,7 +46,7 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile('com.android.support:appcompat-v7:25.3.0') {
+    compile('com.android.support:appcompat-v7:25.3.1') {
         force = true
     }
     // SmartRefreshLayout
@@ -65,7 +65,7 @@ dependencies {
     // https://mvnrepository.com/artifact/org.jsoup/jsoup
     // 此处以JMessage 2.6.1 版本为例。
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    compile 'com.android.support:design:25.0.0'
+    compile 'com.android.support:design:25.3.1'
     compile 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-alpha-11'
     compile 'com.scwang.smartrefresh:SmartRefreshHeader:1.1.0-alpha-11'
     compile 'com.amap.api:3dmap:5.0.0'
@@ -87,7 +87,7 @@ dependencies {
     compile 'cn.jiguang.sdk:jmessage:2.6.1'
     compile 'com.github.yilylong:CBDialog:v1.0.7'
     compile 'com.mcxiaoke.volley:library:1.0.19'
-    compile 'com.android.support:cardview-v7:25.0.0'
+    compile 'com.android.support:cardview-v7:25.3.1'
     compile 'com.tencent.bugly:crashreport_upgrade:1.2.0'
     compile 'com.tencent.bugly:nativecrashreport:2.2.0'
     compile 'com.squareup.okhttp3:logging-interceptor:3.1.2'

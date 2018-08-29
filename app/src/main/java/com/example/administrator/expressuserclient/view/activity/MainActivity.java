@@ -2,14 +2,17 @@ package com.example.administrator.expressuserclient.view.activity;
 
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.widget.FrameLayout;
 
 import com.example.administrator.expressuserclient.R;
 import com.example.administrator.expressuserclient.base.BaseActivity;
 import com.example.administrator.expressuserclient.base.BaseGson;
+import com.example.administrator.expressuserclient.commonUtil.BackHandlerHelper;
 import com.example.administrator.expressuserclient.contract.push.MessageFragmentContract;
 import com.example.administrator.expressuserclient.gson.PushGson;
 import com.example.administrator.expressuserclient.presenter.push.MessageFragmentPresenter;
@@ -25,6 +28,8 @@ import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+
+import static android.R.attr.fragment;
 
 public class MainActivity extends BaseActivity implements MessageFragmentContract.View {
 
@@ -52,6 +57,8 @@ public class MainActivity extends BaseActivity implements MessageFragmentContrac
     public void initView(Bundle savedInstanceState) {
         bottom = (BottomBarLayout) findViewById(R.id.bottom);
     }
+
+
 
 
     @Override
