@@ -9,9 +9,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.NestedScrollView;
 import android.util.Log;
 import android.view.Gravity;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -22,7 +20,6 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
@@ -34,8 +31,6 @@ import com.bumptech.glide.Glide;
 import com.example.administrator.expressuserclient.R;
 import com.example.administrator.expressuserclient.base.BaseFragment;
 import com.example.administrator.expressuserclient.base.BaseGson;
-import com.example.administrator.expressuserclient.commonUtil.BackHandlerHelper;
-import com.example.administrator.expressuserclient.commonUtil.FragmentBackHandler;
 import com.example.administrator.expressuserclient.commonUtil.ToastUtil;
 import com.example.administrator.expressuserclient.contract.home.HomeFragmentContract;
 import com.example.administrator.expressuserclient.contract.order.TicketFragmentContract;
@@ -56,7 +51,6 @@ import com.example.administrator.expressuserclient.view.activity.PackagePointLis
 import com.example.administrator.expressuserclient.view.activity.ScanShiperTraceActivity;
 import com.example.administrator.expressuserclient.view.activity.ShiperTraceActivity;
 import com.example.administrator.expressuserclient.view.activity.WebActivity;
-import com.example.administrator.expressuserclient.weight.SupportPopupWindow;
 import com.example.administrator.expressuserclient.weight.VerticalScrollLayout;
 import com.example.administrator.expressuserclient.weight.card.CardFragmentPagerAdapter;
 import com.example.administrator.expressuserclient.weight.card.CardItem;
@@ -72,6 +66,7 @@ import com.youth.banner.listener.OnBannerListener;
 import com.youth.banner.loader.ImageLoader;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -82,15 +77,13 @@ import butterknife.OnClick;
 import io.github.xudaojie.qrcodelib.CaptureActivity;
 
 import static android.app.Activity.RESULT_OK;
-import static cn.jpush.android.api.b.r;
-import static cn.jpush.android.api.b.t;
 import static com.example.administrator.expressuserclient.config.SysConfig.REQUEST_QR_CODE;
 
 /**
  * Created by Administrator on 2018/7/29.
  */
 
-public class HomeFragment extends BaseFragment implements  AMapLocationListener, TicketFragmentContract.View, HomeFragmentContract.View {
+public class HomeFragment extends BaseFragment implements AMapLocationListener, TicketFragmentContract.View, HomeFragmentContract.View {
 
     @InjectView(R.id.tv_weather)
     TextView tvWeather;
@@ -162,27 +155,6 @@ public class HomeFragment extends BaseFragment implements  AMapLocationListener,
     protected void setUpView(View view, Bundle bundle) {
 
 
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        getView().setFocusableInTouchMode(true);
-        getView().requestFocus();
-        getView().setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View view, int i, KeyEvent keyEvent) {
-                if (keyEvent.getAction() == KeyEvent.ACTION_DOWN && i == KeyEvent.KEYCODE_BACK) {
-                    Log.i(TAG, "onKey: " + "返回键");
-                    if (popupWindow.isShowing()) {
-                        popupWindow.dismiss();
-                        backgroundAlpha(1f);
-                    }
-                    return true;
-                }
-                return false;
-            }
-        });
     }
 
 
@@ -299,22 +271,38 @@ public class HomeFragment extends BaseFragment implements  AMapLocationListener,
                 Log.i(TAG, "onSuccess: " + result);
                 Gson gson = new Gson();
                 WeatherGson weatherGson = gson.fromJson(result, WeatherGson.class);
-                List<WeatherGson.ResultBean.FutureBean> future = weatherGson.getResult().get(0).getFuture();
-                for (int i = 0; i < future.size(); i++) {
-                    mCardAdapter.addCardItem(new CardItem(future.get(i).getDayTime(), future.get(i).getTemperature(),
-                            future.get(i).getWeek(), future.get(i).getWind()));
+                if (weatherGson.getResult() != null) {
+                    List<WeatherGson.ResultBean.FutureBean> future = weatherGson.getResult().get(0).getFuture();
+                    if (future.size() > 0) {
+                        Calendar calendar = Calendar.getInstance();
+                        int hour = calendar.get(Calendar.HOUR_OF_DAY);
+                        Log.i(TAG, "onSuccess: "+hour);
+                        if (hour > 17||hour<6) {
+                            mCardAdapter.addCardItem(new CardItem(future.get(0).getNight(), future.get(0).getTemperature(),
+                                    future.get(0).getWeek(), future.get(0).getWind()));
+                            for (int i = 1; i < future.size(); i++) {
+                                mCardAdapter.addCardItem(new CardItem(future.get(i).getNight()==null?"晴":future.get(i).getNight(), future.get(i).getTemperature(),
+                                        future.get(i).getWeek(), future.get(i).getWind()));
+                            }
+                        }else {
+                            for (int i = 0; i < future.size(); i++) {
+                                mCardAdapter.addCardItem(new CardItem(future.get(i).getDayTime(), future.get(i).getTemperature(),
+                                        future.get(i).getWeek(), future.get(i).getWind()));
+                            }
+                        }
+
+                        mFragmentCardAdapter = new CardFragmentPagerAdapter(getChildFragmentManager(),
+                                dpToPixels(2, getActivity()));
+                        mCardShadowTransformer = new ShadowTransformer(mViewPager, mCardAdapter);
+                        mFragmentCardShadowTransformer = new ShadowTransformer(mViewPager, mFragmentCardAdapter);
+                        mCardShadowTransformer.enableScaling(true);
+                        mFragmentCardShadowTransformer.enableScaling(true);
+                        backgroundAlpha(0.5f);
+                        mViewPager.setAdapter(mCardAdapter);
+                        mViewPager.setPageTransformer(false, mCardShadowTransformer);
+                        mViewPager.setOffscreenPageLimit(3);
+                    }
                 }
-                mFragmentCardAdapter = new CardFragmentPagerAdapter(getChildFragmentManager(),
-                        dpToPixels(2, getActivity()));
-                mCardShadowTransformer = new ShadowTransformer(mViewPager, mCardAdapter);
-                mFragmentCardShadowTransformer = new ShadowTransformer(mViewPager, mFragmentCardAdapter);
-                mCardShadowTransformer.enableScaling(true);
-                mFragmentCardShadowTransformer.enableScaling(true);
-                backgroundAlpha(0.5f);
-                mViewPager.setAdapter(mCardAdapter);
-                mViewPager.setPageTransformer(false, mCardShadowTransformer);
-                mViewPager.setOffscreenPageLimit(3);
-//
             }
 
             @Override
