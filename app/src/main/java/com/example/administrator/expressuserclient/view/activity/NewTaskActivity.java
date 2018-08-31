@@ -2,6 +2,7 @@ package com.example.administrator.expressuserclient.view.activity;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -44,11 +45,12 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.administrator.expressuserclient.R;
 import com.example.administrator.expressuserclient.base.BaseActivity;
 import com.example.administrator.expressuserclient.base.BaseGson;
 import com.example.administrator.expressuserclient.commonUtil.ToastUtil;
-import com.example.administrator.expressuserclient.contract.home.ExpressSearchActivityContract;
 import com.example.administrator.expressuserclient.contract.order.TicketFragmentContract;
 import com.example.administrator.expressuserclient.gson.OrderGson;
 import com.example.administrator.expressuserclient.presenter.order.TicketFragmentPresenter;
@@ -64,7 +66,7 @@ import butterknife.OnClick;
 
 import static com.amap.api.services.route.RouteSearch.DRIVING_SINGLE_SHORTEST;
 
-public class NewTaskActivity extends BaseActivity implements ExpressSearchActivityContract.View, TicketFragmentContract.View {
+public class NewTaskActivity extends BaseActivity implements TicketFragmentContract.View {
 
 
     @InjectView(R.id.toolbar)
@@ -222,11 +224,6 @@ public class NewTaskActivity extends BaseActivity implements ExpressSearchActivi
 
 
     @Override
-    public void expressSearch(BaseGson<OrderGson> packageSiteListBaseGson) {
-
-    }
-
-    @Override
     public void showData(final BaseGson<OrderGson> baseGson) {
 
         mlocationClient.setLocationListener(new AMapLocationListener() {
@@ -294,8 +291,38 @@ public class NewTaskActivity extends BaseActivity implements ExpressSearchActivi
         });
         mlocationClient.setLocationOption(mLocationOption);
         mlocationClient.startLocation();//启动定位
-        ExpressSearchActivity.ExpressSearchAdapter adapter = new ExpressSearchActivity.ExpressSearchAdapter(NewTaskActivity.this, baseGson.getData());
+        ExpressSearchAdapter adapter = new ExpressSearchAdapter(NewTaskActivity.this, baseGson.getData());
         ryPackage.setAdapter(adapter);
+    }
+
+    private class ExpressSearchAdapter extends BaseQuickAdapter<OrderGson, BaseViewHolder> {
+        private Context context;
+
+        public ExpressSearchAdapter(Context context, List<OrderGson> data) {
+            super(R.layout.ry_item_express_search, data);
+            this.context = context;
+        }
+
+        @Override
+        protected void convert(BaseViewHolder helper, final OrderGson item) {
+            helper.setText(R.id.tv_num, "订单号：" + item.getOrdernum())
+                    .setText(R.id.tv_username, "收件人：" + item.getUsername())
+                    .setText(R.id.tv_address, "地址：" + item.getEndlocation())
+                    .setOnClickListener(R.id.tv_detail, new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Intent intent = new Intent(context, UserExpressDetailActivity.class);
+                            intent.putExtra("location", item.getLatintude() + "," + item.getLongtitude());
+                            intent.putExtra("num", item.getOrdernum());
+                            intent.putExtra("tel", item.getTel());
+                            intent.putExtra("username", item.getUsername());
+                            intent.putExtra("address", item.getEndlocation());
+                            intent.putExtra("id", item.getId());
+                            context.startActivity(intent);
+                        }
+                    });
+
+        }
     }
 
     private void addMarker(LatLng latLng) {

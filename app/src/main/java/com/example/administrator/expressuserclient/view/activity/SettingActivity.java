@@ -1,6 +1,7 @@
 package com.example.administrator.expressuserclient.view.activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.widget.TextView;
 
 import com.example.administrator.expressuserclient.R;
 import com.example.administrator.expressuserclient.base.BaseActivity;
+import com.example.administrator.expressuserclient.commonUtil.ActivityCollectorUtil;
 import com.example.administrator.expressuserclient.commonUtil.DataCleanManager;
 import com.example.administrator.expressuserclient.commonUtil.ToastUtil;
 import com.example.administrator.expressuserclient.http.util.RetrofitUtil;
@@ -87,13 +89,13 @@ public class SettingActivity extends BaseActivity {
                 }
                 break;
             case R.id.tv_about_us:
-                Intent intent=new Intent(SettingActivity.this,WebActivity.class);
-                intent.putExtra("url", RetrofitUtil.BASE_URL+"/CurrierBrother/public/index.php/index/Index/aboutUs");
+                Intent intent = new Intent(SettingActivity.this, WebActivity.class);
+                intent.putExtra("url", RetrofitUtil.BASE_URL + "/CurrierBrother/public/index.php/index/Index/aboutUs");
                 startActivity(intent);
                 break;
             case R.id.tv_our_service:
-                Intent about=new Intent(SettingActivity.this,WebActivity.class);
-                about.putExtra("url",RetrofitUtil.BASE_URL+"/CurrierBrother/public/index.php/index/Index/introduce");
+                Intent about = new Intent(SettingActivity.this, WebActivity.class);
+                about.putExtra("url", RetrofitUtil.BASE_URL + "/CurrierBrother/public/index.php/index/Index/introduce");
                 startActivity(about);
                 break;
             case R.id.tv_update:
@@ -104,6 +106,13 @@ public class SettingActivity extends BaseActivity {
                 }
                 break;
             case R.id.tv_login_out:
+                ActivityCollectorUtil.finishAllActivity();
+                SharedPreferences userSettings = getSharedPreferences("user", MODE_PRIVATE);
+                SharedPreferences.Editor editor = userSettings.edit();
+                editor.clear();
+                editor.apply();
+                Intent intent1=new Intent(SettingActivity.this,SplashActivity.class);
+                startActivity(intent1);
                 break;
         }
     }

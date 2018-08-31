@@ -126,13 +126,14 @@ public class ContactListActivity extends BaseActivity implements ContactListActi
         }
 
         @Override
-        protected void convert(BaseViewHolder helper, UserGson item) {
+        protected void convert(BaseViewHolder helper, final UserGson item) {
 
-            helper.setText(R.id.tv_username, item.getUsername())
+            helper.setText(R.id.tv_username, item.getUsername()==null?"":item.getUsername())
                     .setOnClickListener(R.id.ll_contact, new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
                             Intent intent = new Intent(ContactListActivity.this, ConversationActivity.class);
+                            intent.putExtra("username",item.getUsername());
                             startActivity(intent);
                         }
                     });

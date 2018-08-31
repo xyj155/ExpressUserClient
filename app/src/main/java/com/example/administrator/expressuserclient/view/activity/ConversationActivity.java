@@ -23,14 +23,8 @@ import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
-import cn.jpush.im.android.api.JMessageClient;
 import cn.jpush.im.android.api.model.Conversation;
 import cn.jpush.im.android.api.model.Message;
-
-import static android.R.id.message;
-import static cn.jpush.android.api.b.a;
-import static cn.jpush.android.api.b.s;
-import static cn.jpush.im.android.tasks.GetUserInfoListTask.IDType.username;
 
 public class ConversationActivity extends BaseActivity implements ConversationActivityContract.View {
 
@@ -92,7 +86,7 @@ public class ConversationActivity extends BaseActivity implements ConversationAc
     @Override
     public void loginSuccess() {
         showmDialog("数据加载中...");
-        mConversation = Conversation.createSingleConversation("456789");
+        mConversation = Conversation.createSingleConversation(getIntent().getStringExtra("username"));
         if (mConversation != null) {
             List<Message> allMessage = mConversation.getAllMessage();
             if (allMessage != null) {

@@ -9,9 +9,8 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.administrator.expressuserclient.R;
+import com.example.administrator.expressuserclient.commonUtil.ActivityCollectorUtil;
 import com.example.administrator.expressuserclient.weight.AppleDialog;
-
-import butterknife.ButterKnife;
 
 
 /**
@@ -39,6 +38,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         initView(savedInstanceState);
         //设置数据
         initData();
+        ActivityCollectorUtil.addActivity(this);
     }
 
     public void showmDialog(String msg) {
@@ -94,7 +94,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     /**
      * 初始化布局
      */
-    public abstract void initView(Bundle savedInstanceState) ;
+    public abstract void initView(Bundle savedInstanceState);
 
     /**
      * 设置数据

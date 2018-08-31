@@ -21,8 +21,8 @@ public class ChatAdapter extends BaseMultiItemQuickAdapter<ServiceEntity, BaseVi
 
     public ChatAdapter(List<ServiceEntity> data) {
         super(data);
-        addItemType(ServiceEntity.TYPE_SERVICES_MESSAGE, R.layout.service_recycle_item_chat_chatfriends);
-        addItemType(ServiceEntity.TYPE_CLIENT_MESSAGE, R.layout.service_recycle_item_chat_user);
+        addItemType(ServiceEntity.TYPE_SERVICES_MESSAGE, R.layout.ry_item_service_recycle_chat_chatfriends);
+        addItemType(ServiceEntity.TYPE_CLIENT_MESSAGE, R.layout.ry_item_service_recycle_chat_user);
     }
 
     @Override

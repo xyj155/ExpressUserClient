@@ -32,6 +32,19 @@ public class OrderGson {
     private String createtime;
     private double longitude;
     private double latitude;
+    /**
+     * date : 2018-08-30T15:13:25.000+0000
+     * latintude : 40.251801
+     * longtitude : 116.197021
+     * servicetime : 301
+     * endtime : 305
+     * tel : 1454565615
+     * pid : 31
+     */
+
+    private double latintude;
+    private double longtitude;
+    private String tel;
 
     public int getId() {
         return id;
@@ -119,5 +132,29 @@ public class OrderGson {
 
     public void setLatitude(double latitude) {
         this.latitude = latitude;
+    }
+
+    public double getLatintude() {
+        return latintude;
+    }
+
+    public void setLatintude(double latintude) {
+        this.latintude = latintude;
+    }
+
+    public double getLongtitude() {
+        return longtitude;
+    }
+
+    public void setLongtitude(double longtitude) {
+        this.longtitude = longtitude;
+    }
+
+    public String getTel() {
+        return tel;
+    }
+
+    public void setTel(String tel) {
+        this.tel = tel;
     }
 }

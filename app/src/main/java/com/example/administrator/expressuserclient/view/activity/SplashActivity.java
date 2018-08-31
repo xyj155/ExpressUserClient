@@ -3,6 +3,7 @@ package com.example.administrator.expressuserclient.view.activity;
 import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Typeface;
 import android.net.Uri;
@@ -54,11 +55,17 @@ public class SplashActivity extends AppCompatActivity {
         boolean isAllGranted = checkPermissionAllGranted(
                 permissions
         );
+        SharedPreferences sp=getSharedPreferences("user",MODE_PRIVATE);
+        final boolean login = sp.getBoolean("login", false);
         if (isAllGranted) {
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    startActivity(new Intent(SplashActivity.this, MainActivity.class));
+                    if (login){
+                        startActivity(new Intent(SplashActivity.this, MainActivity.class));
+                    }else {
+                        startActivity(new Intent(SplashActivity.this, LoginAndRegisterActivity.class));
+                    }
                     finish();
                 }
             }, 2000);

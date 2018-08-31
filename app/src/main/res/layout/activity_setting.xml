@@ -57,7 +57,8 @@
                     android:layout_height="match_parent"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentTop="true"
-                    app:theme="@style/MySwitch" />
+                    app:theme="@style/MySwitch"
+                    android:layout_alignParentRight="true" />
             </RelativeLayout>
 
 
@@ -108,7 +109,7 @@
                 android:gravity="center"
                 android:id="@+id/tv_login_out"
                 android:text="退出登陆"
-                android:textColor="#000" />
+                android:textColor="#ff00" />
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 </RelativeLayout>

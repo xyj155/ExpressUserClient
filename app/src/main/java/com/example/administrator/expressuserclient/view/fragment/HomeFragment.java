@@ -235,7 +235,7 @@ public class HomeFragment extends BaseFragment implements AMapLocationListener, 
     }
 
     private void showPopWindow() {
-        final View popupWindow_view = LayoutInflater.from(getActivity()).inflate(R.layout.popwindows_fragment_home_weather, null, false);
+        final View popupWindow_view = LayoutInflater.from(getActivity()).inflate(R.layout.pop_fragment_home_weather, null, false);
         popupWindow = new PopupWindow(popupWindow_view, RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT, true);
         popupWindow.setAnimationStyle(R.style.PopWindowAnimStyle);
         popupWindow.showAtLocation(llWeather, Gravity.BOTTOM, 0, 0);
