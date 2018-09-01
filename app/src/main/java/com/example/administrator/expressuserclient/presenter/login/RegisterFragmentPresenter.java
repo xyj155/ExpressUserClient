@@ -60,9 +60,9 @@ public class RegisterFragmentPresenter implements RegisterFragmentContract.Prese
                             Map<String, Object> map = new HashMap<>();
                             map.put("username", emptyGsonBaseGson.getData().get(0).getUsername());
                             map.put("login", true);
-                            map.put("userhead", emptyGsonBaseGson.getData().get(0).getHead() == null ? "" : emptyGsonBaseGson.getData().get(0).getHead());
+                            map.put("userhead", emptyGsonBaseGson.getData().get(0).getHead().isEmpty() ? "http://img04.store.sogou.com/app/a/10010016/53796ab93dae0b5be1f729ba17dd0b62" : emptyGsonBaseGson.getData().get(0).getHead());
                             map.put("id", emptyGsonBaseGson.getData().get(0).getId());
-                            map.put("tel", emptyGsonBaseGson.getData().get(0).getUsertel() == null ? "" : map.put("tel", emptyGsonBaseGson.getData().get(0).getUsertel()));
+                            map.put("tel", emptyGsonBaseGson.getData().get(0).getUsertel().isEmpty() ? "未填写" : map.put("tel", emptyGsonBaseGson.getData().get(0).getUsertel()));
                             SPUtil.getInstance().saveSPData(map).save();
                         } else {
                             ToastUtil.showToastWarning(emptyGsonBaseGson.getMsg());

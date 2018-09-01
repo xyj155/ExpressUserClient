@@ -1,9 +1,11 @@
 package com.example.administrator.expressuserclient.view.fragment.login;
 
+import android.app.Dialog;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -17,12 +19,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.administrator.expressuserclient.R;
-import com.example.administrator.expressuserclient.base.BaseFragment;
 import com.example.administrator.expressuserclient.base.BaseGson;
 import com.example.administrator.expressuserclient.commonUtil.ToastUtil;
 import com.example.administrator.expressuserclient.contract.login.RegisterFragmentContract;
 import com.example.administrator.expressuserclient.gson.UserGson;
 import com.example.administrator.expressuserclient.presenter.login.RegisterFragmentPresenter;
+import com.example.administrator.expressuserclient.weight.AppleDialog;
 import com.example.administrator.expressuserclient.weight.CheckCodeCountDown;
 
 import butterknife.ButterKnife;
@@ -36,7 +38,7 @@ import cn.smssdk.SMSSDK;
  * @date 2018/8/28/028
  */
 
-public class RegisterFragment extends BaseFragment implements RegisterFragmentContract.View {
+public class RegisterFragment extends Fragment implements RegisterFragmentContract.View {
 
 
     @InjectView(R.id.tv_title)
@@ -49,7 +51,7 @@ public class RegisterFragment extends BaseFragment implements RegisterFragmentCo
     EditText etSmscode;
     @InjectView(R.id.btn_login)
     Button btnLogin;
-    @InjectView(R.id.tv_send)
+
     CheckCodeCountDown mCheckCodeCountDown;
     @InjectView(R.id.tv_already)
     TextView tvAlready;
@@ -80,13 +82,24 @@ public class RegisterFragment extends BaseFragment implements RegisterFragmentCo
         }
     };
 
-    @Override
-    protected int setLayoutResourceID() {
-        return R.layout.vp_register_item1;
-    }
 
     @Override
-    protected void setUpView(View view, Bundle bundle) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        // TODO: inflate a fragment view
+        View rootView = inflater.inflate(R.layout.vp_register_item1, container, false);
+        EventHandler eh = new EventHandler() {
+            @Override
+            public void afterEvent(int event, int result, Object data) {
+                Message msg = new Message();
+                msg.arg1 = event;
+                msg.arg2 = result;
+                msg.obj = data;
+                handler.sendMessage(msg);
+            }
+        };
+
+        SMSSDK.registerEventHandler(eh);
+        ButterKnife.inject(this, rootView);
         Typeface typeFace = Typeface.createFromAsset(getActivity().getAssets(), "font.ttf");
         tvTitle.setTypeface(typeFace);
         TextWatcher textWatcher = new TextWatcher() {
@@ -106,32 +119,7 @@ public class RegisterFragment extends BaseFragment implements RegisterFragmentCo
             }
         };
         etUsername.addTextChangedListener(textWatcher);
-    }
-
-
-    @Override
-    protected void setUpData() {
-
-        EventHandler eh = new EventHandler() {
-            @Override
-            public void afterEvent(int event, int result, Object data) {
-                Message msg = new Message();
-                msg.arg1 = event;
-                msg.arg2 = result;
-                msg.obj = data;
-                handler.sendMessage(msg);
-            }
-        };
-
-        SMSSDK.registerEventHandler(eh);
-    }
-
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // TODO: inflate a fragment view
-        View rootView = super.onCreateView(inflater, container, savedInstanceState);
-        ButterKnife.inject(this, rootView);
+        mCheckCodeCountDown = rootView.findViewById(R.id.tv_send);
         mCheckCodeCountDown.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -199,23 +187,27 @@ public class RegisterFragment extends BaseFragment implements RegisterFragmentCo
 
     @Override
     public void querySameUser(BaseGson<UserGson> baseGson) {
-        System.out.println(baseGson.getData()+"data");
+        System.out.println(baseGson.getData() + "data");
         if (!baseGson.isSuccess()) {
             tvAlready.setText("可注册");
             tvAlready.setTextColor(getResources().getColor(R.color.green));
-        }else {
+        } else {
             tvAlready.setText("已被注册");
             tvAlready.setTextColor(getResources().getColor(R.color.player_red));
         }
     }
 
+    private Dialog dialog;
+
     @Override
     public void showDialog(String msg) {
-        showFragmentDialog(msg);
+        dialog = AppleDialog.createLoadingDialog(getActivity(), "注册中...");
+        dialog.show();
     }
 
     @Override
     public void hideDialog() {
-        hideFragmentDialog();
+        dialog.dismiss();
     }
+
 }

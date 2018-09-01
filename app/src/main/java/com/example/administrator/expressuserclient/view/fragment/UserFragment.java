@@ -86,7 +86,7 @@ public class UserFragment extends BaseFragment implements UserFragmentContract.V
         String username = sp.getString("username", "");
         String tel = sp.getString("tel", "");
         Log.i(TAG, "setUpData: " + tel);
-        String headurl = sp.getString("userhead", "").isEmpty() ? "" : sp.getString("userhead", "");
+        String headurl =  sp.getString("userhead", "");
         Glide.with(getActivity()).load(headurl).asBitmap().error(R.mipmap.w3).into(imgUserHead);
         if (tel.equals("")) {
             tvTel.setText("你还没有绑定手机号码哦！");

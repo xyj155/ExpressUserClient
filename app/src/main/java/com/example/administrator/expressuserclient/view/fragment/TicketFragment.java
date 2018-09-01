@@ -130,7 +130,7 @@ public class TicketFragment extends BaseFragment implements TicketFragmentContra
             helper.setText(R.id.tv_username, "收件人：" + item.getUsername())
                     .setText(R.id.tv_num, "订单号：" + item.getOrdernum())
                     .setText(R.id.tv_address, "派送地址：" + item.getEndlocation())
-                    .setText(R.id.tv_tel, "联系方式：" + item.getUsertel())
+                    .setText(R.id.tv_tel, "联系方式：" + item.getTel())
                     .setOnClickListener(R.id.ty_ticket, new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {

@@ -17,7 +17,6 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
@@ -129,8 +128,6 @@ public class NewTaskActivity extends BaseActivity implements TicketFragmentContr
         mlocationClient.setLocationOption(mLocationOption);
         CameraUpdate cameraUpdate = CameraUpdateFactory.zoomTo(15);
         mMapView.getMap().moveCamera(cameraUpdate);
-
-
         initToolBar().setToolNavigationIco(R.mipmap.ic_back)
                 .setToolNavigationIcoOnClickListener(new OnClickListener() {
                     @Override
@@ -225,7 +222,6 @@ public class NewTaskActivity extends BaseActivity implements TicketFragmentContr
 
     @Override
     public void showData(final BaseGson<OrderGson> baseGson) {
-
         mlocationClient.setLocationListener(new AMapLocationListener() {
             @Override
             public void onLocationChanged(AMapLocation aMapLocation) {
@@ -237,8 +233,8 @@ public class NewTaskActivity extends BaseActivity implements TicketFragmentContr
                             new LatLonPoint(aMapLocation.getLatitude(), aMapLocation.getLongitude()));
                     List<LatLonPoint> lists = new ArrayList<LatLonPoint>();
                     for (int i = 0; i < baseGson.getData().size(); i++) {
-                        addMarker(new LatLng(baseGson.getData().get(i).getLatitude(), baseGson.getData().get(i).getLongitude()));
-                        lists.add(new LatLonPoint(baseGson.getData().get(i).getLatitude(), baseGson.getData().get(i).getLongitude()));
+                        addMarker(new LatLng(baseGson.getData().get(i).getLatintude(), baseGson.getData().get(i).getLongtitude()));
+                        lists.add(new LatLonPoint(baseGson.getData().get(i).getLatintude(), baseGson.getData().get(i).getLongtitude()));
                     }
                     RouteSearch.DriveRouteQuery query = new RouteSearch.DriveRouteQuery(fromAndTo, DRIVING_SINGLE_SHORTEST, lists, null, "");
                     routeSearch.calculateDriveRouteAsyn(query);
@@ -271,7 +267,7 @@ public class NewTaskActivity extends BaseActivity implements TicketFragmentContr
                                 mPolylineOptions.setPoints(latLonPoints);
                                 aMap.addPolyline(mPolylineOptions);
                             } else {
-                                Toast.makeText(NewTaskActivity.this, "规划出错", Toast.LENGTH_SHORT).show();
+                                ToastUtil.showToastError("规划出错,错误代码："+errorCode);
                             }
 
                         }

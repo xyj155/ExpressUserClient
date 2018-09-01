@@ -17,8 +17,6 @@ import cn.jpush.im.android.api.model.Conversation;
 import cn.jpush.im.android.api.model.Message;
 import cn.jpush.im.api.BasicCallback;
 
-import static cn.jpush.im.android.tasks.GetUserInfoListTask.IDType.username;
-
 /**
  * Created by Administrator on 2018/8/26/026.
  */
@@ -43,7 +41,7 @@ public class ConversationActivityPresenter implements ConversationActivityContra
                 if (code == IMUtils.CODE_SUCCESS) {
 
                 } else {
-                    ToastUtil.showToastError("发送失败");
+                    ToastUtil.showToastError("发送失败,错误信息："+s+"错误代码："+code);
                 }
             }
         });

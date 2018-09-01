@@ -18,6 +18,7 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.administrator.expressuserclient.R;
 import com.example.administrator.expressuserclient.base.BaseFragment;
 import com.example.administrator.expressuserclient.base.BaseGson;
+import com.example.administrator.expressuserclient.commonUtil.GlideRoundTransform;
 import com.example.administrator.expressuserclient.contract.push.MessageFragmentContract;
 import com.example.administrator.expressuserclient.gson.PushGson;
 import com.example.administrator.expressuserclient.presenter.push.MessageFragmentPresenter;
@@ -133,7 +134,7 @@ public class MessageFragment extends BaseFragment implements MessageFragmentCont
                         }
                     });
             ImageView view = helper.getView(R.id.img_src);
-            Glide.with(getActivity()).load(item.getPic()).asBitmap().into(view);
+            Glide.with(getActivity()).load(item.getPic()).transform(new GlideRoundTransform(getActivity())).into(view);
         }
     }
 }

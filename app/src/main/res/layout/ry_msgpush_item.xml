@@ -42,7 +42,7 @@
 
             <ImageView
                 android:id="@+id/img_src"
-                android:layout_width="@dimen/dp_70"
+                android:layout_width="@dimen/dp_90"
                 android:layout_height="@dimen/dp_70"
                 android:layout_marginLeft="@dimen/dp_6"
                 android:src="@mipmap/ic_launcher" />

@@ -34,18 +34,18 @@ public interface API {
 
     //登陆
     @FormUrlEncoded
-    @POST("/CurrierBrother/public/index.php/Index/User/login")
+    @POST("/CurrierBrother/public/index.php/Index/Users/login")
     Observable<BaseGson<UserGson>> loginWithUserName(@Field("username") String username,
                                                      @Field("password") String password);
 
     //注册
     @FormUrlEncoded
-    @POST("/CurrierBrother/public/index.php/Index/User/register")
+    @POST("/CurrierBrother/public/index.php/Index/Users/register")
     Observable<BaseGson<UserGson>> register(@Field("username") String username,
                                                      @Field("password") String password,
                                                      @Field("tel") String tel);    //注册
     @FormUrlEncoded
-    @POST("/CurrierBrother/public/index.php/Index/User/querySameUser")
+    @POST("/CurrierBrother/public/index.php/Index/Users/querySameUser")
     Observable<BaseGson<UserGson>> querySameUser(@Field("username") String username);
 
     @Headers({
@@ -63,7 +63,7 @@ public interface API {
     //上传头像
     @Streaming
     @Multipart
-    @POST("/CurrierBrother/public/index.php/Index/User/loadHead")
+    @POST("/CurrierBrother/public/index.php/Index/Users/loadHead")
     Call<BaseGson<UserGson>> uploadAvatar(@Part("id") RequestBody id, @Part MultipartBody.Part part);
 
     //消息推送
@@ -96,7 +96,7 @@ public interface API {
 
     //查询用户信息
     @FormUrlEncoded
-    @POST("/CurrierBrother/public/index.php/index/User/queryUserInfor")
+    @POST("/CurrierBrother/public/index.php/index/Users/queryUserInfor")
     Observable<BaseGson<UserGson>> queryUserInfor(@Field("id") String id);
 
 

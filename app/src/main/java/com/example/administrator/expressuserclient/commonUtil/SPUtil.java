@@ -34,25 +34,33 @@ public class SPUtil {
 
     public SPUtil saveSPData(Map<String, Object> value) {
         for (Map.Entry<String, Object> vo : value.entrySet()) {
-            System.out.println( "saveSPData: " +vo.getValue().getClass().toString());
-            switch (vo.getValue().getClass().toString()) {
-                //整型
-                case "class java.lang.Integer":
-                    editor.putInt(vo.getKey(), Integer.valueOf(vo.getValue().toString()));
-                    break;
-                //布尔型
-                case "class java.lang.Boolean":
-                    editor.putBoolean(vo.getKey(), Boolean.valueOf(vo.getValue().toString()));
-                    break;
-                //字符串型
-                case "class java.lang.String":
-                    editor.putString(vo.getKey(), vo.getValue().toString());
-                    break;
-                //浮点型
-                case "class java.lang.Float":
-                    editor.putFloat(vo.getKey(), Float.valueOf(vo.getValue().toString()));
-                    break;
+            if (vo.getValue() instanceof Integer){
+                editor.putInt(vo.getKey(), Integer.valueOf(vo.getValue().toString()));
+            }else if (vo.getValue() instanceof Boolean){
+                editor.putBoolean(vo.getKey(), Boolean.valueOf(vo.getValue().toString()));
+            }else  if (vo.getValue() instanceof String){
+                editor.putString(vo.getKey(), vo.getValue().toString());
+            }else  if (vo.getValue() instanceof Float){
+                editor.putFloat(vo.getKey(), Float.valueOf(vo.getValue().toString()));
             }
+//            switch (vo.getValue().getClass().toString()) {
+//                //整型
+//                case "class java.lang.Integer":
+//                    editor.putInt(vo.getKey(), Integer.valueOf(vo.getValue().toString()));
+//                    break;
+//                //布尔型
+//                case "class java.lang.Boolean":
+//                    editor.putBoolean(vo.getKey(), Boolean.valueOf(vo.getValue().toString()));
+//                    break;
+//                //字符串型
+//                case "class java.lang.String":
+//                    editor.putString(vo.getKey(), vo.getValue().toString());
+//                    break;
+//                //浮点型
+//                case "class java.lang.Float":
+//                    editor.putFloat(vo.getKey(), Float.valueOf(vo.getValue().toString()));
+//                    break;
+//            }
         }
 
         return sInstance;

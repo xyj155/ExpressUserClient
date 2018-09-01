@@ -14,6 +14,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.administrator.expressuserclient.R;
 import com.example.administrator.expressuserclient.base.BaseActivity;
+import com.example.administrator.expressuserclient.commonUtil.GlideRoundTransform;
 import com.example.administrator.expressuserclient.contract.home.NewsActivityContract;
 import com.example.administrator.expressuserclient.entity.NewsEntity;
 import com.example.administrator.expressuserclient.presenter.home.NewsActivityPresenter;
@@ -148,7 +149,7 @@ public class NewsActivity extends BaseActivity implements NewsActivityContract.V
                         }
                     });
             ImageView view = helper.getView(R.id.img_news);
-            Glide.with(NewsActivity.this).load(item.getImg()).asBitmap().into(view);
+            Glide.with(NewsActivity.this).load(item.getImg()).transform(new GlideRoundTransform(NewsActivity.this)).into(view);
         }
     }
 }
