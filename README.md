@@ -68,6 +68,15 @@
 ![image](http://bmob-cdn-20920.b0.upaiyun.com/2018/08/06/f2c8109140524f8380cf44f58bff3c8c.png)
 
 
+
+### 快递小哥架构图
+
+![image](http://bmob-cdn-20920.b0.upaiyun.com/2018/09/30/6f586dac40a74f1080a85e0eb83af56f.png)
+
+### 快递小哥流程图
+![image](http://bmob-cdn-20920.b0.upaiyun.com/2018/09/30/89a1dd62407e7db180f1b89ae1f8d53d.png)
+
+
 ### 本人博客：
 #### CSDN：[CSDN博客](https://blog.csdn.net/qq_33163983 "悬停显示")  
 #### 简书：[简书博客](https://www.jianshu.com/u/a09ef2f2fe67 "悬停显示")  
