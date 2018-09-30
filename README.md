@@ -15,6 +15,11 @@
 
 
 ###### 从Model层获得所需要的数据，进行一些适当的处理后交由View层进行显示。这样通过Presenter将View与Model进行隔离，使得View和Model之间不存在耦合，同时也将业务逻辑从View中抽离。
+
+#### MVP架构模式图
+
+![image](https://gss0.baidu.com/9vo3dSag_xI4khGko9WTAnF6hhy/zhidao/wh%3D600%2C800/sign=9c098c8841540923aa3c6b78a268fd31/3b87e950352ac65c018014d8f3f2b21192138a97.jpg)
+
   
 ####    开发采用诸多流行框架，用响应式开发，Rxjava+Retrofit一起用，然后不够就用Volley一起。VOlley不够就用OkHttp。
 
@@ -73,7 +78,6 @@
 ![image](http://bmob-cdn-20920.b0.upaiyun.com/2018/08/06/75314f5d403ef1b480d5babe758526c6.png)
 ![image](http://bmob-cdn-20920.b0.upaiyun.com/2018/08/06/139aa80e407b91b180b5b1b9517c0b8a.png)
 ![image](http://bmob-cdn-20920.b0.upaiyun.com/2018/08/06/f2c8109140524f8380cf44f58bff3c8c.png)
-
 
 
 ### 快递小哥架构图
