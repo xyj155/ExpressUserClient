@@ -18,7 +18,7 @@
 
 #### MVP架构模式图
 
-![image](https://gss0.baidu.com/9vo3dSag_xI4khGko9WTAnF6hhy/zhidao/wh%3D600%2C800/sign=9c098c8841540923aa3c6b78a268fd31/3b87e950352ac65c018014d8f3f2b21192138a97.jpg)
+![image](http://bmob-cdn-20920.b0.upaiyun.com/2018/09/30/b00eb1e5408a5e6880361b4b977727d4.png)
 
   
 ####    开发采用诸多流行框架，用响应式开发，Rxjava+Retrofit一起用，然后不够就用Volley一起。VOlley不够就用OkHttp。
