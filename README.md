@@ -18,7 +18,14 @@
   
 ####    开发采用诸多流行框架，用响应式开发，Rxjava+Retrofit一起用，然后不够就用Volley一起。VOlley不够就用OkHttp。
 
-##### 后台管理系统我在开发，分PHP接口和JavaSpring后台管理系统，开发完了我留链接
+##### 快递小哥后台我采用PHP和JAVA Spring开发，php进行数据传输，java进行算法运算，后台链接：
+
+
+#### JAVA后端：[JAVA后端](https://github.com/xyj155/Currierbrother "悬停显示")  
+
+#### 后台管理系统：[后台管理系统](https://github.com/xyj155/Administrator "悬停显示")  
+
+#### PHP后端：[PHP后端](https://github.com/xyj155/CurrierBrotherPHP "悬停显示")  
 
 # 快递小哥快递员版
 
